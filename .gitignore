@@ -55,3 +55,6 @@ docs/_build/
 
 # PyBuilder
 target/
+
+# Base de datos
+db.sqlite3
