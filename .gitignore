@@ -58,3 +58,6 @@ target/
 
 # Base de datos
 db.sqlite3
+
+#Carpeta migrations de la app usuarios
+usuarios/migrations
