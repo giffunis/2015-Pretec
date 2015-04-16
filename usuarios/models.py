@@ -39,7 +39,6 @@ class Usuario(models.Model):
 
     def restriccion_edad(self):
         edad = Usuario.calc_edad(self)
-        if (edad >= 18):
+        if(edad >= 18):
             return True
-        else:
-            return False
+        return False
