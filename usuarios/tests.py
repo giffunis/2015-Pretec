@@ -39,7 +39,7 @@ class UsuarioTestCase(TestCase):
 
 
     def test_Mayor_edad(self):
-        u1 = Usuario.objets.get(nombre = 'Joaquin')
+        u1 = Usuario.objects.get(nombre = 'Joaquin')
         self.assertTrue(u1.restriccion_edad())
 
     def test_calc_edad(self):

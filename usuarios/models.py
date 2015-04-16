@@ -31,18 +31,15 @@ class Usuario(models.Model):
         name = 'Nombre: ' + self.nombre
         return name
 
-
-
-    def restriccion_edad(self):
-        edad = calc_edad(self)
-        if(edad >= 18 ){
-            return True
-        } else{
-            return False
-        }
-
     def calc_edad(self):
         hoy = datetime.date.today() # 1976-05-26T00:00:00"
         fecha = self.date
         edad = ((hoy - fecha).days) / 365
         return edad
+
+    def restriccion_edad(self):
+        edad = Usuario.calc_edad(self)
+        if (edad >= 18):
+            return True
+        else:
+            return False
