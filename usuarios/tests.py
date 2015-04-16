@@ -6,8 +6,8 @@ from usuarios.models import Usuario
 class UsuarioTestCase(TestCase):
 
     def setUp(self):
-        Usuario.objects.create(nombre = "Alejandro", apellidos = "Ravelo", pseudonimo = "J", correo = "alu@ull.edu.es", password = "batman")
-        Usuario.objects.create(nombre = "Joaquin", apellidos = "Escobar", pseudonimo = "Jo", correo = "alu2@ull.edu.es", password = "robin")
+        Usuario.objects.create(nombre = "Alejandro", apellidos = "Ravelo", pseudonimo = "J", correo = "alu@ull.edu.es", password = "batman", date = "1976-05-26")
+        Usuario.objects.create(nombre = "Joaquin", apellidos = "Escobar", pseudonimo = "Jo", correo = "alu2@ull.edu.es", password = "robin", date = "1976-04-26")
 
     def test_tiene_nombre(self):
         u1 = Usuario.objects.get(apellidos = 'Ravelo' )
@@ -36,6 +36,11 @@ class UsuarioTestCase(TestCase):
     def test_Password_no_vacio(self):
         u1 = Usuario.objects.get(nombre = 'Joaquin')
         self.assertNotEqual(u1.password,"")
+
+    def test_calc_edad(self):
+        u1 = Usuario.objects.get(nombre = 'Joaquin')
+        self.assertEqual(u1.calc_edad(), 38)
+
 
     #def test_disponibilidad_pseudonimo(self)
     #    assertNotEqual()
