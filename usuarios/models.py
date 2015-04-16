@@ -27,3 +27,12 @@ class Usuario(models.Model):
     def get_nombre(self):
         name = 'Nombre: ' + self.nombre
         return name
+
+
+    def restriccion_edad():
+        edad = calc_edad(self)
+        if(edad >= 18 ){
+            return True
+        } else{
+            return False
+        }

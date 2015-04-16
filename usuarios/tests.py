@@ -37,5 +37,9 @@ class UsuarioTestCase(TestCase):
         u1 = Usuario.objects.get(nombre = 'Joaquin')
         self.assertNotEqual(u1.password,"")
 
+    def test_Mayor_edad(self):
+        u1 = Usuario.objets.get(nombre = 'Joaquin')
+        self.assertTrue(u1.restriccion_edad())
+
     #def test_disponibilidad_pseudonimo(self)
     #    assertNotEqual()
