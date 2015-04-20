@@ -44,7 +44,7 @@ class UsuarioTestCase(TestCase):
 
     def test_calc_edad(self):
         u1 = Usuario.objects.get(nombre = 'Joaquin')
-        self.assertEqual(u1.calc_edad(), 38)
+        self.assertEqual(u1.calc_edad(), 39)
 
 
 
