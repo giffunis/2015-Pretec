@@ -11,7 +11,7 @@ def get_registro(request):
         form=RegistroForm(request.POST)
         #verifica si es valido
         if form.is_valid():
-            return HttpResponseRedirect('#')
+            return HttpResponseRedirect('/registro_completado.html/')
     else:
         form = RegistroForm()
 
