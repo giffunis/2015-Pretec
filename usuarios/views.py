@@ -11,7 +11,7 @@ def get_nombre(request):
         form=RegistroForm(request.POST)
         #verifica si es valido
         if form.is_valid():
-            return HttpResponseRedirect('/thanks/')
+            return HttpResponseRedirect('#')
     else:
         form = RegistroForm()
 
