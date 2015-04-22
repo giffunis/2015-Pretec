@@ -7,5 +7,5 @@ urlpatterns = [
     # url(r'^$', 'pretec.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^registro/$', views.get_nombre),
+    url(r'^registro/$', views.get_registro),
 ]

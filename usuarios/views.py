@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect
 from .forms import RegistroForm
 
 # Create your views here.
-def get_nombre(request):
+def get_registro(request):
     if request.method == 'POST':
         #crea una instancia de formulario y la llena con los datos del request
         form=RegistroForm(request.POST)
