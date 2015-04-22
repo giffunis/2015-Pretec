@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 
-from .forms import FormNombre
+from .forms import RegistroForm
 
 # Create your views here.
 def get_nombre(request)
