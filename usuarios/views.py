@@ -28,8 +28,10 @@ def get_registro(request):
                             password = password,
                             date = date,)
             usuario.save()
+            #return HttpResponseRedirect('#')
+            #aqui va el codigo
+            return render(request, 'registro_completado.html')
 
-            return HttpResponseRedirect('/ayuda')
     else:
         form = RegistroForm()
 
