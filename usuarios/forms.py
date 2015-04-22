@@ -11,4 +11,4 @@ class RegistroForm(forms.Form):
   correo = forms.EmailField(label='Correo')
   password1 = forms.CharField(label='Contrasena', widget=forms.PasswordInput)
   password2 = forms.CharField(label='Repita la contrasena', widget=forms.PasswordInput)
-  date = forms.DateField() #---> Esta dando fallos, dice que no hay atributo dateField() en models
+  date = forms.DateField() 
