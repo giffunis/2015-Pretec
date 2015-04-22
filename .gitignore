@@ -61,3 +61,6 @@ db.sqlite3
 
 #Carpeta migrations de la app usuarios
 usuarios/migrations
+
+#Residuos del Mac
+.DS_Store
