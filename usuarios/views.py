@@ -1,3 +1,4 @@
+
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 
@@ -7,12 +8,12 @@ from .forms import RegistroForm
 def get_nombre(request):
     if request.method == 'POST':
         #crea una instancia de formulario y la llena con los datos del request
-        form=FormNombre(request.POST)
+        form=RegistroForm(request.POST)
         #verifica si es valido
         if form.is_valid():
             return HttpResponseRedirect('/thanks/')
     else:
-        form = FormNombre()
+        form = RegistroForm()
 
     return render(request, 'formulario_registro.html', {'form' : form})
 
