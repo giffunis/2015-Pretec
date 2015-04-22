@@ -24,7 +24,7 @@ class Usuario(models.Model):
     date = models.DateField() # *
 
     def __str__(self):
-        cadena = 'Nombre: ' + self.nombre + ', Apellidos: ' + self.apellidos + ', Pseudonimo: ' + self.pseudonimo + ', Correo: ' + self.correo + ', Contraseña: ' + self.password
+        cadena = 'Nombre: ' + self.nombre + ', Apellidos: ' + self.apellidos + ', Pseudonimo: ' + self.pseudonimo + ', Correo: ' #+ self.correo + ', Contraseña: ' + self.password
         return cadena
 
     def get_nombre(self):
