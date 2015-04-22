@@ -64,3 +64,6 @@ usuarios/migrations
 
 #Residuos del Mac
 .DS_Store
+
+#Archivos del IDE de Joaquín
+.idea

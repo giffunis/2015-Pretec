@@ -11,11 +11,13 @@ def get_registro(request):
         form=RegistroForm(request.POST)
         #verifica si es valido
         if form.is_valid():
-            return HttpResponseRedirect('/thanks/')
+            return HttpResponseRedirect('#')
     else:
         form = RegistroForm()
 
     return render(request, 'formulario_registro.html', {'form' : form})
+
+
 
 def formulario_registro(request):
     return render(request, 'formulario_registro.html')
