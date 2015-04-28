@@ -1,9 +1,11 @@
 
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
+from django.http import HttpResponse
 from usuarios.models import Usuario
 
 from .forms import RegistroForm
+from .forms import LoginForm
 
 # Create your views here.
 def get_registro(request):
@@ -38,6 +40,22 @@ def get_registro(request):
     return render(request, 'formulario_registro.html', {'form' : form})
 
 
+#Metodo de la clase LoginForm
+def login(request):
+    if request.method == 'POST':
 
-def formulario_registro(request):
-    return render(request, 'formulario_registro.html')
+        form=LoginForm(request.POST)
+
+        #if form.is_valid():
+            # pseudonimo = form.cleaned_data['pseudonimo']
+            # password = form.cleaned_data['password']
+        try:
+            usuario = Usuario.objects.get(pseudonimo = request.POST['pseudonimo'])
+            if usuario.password == request.POST['password']:
+                request.session['pseudonimo'] = usuario.pseudonimo
+                return render(request, 'perfil.html')
+        except Usuario.DoesNotExist:
+             return HttpResponse('Tu nombre de usuario o contrasen no coinciden')
+    else:
+        form = LoginForm()
+    return render(request, 'login.html', {'form' : form})
