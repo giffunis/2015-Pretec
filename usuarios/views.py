@@ -55,7 +55,7 @@ def login(request):
                 request.session['pseudonimo'] = usuario.pseudonimo
                 return render(request, 'perfil.html')
         except Usuario.DoesNotExist:
-             return HttpResponse('Tu nombre de usuario o contrasen no coinciden')
+             return HttpResponse('Tu nombre de usuario o contrasena no coinciden')
     else:
         form = LoginForm()
     return render(request, 'login.html', {'form' : form})
