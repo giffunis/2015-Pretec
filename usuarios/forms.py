@@ -13,3 +13,7 @@ class RegistroForm(forms.Form):
     password1 = forms.CharField(label='Contrasena', widget=forms.PasswordInput)
     password2 = forms.CharField(label='Repita la contrasena', widget=forms.PasswordInput)
     date = forms.DateField()
+
+class LoginForm(forms.Form):
+    pseudonimo = forms.CharField(label= 'Pseudonimo', max_length='20', min_length='5')
+    password = forms.CharField(label='Contrasena', widget=forms.PasswordInput)

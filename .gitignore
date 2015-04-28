@@ -66,4 +66,4 @@ usuarios/migrations
 .DS_Store
 
 #Archivos del IDE de Joaquín
-.idea
+.idea/
