@@ -9,6 +9,14 @@ from .forms import LoginForm
 
 # Create your views here.
 
+
+# def decorador(funcion):
+#     def funcion_decorada(*args, **kwargs):
+#         if()
+#         funcion(*args, **kwargs)
+#         print "Despues de llamar a la funcion %s" % funcion.__name__
+#     return funcion_decorada
+
 def login(request):
     if request.method == 'POST':
 
@@ -20,7 +28,7 @@ def login(request):
         try:
             usuario = Usuario.objects.get(pseudonimo = request.POST['pseudonimo'])
             if usuario.password == request.POST['password']:
-                request.session['member_id'] = usuario.pseudonimo #cookie
+                request.session['pseudonimo'] = usuario.pseudonimo #cookie
                 return render(request, 'perfil.html')
         except Usuario.DoesNotExist:
              return HttpResponse('Tu nombre de usuario o contrasena no coinciden')
