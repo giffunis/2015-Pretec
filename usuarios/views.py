@@ -8,6 +8,40 @@ from .forms import RegistroForm
 from .forms import LoginForm
 
 # Create your views here.
+
+def login(request):
+    if request.method == 'POST':
+
+        form=LoginForm(request.POST)
+
+        #if form.is_valid():
+            # pseudonimo = form.cleaned_data['pseudonimo']
+            # password = form.cleaned_data['password']
+        try:
+            usuario = Usuario.objects.get(pseudonimo = request.POST['pseudonimo'])
+            if usuario.password == request.POST['password']:
+                request.session['member_id'] = usuario.pseudonimo #cookie
+                return render(request, 'perfil.html')
+        except Usuario.DoesNotExist:
+             return HttpResponse('Tu nombre de usuario o contrasena no coinciden')
+    else:
+        form = LoginForm()
+    return render(request, 'login.html', {'form' : form})
+
+
+
+def logout(request):
+    try:
+        del request.session['member_id']
+    except KeyError:
+        pass
+    return HttpResponse("You're logged out.")
+
+
+
+
+
+
 def get_registro(request):
     if request.method == 'POST':
         #crea una instancia de formulario y la llena con los datos del request
@@ -41,7 +75,7 @@ def get_registro(request):
 
 
 #Metodo de la clase LoginForm
-def login(request):
+def pag_inicio(request):
     if request.method == 'POST':
 
         form=LoginForm(request.POST)
