@@ -9,4 +9,5 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^registro/$', views.get_registro),
     url(r'^login/$', views.login),
+    url(r'^logout/$', views.logout),
 ]
