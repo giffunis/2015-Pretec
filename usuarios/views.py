@@ -22,7 +22,7 @@ def comprueba_auth(funcion):
                 return funcion(*args, **kwargs)
         except KeyError:
             form=LoginForm()
-            return render(args[0], 'login.html', {'form' : form})
+            return HttpResponseRedirect('/login')
     return comprueba_login
 
 
