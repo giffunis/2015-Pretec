@@ -1,13 +1,70 @@
-
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse
-from usuarios.models import Usuario
 
+from django.shortcuts import render_to_response
+# from django.http import HttpResponseRedirect
+from django.core.context_processors import csrf
+
+
+# creados por nosotros
+from usuarios.models import Usuario
 from .forms import RegistroForm
 from .forms import LoginForm
 
 # Create your views here.
+
+def comprueba_auth(funcion):
+    # @wraps(funcion)
+    def comprueba_login(*args, **kwargs):
+        try:
+            if(args[0].session['member_id'] != None):
+                return funcion(*args, **kwargs)
+        except KeyError:
+            form=LoginForm()
+            return render(args[0], 'login.html', {'form' : form})
+    return comprueba_login
+
+
+
+
+def login(request):
+    if request.method == 'POST':
+        form=LoginForm(request.POST)
+        try:
+            usuario = Usuario.objects.get(pseudonimo = request.POST['pseudonimo'])
+            if usuario.password == request.POST['password']:
+                request.session['member_id'] = usuario.pseudonimo #creacion de la cookie
+                return render(request,'perfil.html', {'name': request.session['member_id']})
+            else:
+                return HttpResponse('Tu nombre de usuario o contrasena no coinciden')
+        except Usuario.DoesNotExist:
+             return HttpResponse('El nombre de usuario no existe')
+    else:
+        form = LoginForm()
+    return render(request, 'login.html', {'form' : form})
+
+# Redirigiremos a este metodo cuando el usuario haya intentado acceder a una sona especial
+# y no se hubiese logeado antes.
+def invalid_login(request):
+    return render_to_response('invalid_login.html')
+
+def logout(request):
+    try:
+        del request.session['member_id']
+    except KeyError:
+        pass
+    return HttpResponse("You're logged out.")
+
+def authenticate(name, pswd):
+    try:
+        usuario = Usuario.objects.get(nombre = name)
+        if(pswd == usuario.password):
+            return usuario
+        else:
+            return None
+    except KeyError:
+        return None
 
 
 # def decorador(funcion):
@@ -17,46 +74,11 @@ from .forms import LoginForm
 #         print "Despues de llamar a la funcion %s" % funcion.__name__
 #     return funcion_decorada
 
-def login(request):
-    if request.method == 'POST':
 
-        form=LoginForm(request.POST)
-
-        #if form.is_valid():
-            # pseudonimo = form.cleaned_data['pseudonimo']
-            # password = form.cleaned_data['password']
-        try:
-            usuario = Usuario.objects.get(pseudonimo = request.POST['pseudonimo'])
-            if usuario.password == request.POST['password']:
-                request.session['pseudonimo'] = usuario.pseudonimo #cookie
-                return render(request, 'perfil.html')
-        except Usuario.DoesNotExist:
-             return HttpResponse('Tu nombre de usuario o contrasena no coinciden')
-    else:
-        form = LoginForm()
-    return render(request, 'login.html', {'form' : form})
-
-
-
-def logout(request):
-    try:
-        del request.session['member_id']
-    except KeyError:
-        pass
-    return HttpResponse("You're logged out.")
-
-
-
-
-
-
+# Metodo que sirve para registrarse
 def get_registro(request):
     if request.method == 'POST':
-        #crea una instancia de formulario y la llena con los datos del request
         form=RegistroForm(request.POST)
-        #if form.equalPassword():
-        #form.toBaseDatos()
-        #verifica si es valido
         if form.is_valid():
             nombre = form.cleaned_data['nombre']
             apellidos = form.cleaned_data['apellidos']
@@ -72,32 +94,12 @@ def get_registro(request):
                             password = password,
                             date = date,)
             usuario.save()
-            #return HttpResponseRedirect('#')
-            #aqui va el codigo
             return render(request, 'registro_completado.html')
-
     else:
         form = RegistroForm()
-
     return render(request, 'formulario_registro.html', {'form' : form})
 
-
-#Metodo de la clase LoginForm
-def pag_inicio(request):
-    if request.method == 'POST':
-
-        form=LoginForm(request.POST)
-
-        #if form.is_valid():
-            # pseudonimo = form.cleaned_data['pseudonimo']
-            # password = form.cleaned_data['password']
-        try:
-            usuario = Usuario.objects.get(pseudonimo = request.POST['pseudonimo'])
-            if usuario.password == request.POST['password']:
-                request.session['pseudonimo'] = usuario.pseudonimo
-                return render(request, 'perfil.html')
-        except Usuario.DoesNotExist:
-             return HttpResponse('Tu nombre de usuario o contrasena no coinciden')
-    else:
-        form = LoginForm()
-    return render(request, 'login.html', {'form' : form})
+# Metodo que sirve para acceder al perfil del usuario
+@comprueba_auth
+def perfil(request):
+    return render(request,'perfil.html', {'name': request.session['member_id']})
