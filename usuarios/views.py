@@ -21,7 +21,7 @@ def comprueba_auth(funcion):
             if(args[0].session['member_id'] != None):
                 return funcion(*args, **kwargs)
         except KeyError:
-            form=LoginForm()
+            #form=LoginForm()
             return HttpResponseRedirect('/login')
     return comprueba_login
 
