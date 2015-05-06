@@ -12,6 +12,8 @@ from usuarios.models import Usuario
 from .forms import RegistroForm
 from .forms import LoginForm
 from .forms import EditNameForm
+from .forms import EditEmailForm
+from .forms import EditPasswordForm
 
 # Create your views here.
 
@@ -129,20 +131,40 @@ def set_name(request):
         form = EditNameForm()
     return render(request, 'set_name.html', {'form' : form})
 
-# def editProfile(request):
-#     if request.method == 'POST':
-#         form = EditProfileForm(request.POST)
-#         if form.is_valid():
-#             nombre = form.cleaned_data['nombre']
-#             apellidos = form.cleaned_data['apellidos']
-#             correo = form.cleaned_data['correo']
-#             old_password = form.cleaned_data['old_password']
-#             new_password1 = form.cleaned_data['new_password1']
-#             new_password2 = form.cleaned_data['new_password2']
-#             usu = Usuario.objects.get(pseudonimo = request.session['member_id'])
-#             usu.nombre = nombre
-#             usu.save()
-#             return render(request, 'perfil.html')
-#     else:
-#         form = EditProfileForm()
-#     return render(request, 'formulario_edit.html', {'form' : form})
+@comprueba_auth
+def set_email(request):
+    if request.method == 'POST':
+        form = EditEmailForm(request.POST)
+        if form.is_valid():
+            correo = form.cleaned_data['correo']
+            usu = Usuario.objects.get(pseudonimo = request.session['member_id'])
+            usu.correo = correo
+            usu.save()
+            return HttpResponseRedirect('/perfil')
+        else:
+            form = EditEmailForm()
+        return render(request, 'set_email.html', {'form' : form})
+    else:
+        form = EditEmailForm()
+    return render(request, 'set_email.html', {'form' : form})
+
+@comprueba_auth
+def set_password(request):
+    if request.method == 'POST':
+        form = EditPasswordForm(request.POST)
+        if form.is_valid():
+            old_password = form.cleaned_data['old_password']
+            new_password1 = form.cleaned_data['new_password1']
+            new_password2 = form.cleaned_data['new_password2']
+            #falta comprobar que la contrasena introducida coincida con la que tenia
+            # y que las dos contrasenas coincidan
+            usu = Usuario.objects.get(pseudonimo = request.session['member_id'])
+            usu.password = new_password1
+            usu.save()
+            return HttpResponseRedirect('/perfil')
+        else:
+            form = EditPasswordForm()
+        return render(request, 'set_password.html', {'form' : form})
+    else:
+        form = EditPasswordForm()
+    return render(request, 'set_password.html', {'form' : form})

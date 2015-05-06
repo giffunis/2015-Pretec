@@ -14,6 +14,6 @@ urlpatterns = [
     url(r'^home/$', views.pag_home),
     url(r'^editProfile/$', views.editProfile),
     url(r'^set_name/$', views.set_name),
-    #url(r'^set_email/$', views.set_email),
-    #url(r'^set_password/$', views.set_password),
+    url(r'^set_email/$', views.set_email),
+    url(r'^set_password/$', views.set_password),
 ]
