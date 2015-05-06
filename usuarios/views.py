@@ -11,7 +11,7 @@ from django.core.context_processors import csrf
 from usuarios.models import Usuario
 from .forms import RegistroForm
 from .forms import LoginForm
-from .forms import EditProfileForm
+from .forms import EditNameForm
 
 # Create your views here.
 
@@ -22,7 +22,6 @@ def comprueba_auth(funcion):
             if(args[0].session['member_id'] != None):
                 return funcion(*args, **kwargs)
         except KeyError:
-            #form=LoginForm()
             return HttpResponseRedirect('/login')
     return comprueba_login
 
@@ -36,7 +35,8 @@ def login(request):
             usuario = Usuario.objects.get(pseudonimo = request.POST['pseudonimo'])
             if usuario.password == request.POST['password']:
                 request.session['member_id'] = usuario.pseudonimo #creacion de la cookie
-                return render(request,'perfil.html', {'name': request.session['member_id']})
+                # return render(request,'home.html', {'pseudonimo': request.session['member_id']})
+                return HttpResponseRedirect('/home')
             else:
                 return HttpResponse('Tu nombre de usuario o contrasena no coinciden')
         except Usuario.DoesNotExist:
@@ -45,10 +45,6 @@ def login(request):
         form = LoginForm()
     return render(request, 'login.html', {'form' : form})
 
-# Redirigiremos a este metodo cuando el usuario haya intentado acceder a una sona especial
-# y no se hubiese logeado antes.
-def invalid_login(request):
-    return render_to_response('invalid_login.html')
 
 def logout(request):
     try:
@@ -102,25 +98,51 @@ def get_registro(request):
 
 # Metodo que sirve para acceder al perfil del usuario
 @comprueba_auth
-def perfil(request):
-    return render(request,'perfil.html', {'name': request.session['member_id']})
+def pag_perfil(request):
+    return render(request,'perfil.html', {'pseudonimo': request.session['member_id']})
+
+@comprueba_auth
+def pag_home(request):
+    return render(request,'home.html', {'pseudonimo': request.session['member_id']})
+
 
 @comprueba_auth
 def editProfile(request):
+    return render(request,'editProfile.html',{'pseudonimo': request.session['member_id']})
+
+@comprueba_auth
+def set_name(request):
     if request.method == 'POST':
-        form = EditProfileForm(request.POST)
+        form = EditNameForm(request.POST)
         if form.is_valid():
             nombre = form.cleaned_data['nombre']
             apellidos = form.cleaned_data['apellidos']
-            correo = form.cleaned_data['correo']
-            old_password = form.cleaned_data['old_password']
-            new_password1 = form.cleaned_data['new_password1']
-            new_password2 = form.cleaned_data['new_password2']
-            Usuario.objects.get(pseudonimo = request.session['member_id']).update(nombre = nombre)
-            Usuario.objects.get(pseudonimo = request.session['member_id']).update(apellidos = apellidos)
-            Usuario.objects.get(pseudonimo = request.session['member_id']).update(correo = correo)
-            Usuario.objects.get(pseudonimo = request.session['member_id']).update(password = new_password1)
-            return render(request, 'perfil.html')
+            usu = Usuario.objects.get(pseudonimo = request.session['member_id'])
+            usu.nombre = nombre
+            usu.apellidos = apellidos
+            usu.save()
+            return HttpResponseRedirect('/perfil')
+        else:
+            form = EditNameForm()
+        return render(request, 'set_name.html', {'form' : form})
     else:
-        form = EditProfileForm()
-    return render(request, 'formulario_edit.html', {'form' : form})
+        form = EditNameForm()
+    return render(request, 'set_name.html', {'form' : form})
+
+# def editProfile(request):
+#     if request.method == 'POST':
+#         form = EditProfileForm(request.POST)
+#         if form.is_valid():
+#             nombre = form.cleaned_data['nombre']
+#             apellidos = form.cleaned_data['apellidos']
+#             correo = form.cleaned_data['correo']
+#             old_password = form.cleaned_data['old_password']
+#             new_password1 = form.cleaned_data['new_password1']
+#             new_password2 = form.cleaned_data['new_password2']
+#             usu = Usuario.objects.get(pseudonimo = request.session['member_id'])
+#             usu.nombre = nombre
+#             usu.save()
+#             return render(request, 'perfil.html')
+#     else:
+#         form = EditProfileForm()
+#     return render(request, 'formulario_edit.html', {'form' : form})
