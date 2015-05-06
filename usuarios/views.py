@@ -1,19 +1,25 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse
+from django.utils.translation import gettext as _
 
 from django.shortcuts import render_to_response
 # from django.http import HttpResponseRedirect
 from django.core.context_processors import csrf
+from django.core.exceptions import ValidationError
 
 
 # creados por nosotros
 from usuarios.models import Usuario
 from .forms import RegistroForm
 from .forms import LoginForm
+
 from .forms import EditNameForm
 from .forms import EditEmailForm
 from .forms import EditPasswordForm
+
+from django import forms
+
 
 # Create your views here.
 
@@ -86,12 +92,12 @@ def get_registro(request):
             password = form.cleaned_data['password1']
             date  = form.cleaned_data['date']
             usuario = Usuario.objects.create(
-                            nombre = nombre,
-                            apellidos = apellidos,
-                            pseudonimo = pseudonimo,
-                            correo = correo,
-                            password = password,
-                            date = date,)
+	                        nombre = nombre,
+	                        apellidos = apellidos,
+	                        pseudonimo = pseudonimo,
+	                        correo = correo,
+	                        password = password,
+	                        date = date,)
             usuario.save()
             return render(request, 'registro_completado.html')
     else:
@@ -119,6 +125,7 @@ def set_name(request):
     if request.method == 'POST':
         form = EditNameForm(request.POST)
         if form.is_valid():
+
             nombre = form.cleaned_data['nombre']
             apellidos = form.cleaned_data['apellidos']
             usu = Usuario.objects.get(pseudonimo = request.session['member_id'])
@@ -159,11 +166,13 @@ def set_password(request):
             new_password1 = form.cleaned_data['new_password1']
             new_password2 = form.cleaned_data['new_password2']
             #falta comprobar que la contrasena introducida coincida con la que tenia
-            # y que las dos contrasenas coincidan
             usu = Usuario.objects.get(pseudonimo = request.session['member_id'])
-            usu.password = new_password1
-            usu.save()
-            return HttpResponseRedirect('/perfil')
+            if old_password == usu.password:
+                usu.password = new_password1
+                usu.save()
+                return HttpResponseRedirect('/perfil')
+            else:
+                return HttpResponse('La contrasena anterior es erronea')
         else:
             form = EditPasswordForm()
         return render(request, 'set_password.html', {'form' : form})
