@@ -101,7 +101,9 @@ def get_registro(request):
 # Metodo que sirve para acceder al perfil del usuario
 @comprueba_auth
 def pag_perfil(request):
-    return render(request,'perfil.html', {'pseudonimo': request.session['member_id']})
+    usuario = Usuario.objects.get(pseudonimo = request.session['member_id'])
+    return render(request,'perfil.html', {'pseudonimo': usuario.pseudonimo,'nombre': usuario.nombre, 'apellidos':usuario.apellidos, 'correo':usuario.correo})
+
 
 @comprueba_auth
 def pag_home(request):
