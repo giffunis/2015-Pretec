@@ -1,10 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse
+from django.utils.translation import gettext as _
 
 from django.shortcuts import render_to_response
 # from django.http import HttpResponseRedirect
 from django.core.context_processors import csrf
+from django.core.exceptions import ValidationError
 
 
 # creados por nosotros
@@ -12,6 +14,7 @@ from usuarios.models import Usuario
 from .forms import RegistroForm
 from .forms import LoginForm
 from .forms import EditProfileForm
+from django import forms
 
 # Create your views here.
 
@@ -79,7 +82,7 @@ def authenticate(name, pswd):
 # Metodo que sirve para registrarse
 def get_registro(request):
     if request.method == 'POST':
-        form=RegistroForm(request.POST)
+        form=RegistroForm(request.POST)       
         if form.is_valid():
             nombre = form.cleaned_data['nombre']
             apellidos = form.cleaned_data['apellidos']
@@ -88,12 +91,12 @@ def get_registro(request):
             password = form.cleaned_data['password1']
             date  = form.cleaned_data['date']
             usuario = Usuario.objects.create(
-                            nombre = nombre,
-                            apellidos = apellidos,
-                            pseudonimo = pseudonimo,
-                            correo = correo,
-                            password = password,
-                            date = date,)
+	                        nombre = nombre,
+	                        apellidos = apellidos,
+	                        pseudonimo = pseudonimo,
+	                        correo = correo,
+	                        password = password,
+	                        date = date,)
             usuario.save()
             return render(request, 'registro_completado.html')
     else:
@@ -110,6 +113,7 @@ def editProfile(request):
     if request.method == 'POST':
         form = EditProfileForm(request.POST)
         if form.is_valid():
+
             nombre = form.cleaned_data['nombre']
             apellidos = form.cleaned_data['apellidos']
             correo = form.cleaned_data['correo']
@@ -124,3 +128,4 @@ def editProfile(request):
     else:
         form = EditProfileForm()
     return render(request, 'formulario_edit.html', {'form' : form})
+
