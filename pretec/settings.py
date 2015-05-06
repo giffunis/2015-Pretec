@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'usuarios',
     'lettuce.django',
     'bootstrap3',
+    'django_coverage',
 )
 
 MIDDLEWARE_CLASSES = (
