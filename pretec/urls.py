@@ -11,4 +11,5 @@ urlpatterns = [
     url(r'^login/$', views.login),
     url(r'^logout/$', views.logout),
     url(r'^perfil/$', views.perfil),
+    url(r'^editProfile/$', views.editProfile),
 ]

@@ -11,6 +11,7 @@ from django.core.context_processors import csrf
 from usuarios.models import Usuario
 from .forms import RegistroForm
 from .forms import LoginForm
+from .forms import EditProfileForm
 
 # Create your views here.
 
@@ -103,3 +104,23 @@ def get_registro(request):
 @comprueba_auth
 def perfil(request):
     return render(request,'perfil.html', {'name': request.session['member_id']})
+
+@comprueba_auth
+def editProfile(request):
+    if request.method == 'POST':
+        form = EditProfileForm(request.POST)
+        if form.is_valid():
+            nombre = form.cleaned_data['nombre']
+            apellidos = form.cleaned_data['apellidos']
+            correo = form.cleaned_data['correo']
+            old_password = form.cleaned_data['old_password']
+            new_password1 = form.cleaned_data['new_password1']
+            new_password2 = form.cleaned_data['new_password2']
+            Usuario.objects.get(pseudonimo = request.session['member_id']).update(nombre = nombre)
+            Usuario.objects.get(pseudonimo = request.session['member_id']).update(apellidos = apellidos)
+            Usuario.objects.get(pseudonimo = request.session['member_id']).update(correo = correo)
+            Usuario.objects.get(pseudonimo = request.session['member_id']).update(password = new_password1)
+            return render(request, 'perfil.html')
+    else:
+        form = EditProfileForm()
+    return render(request, 'formulario_edit.html', {'form' : form})
