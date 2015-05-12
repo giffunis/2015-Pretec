@@ -7,5 +7,16 @@
 
 {% block content %}
 <form role="form" class="form-horizontal" action="#" method="post">{% csrf_token %}
-  <!-- {{ form.as_p }} -->  {% bootstrap_form form layout="horizontal" %}  {% buttons submit='Enviar'%}{% endbuttons %}  <!--<input type="submit" value="Enviar" /> --></form>
+  <!-- {{ form.as_p }} -->
+{% if form.errors %}
+  	{% for field in form %}
+  		<div class = "error_message">
+  			{{ field.errors }}
+		</div>
+	{% endfor %}
+{% endif %}
+{% bootstrap_form form layout="horizontal" %}
+{% buttons submit='Enviar'%}{% endbuttons %}
+  <!--<input type="submit" value="Enviar" /> -->
+</form>
 {% endblock content %}
