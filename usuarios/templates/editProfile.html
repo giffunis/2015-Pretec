@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Edita tu Perfil
+{% endblock %}
+
+{% block content%}
+<h1>¿Que deseas cambiar {{pseudonimo}}?</h1>
+<h2>Bienvenido {{pseudonimo}}</h2>
+<a href = "/set_name"> <button> Nombre </button></a>
+<a href = "/set_email"> <button> Correo </button></a>
+<a href = "/set_password"> <button> Password </button></a>
+
+{% endblock content%}

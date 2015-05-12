@@ -1,16 +1,25 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse
+from django.utils.translation import gettext as _
 
 from django.shortcuts import render_to_response
 # from django.http import HttpResponseRedirect
 from django.core.context_processors import csrf
+from django.core.exceptions import ValidationError
 
 
 # creados por nosotros
 from usuarios.models import Usuario
 from .forms import RegistroForm
 from .forms import LoginForm
+
+from .forms import EditNameForm
+from .forms import EditEmailForm
+from .forms import EditPasswordForm
+
+from django import forms
+
 
 # Create your views here.
 
@@ -21,7 +30,6 @@ def comprueba_auth(funcion):
             if(args[0].session['member_id'] != None):
                 return funcion(*args, **kwargs)
         except KeyError:
-            #form=LoginForm()
             return HttpResponseRedirect('/login')
     return comprueba_login
 
@@ -35,7 +43,8 @@ def login(request):
             usuario = Usuario.objects.get(pseudonimo = request.POST['pseudonimo'])
             if usuario.password == request.POST['password']:
                 request.session['member_id'] = usuario.pseudonimo #creacion de la cookie
-                return render(request,'perfil.html', {'name': request.session['member_id']})
+                # return render(request,'home.html', {'pseudonimo': request.session['member_id']})
+                return HttpResponseRedirect('/home')
             else:
                 return HttpResponse('Tu nombre de usuario o contrasena no coinciden')
         except Usuario.DoesNotExist:
@@ -44,10 +53,6 @@ def login(request):
         form = LoginForm()
     return render(request, 'login.html', {'form' : form})
 
-# Redirigiremos a este metodo cuando el usuario haya intentado acceder a una sona especial
-# y no se hubiese logeado antes.
-def invalid_login(request):
-    return render_to_response('invalid_login.html')
 
 def logout(request):
     try:
@@ -87,12 +92,12 @@ def get_registro(request):
             password = form.cleaned_data['password1']
             date  = form.cleaned_data['date']
             usuario = Usuario.objects.create(
-                            nombre = nombre,
-                            apellidos = apellidos,
-                            pseudonimo = pseudonimo,
-                            correo = correo,
-                            password = password,
-                            date = date,)
+	                        nombre = nombre,
+	                        apellidos = apellidos,
+	                        pseudonimo = pseudonimo,
+	                        correo = correo,
+	                        password = password,
+	                        date = date,)
             usuario.save()
             return render(request, 'registro_completado.html')
     else:
@@ -101,5 +106,76 @@ def get_registro(request):
 
 # Metodo que sirve para acceder al perfil del usuario
 @comprueba_auth
-def perfil(request):
-    return render(request,'perfil.html', {'name': request.session['member_id']})
+def pag_perfil(request):
+    usuario = Usuario.objects.get(pseudonimo = request.session['member_id'])
+    return render(request,'perfil.html', {'pseudonimo': usuario.pseudonimo,'nombre': usuario.nombre, 'apellidos':usuario.apellidos, 'correo':usuario.correo})
+
+
+@comprueba_auth
+def pag_home(request):
+    return render(request,'home.html', {'pseudonimo': request.session['member_id']})
+
+
+@comprueba_auth
+def editProfile(request):
+    return render(request,'editProfile.html',{'pseudonimo': request.session['member_id']})
+
+@comprueba_auth
+def set_name(request):
+    if request.method == 'POST':
+        form = EditNameForm(request.POST)
+        if form.is_valid():
+
+            nombre = form.cleaned_data['nombre']
+            apellidos = form.cleaned_data['apellidos']
+            usu = Usuario.objects.get(pseudonimo = request.session['member_id'])
+            usu.nombre = nombre
+            usu.apellidos = apellidos
+            usu.save()
+            return HttpResponseRedirect('/perfil')
+        else:
+            form = EditNameForm()
+        return render(request, 'set_name.html', {'form' : form})
+    else:
+        form = EditNameForm()
+    return render(request, 'set_name.html', {'form' : form})
+
+@comprueba_auth
+def set_email(request):
+    if request.method == 'POST':
+        form = EditEmailForm(request.POST)
+        if form.is_valid():
+            correo = form.cleaned_data['correo']
+            usu = Usuario.objects.get(pseudonimo = request.session['member_id'])
+            usu.correo = correo
+            usu.save()
+            return HttpResponseRedirect('/perfil')
+        else:
+            form = EditEmailForm()
+        return render(request, 'set_email.html', {'form' : form})
+    else:
+        form = EditEmailForm()
+    return render(request, 'set_email.html', {'form' : form})
+
+@comprueba_auth
+def set_password(request):
+    if request.method == 'POST':
+        form = EditPasswordForm(request.POST)
+        if form.is_valid():
+            old_password = form.cleaned_data['old_password']
+            new_password1 = form.cleaned_data['new_password1']
+            new_password2 = form.cleaned_data['new_password2']
+            #falta comprobar que la contrasena introducida coincida con la que tenia
+            usu = Usuario.objects.get(pseudonimo = request.session['member_id'])
+            if old_password == usu.password:
+                usu.password = new_password1
+                usu.save()
+                return HttpResponseRedirect('/perfil')
+            else:
+                return HttpResponse('La contrasena anterior es erronea')
+        else:
+            form = EditPasswordForm()
+        return render(request, 'set_password.html', {'form' : form})
+    else:
+        form = EditPasswordForm()
+    return render(request, 'set_password.html', {'form' : form})
