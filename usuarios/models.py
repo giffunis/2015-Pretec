@@ -3,6 +3,8 @@
 from django.db import models
 from django import forms
 import datetime
+from microposts.models import Post
+#from models import Post
 
 
 
@@ -22,6 +24,7 @@ class Usuario(models.Model):
     correo = models.EmailField(max_length = 30) # *
     password = models.CharField(max_length = 30) # *
     date = models.DateField() # *
+    posts = models.ManyToManyField(Post)
 
     def __str__(self):
         cadena = 'Nombre: ' + self.nombre + ', Apellidos: ' + self.apellidos + ', Pseudonimo: ' + self.pseudonimo + ', Correo: ' + self.correo.encode('utf-8') + ', date: ' + str(self.date) + ', Contrasena: ' + self.password
