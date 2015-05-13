@@ -5,7 +5,7 @@ from .forms import PostForm
 
 from microposts.models import Post
 from django.core.context_processors import csrf
-import usuarios
+# import usuarios
 from usuarios.models import Usuario
 
 # Create your views here.
