@@ -17,5 +17,5 @@ urlpatterns = [
     url(r'^set_name/$', views.set_name),
     url(r'^set_email/$', views.set_email),
     url(r'^set_password/$', views.set_password),
-    url(r'^microposts/$', views.formulario_microposts),
+    url(r'^microposts/$', views.get_post),
 ]
