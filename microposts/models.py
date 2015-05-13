@@ -10,8 +10,7 @@ class Post(models.Model):
 	texto = models.CharField(max_length=240)
 	fecha = models.DateField()
 
-	class Meta:
-         app_label="classes"
+	
 
 	#devuelve el numero de post de un usuario
 	def mumero_microposts(pseudon):
