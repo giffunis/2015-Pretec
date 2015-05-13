@@ -23,7 +23,6 @@ def get_post(request):
             #variable = formulario
             titulo = form.cleaned_data['titulo']
             texto = form.cleaned_data['texto']
-            pseudonimo = form.cleaned_data['pseudonimo']
             date  = form.cleaned_data['date']
             #entrada en la base de datos
             post = Post.objects.create(

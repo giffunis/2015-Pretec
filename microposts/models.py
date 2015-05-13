@@ -8,6 +8,7 @@ class Post(models.Model):
 	pseudonimo = models.ForeignKey('usuarios.models.Usuario')
 	titulo = models.CharField(max_length=30)
 	texto = models.CharField(max_length=240)
+	fecha = models.DateField()
 
 	#devuelve el numero de post de un usuario
 	def mumero_microposts(pseudon):
