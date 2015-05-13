@@ -5,7 +5,6 @@ from django.http import HttpResponse
 # Create your views here.
 
 def comprueba_auth(funcion):
-    # @wraps(funcion)
     def comprueba_login(*args, **kwargs):
         try:
             if(args[0].session['member_id'] != None):
@@ -26,9 +25,9 @@ def get_post(request):
             date  = form.cleaned_data['date']
             #entrada en la base de datos
             post = Post.objects.create(
-	                        nombre = nombre,
-	                        apellidos = apellidos,
-	                        pseudonimo = pseudonimo,
+	                        pseudonimo = request.session['member_id'],
+	                        titulo = titulo,
+	                        texto = texto,
 	                        date = date,)
             post.save()
             return render(request, 'micropost_enviado.html')
