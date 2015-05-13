@@ -4,7 +4,7 @@ from django.db import models
 from django import forms
 import datetime
 from microposts.models import Post
-#from models import Post
+
 
 
 
