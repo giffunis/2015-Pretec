@@ -1,5 +1,6 @@
 function obtenerFecha() {
     var d = new Date();
     var n = d.toLocaleString();
-    document.getElementById("demo").innerHTML = n;
+    alert(n);
+    document.getElementById("id_fecha").innerHTML = n;
 }
