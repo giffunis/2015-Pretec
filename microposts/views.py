@@ -2,7 +2,9 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse
 from .forms import PostForm
+
 from microposts.models import Post
+from django.core.context_processors import csrf
 
 
 # Create your views here.
@@ -17,7 +19,7 @@ def comprueba_auth(funcion):
     return comprueba_login
 
 
-# @comprueba_auth
+
 def get_post(request):
     if request.method == 'POST':
         form=PostForm(request.POST)
