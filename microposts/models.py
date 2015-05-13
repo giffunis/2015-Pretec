@@ -5,7 +5,7 @@ import usuarios
 # Create your models here.
 
 class Post(models.Model):
-	pseudonimo = models.ForeignKey('usuarios.models.Usuario')
+	pseudonimo = models.ForeignKey('usuarios.Usuario')
 	titulo = models.CharField(max_length=30)
 	texto = models.CharField(max_length=240)
 	fecha = models.DateField()
