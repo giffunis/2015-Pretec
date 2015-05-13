@@ -13,8 +13,6 @@ def comprueba_auth(funcion):
             return HttpResponseRedirect('/login')
     return comprueba_login
 
-def Meta:
-    app_label="classes"
 
 
 @comprueba_auth
