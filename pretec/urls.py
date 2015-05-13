@@ -20,5 +20,5 @@ urlpatterns = [
     url(r'^set_name/$', usuarios.views.set_name),
     url(r'^set_email/$', usuarios.views.set_email),
     url(r'^set_password/$', usuarios.views.set_password),
-    url(r'^microposts/$', microposts.views.get_post),
+    url(r'^microposts/$', microposts.views.set_post),
 ]
