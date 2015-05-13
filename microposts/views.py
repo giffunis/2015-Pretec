@@ -6,7 +6,6 @@ from .forms import PostForm
 from microposts.models import Post
 from django.core.context_processors import csrf
 
-
 # Create your views here.
 
 def comprueba_auth(funcion):
