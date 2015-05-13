@@ -21,7 +21,7 @@ def comprueba_auth(funcion):
 
 
 @comprueba_auth
-def get_post(request):
+def set_post(request):
     if request.method == 'POST':
         form=PostForm(request.POST)
         if form.is_valid():
