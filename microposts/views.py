@@ -6,6 +6,10 @@ from .forms import PostForm
 from microposts.models import Post
 from django.core.context_processors import csrf
 
+# import usuarios
+from usuarios.models import Usuario
+
+
 # Create your views here.
 
 def comprueba_auth(funcion):
@@ -18,8 +22,8 @@ def comprueba_auth(funcion):
     return comprueba_login
 
 
-
-def get_post(request):
+@comprueba_auth
+def set_post(request):
     if request.method == 'POST':
         form=PostForm(request.POST)
         if form.is_valid():
@@ -27,9 +31,10 @@ def get_post(request):
             titulo = form.cleaned_data['titulo']
             texto = form.cleaned_data['texto']
             date  = form.cleaned_data['fecha']
+            usuario = Usuario.objects.get(pseudonimo = request.session['member_id'])
             #entrada en la base de datos
             post = Post.objects.create(
-	                        pseudonimo = request.session['member_id'],
+	                        pseudonimo = usuario,
 	                        titulo = titulo,
 	                        texto = texto,
 	                        fecha = date,)
@@ -37,4 +42,4 @@ def get_post(request):
             return render(request, 'micropost_enviado.html')
     else:
         form = PostForm()
-    return render(request, 'formulario_microposts.html', {'form' : form})
+    return render(request, 'formulario_microposts.html', {'pseudonimo':request.session['member_id'],'form' : form})

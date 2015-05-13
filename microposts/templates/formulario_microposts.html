@@ -7,15 +7,9 @@
 
 {% block content %}
 <script type="text/javascript" src="static/js/scriptfecha.js"> </script>
+<h2> Bienvenido {{pseudonimo}} </h2>
 <form role="form" class="form-horizontal" action="#" method="post">{% csrf_token %}
   <!-- {{ form.as_p }} -->
-{% if form.errors %}
-  	{% for field in form %}
-  		<div class = "error_message">
-  			{{ field.errors }}
-		</div>
-	{% endfor %}
-{% endif %}
 {% bootstrap_form form layout="horizontal" %}
 {% buttons submit='Enviar'%}{% endbuttons %}
   <!--<input type="submit" value="Enviar" /> -->
