@@ -67,3 +67,6 @@ usuarios/migrations
 
 #Archivos del IDE de Joaquín
 .idea/
+
+#notas
+.notas-datetimer
