@@ -1,22 +1,24 @@
-{%  extends 'base.html' %}
+{%  extends 'base_formularios.html' %}
 {% load bootstrap3 %}
 
 {% block title %}
-  Formulario de Registro
+  ¡Únete a pretec!
 {% endblock %}
 
 {% block content %}
-<form role="form" class="form-horizontal" action="#" method="post">{% csrf_token %}
-  <!-- {{ form.as_p }} -->
-{% if form.errors %}
-  	{% for field in form %}
-  		<div class = "error_message">
-  			{{ field.errors }}
-		</div>
-	{% endfor %}
-{% endif %}
-{% bootstrap_form form layout="horizontal" %}
-{% buttons submit='Enviar'%}{% endbuttons %}
-  <!--<input type="submit" value="Enviar" /> -->
-</form>
+<div id = "form_registro">
+	<form role="form" class="form-horizontal" action="#" method="post">{% csrf_token %}
+	  <!-- {{ form.as_p }} -->
+	{% if form.errors %}
+	  	{% for field in form %}
+	  		<div class = "error_message">
+	  			{{ field.errors }}
+			</div>
+		{% endfor %}
+	{% endif %}
+	{% bootstrap_form form layout="horizontal" %}
+	<button type="submit" class="btn btn-primary col-sm-offset-6">Registrarse</button>
+	  <!--<input type="submit" value="Enviar" /> -->
+	</form>
+</div>
 {% endblock content %}
