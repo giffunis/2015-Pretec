@@ -14,7 +14,8 @@
 
 
   <!-- {{ form.as_p }} -->
-{% bootstrap_form form layout="horizontal" %}
+{% bootstrap_javascript jquery=1 %}
+{% bootstrap_form form layout="horizontal" onshow="obtenerFecha()" %}
 {% buttons submit='Enviar'%}{% endbuttons %}
   <!--<input type="submit" value="Enviar" /> -->
 </form>
