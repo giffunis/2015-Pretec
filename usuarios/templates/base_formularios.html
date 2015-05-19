@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+{% load bootstrap3 %}
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% block bootstrap3_content %}
+
+<html lang="es">
+
+  <head>
+    <meta charset="utf-8" />
+    <title>{{page_title}}</title>
+    <link rel="stylesheet" type="text/css" href="../../static/css/estilos.css"
+
+  </head>
+
+  <body>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="container-fluid">
+        <div class="header col-sm-6 col-sm-offset-4">
+          <h1>{% block title %}(no title){% endblock %}</h1>
+
+        </div>
+      </div>
+      </div>
+    </div>
+
+
+      <div class="col-sm-6 col-sm-offset-2">
+        <div class="container-fluid">
+          {% block content %}{% endblock content %}
+        </div>
+      </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="footer">
+      </div>
+    </div>
+
+  </div>
+  </body>
+
+</html>
+
+{% endblock %}
