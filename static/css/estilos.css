@@ -3,10 +3,12 @@ h1 {
 }
 
 #form_registro{
-	background-image: url(opcion5.jpg);
+	background-image: url(../imagenes/opcion5.jpg);
 	padding-bottom: 5%;
 	padding-right: 5%;
 }
+
+
 
 button {
 	margin-top: 4%;
@@ -26,3 +28,10 @@ button {
 #info_perfil {
 	padding-left: 3%
 }
+
+#fondo_body {
+	background-image: url(../imagenes/fondo3.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
