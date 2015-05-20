@@ -114,7 +114,7 @@ def follow(request):
             except ObjectDoesNotExist:
                 return HttpResponseRedirect('/home') #return redirect('/users/')
     return HttpResponseRedirect('/home')#return redirect('/users/')
-    
+
 
 # Metodo que sirve para acceder al perfil del usuario
 @comprueba_auth
@@ -191,3 +191,8 @@ def set_password(request):
     else:
         form = EditPasswordForm()
     return render(request, 'set_password.html', {'form' : form})
+
+
+def users_view(request):
+    usuarios = Usuario.objects.values('pseudonimo').order_by('pseudonimo')
+    return render(request, 'users_view.html', {'usuarios' : usuarios})
