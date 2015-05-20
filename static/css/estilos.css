@@ -13,3 +13,16 @@ button {
 	color:black;
 
 }
+
+#imagen_perfil img {
+	width: 80%;
+	height: 50%;
+}
+
+#imagen_perfil {
+	padding-left: 3%;
+}
+
+#info_perfil {
+	padding-left: 3%
+}

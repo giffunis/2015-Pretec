@@ -5,13 +5,25 @@
 {% endblock %}
 
 {% block content%}
-<h1>ESTE ES TU PERFIL</h1>
-<h2> Bienvenido {{pseudonimo}} </h2>
-<p> Eres un usuario de este sitio web, este es tu perfil.</p>
+<div class="row" id="imagen_perfil">
+	<div class="col-md-3" >
+		<img src="../../static/css/opcion5.jpg">
+	</div>
 
-<p>Nombre: {{nombre}}</p>
-<p>Apellidos: {{apellidos}}</p>
-<p>Correo: {{correo}}</p>
+	<div class="col-md-3">
+		<h2>{{pseudonimo}}</h2>
+		<button type="submit" class="btn btn-primary">Seguir</button>
+
+	</div>
+</div>
+
+<div class="row" id="info_perfil">
+	<div class="col-md-1">
+		<label>Seguidores</label>
+		<label>Seguidos</label>
+		<label>Posts</label>
+	</div>
+</div>
 
 
  <a href = "/logout"> <button> logout </button></a>
