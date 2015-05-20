@@ -21,4 +21,5 @@ urlpatterns = [
     url(r'^set_email/$', usuarios.views.set_email),
     url(r'^set_password/$', usuarios.views.set_password),
     url(r'^microposts/$', microposts.views.set_post),
+    url(r'^seguidores/$', usuarios.views.follow),
 ]

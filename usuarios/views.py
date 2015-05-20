@@ -7,6 +7,7 @@ from django.shortcuts import render_to_response
 # from django.http import HttpResponseRedirect
 from django.core.context_processors import csrf
 from django.core.exceptions import ValidationError
+from django.core.exceptions import ObjectDoesNotExist
 
 
 # creados por nosotros
@@ -103,6 +104,17 @@ def get_registro(request):
     else:
         form = RegistroForm()
     return render(request, 'formulario_registro.html', {'form' : form})
+
+def follow(request):
+    if request.method == "POST":
+        follow_id = request.POST.get('follow', False)
+        if follow_id:
+            try:
+                user = Usuario.objects.get(pseudonimo=follow_id)#request.user.profile.follows.add(user.profile)
+            except ObjectDoesNotExist:
+                return HttpResponseRedirect('/home') #return redirect('/users/')
+    return HttpResponseRedirect('/home')#return redirect('/users/')
+    
 
 # Metodo que sirve para acceder al perfil del usuario
 @comprueba_auth
