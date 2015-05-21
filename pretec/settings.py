@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'usuarios',
     'bootstrap3',
     'microposts',
+    'bootstrap3_datetime',
 )
 
 MIDDLEWARE_CLASSES = (
