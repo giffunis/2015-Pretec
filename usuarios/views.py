@@ -107,35 +107,45 @@ def get_registro(request):
         form = RegistroForm()
     return render(request, 'formulario_registro.html', {'form' : form})
 
-def follow(request):
-    if request.method == "POST":
-        follow_id = request.POST.get('follow', False)
-        if follow_id:
-            try:
-                user = Usuario.objects.get(pseudonimo=follow_id)#request.user.profile.follows.add(user.profile)
-            except ObjectDoesNotExist:
-                return HttpResponseRedirect('/home') #return redirect('/users/')
-    return HttpResponseRedirect('/home')#return redirect('/users/')
 
-
-
-#Metodo que sirve para calcular el numero de seguidores
-def seguidores(request):
-    aux = Relaciones.objects.filter(sigue = request.session['member_id']).count()
-    return aux
-
-#Metodo que sirve para calcular el numero de personas a las que sigue
-def sigue(request):
-    aux = Relaciones.objects.filter(seguidor = request.session['member_id']).count()
-    return aux
+# #Metodo que sirve para calcular el numero de seguidores
+# def seguidores(request):
+#     aux = Relaciones.objects.filter(sigue = request.session['member_id']).count()
+#     return aux
+#
+# #Metodo que sirve para calcular el numero de personas a las que sigue
+# def sigue(request):
+#     aux = Relaciones.objects.filter(seguidor = request.session['member_id']).count()
+#     return aux
 
 
 # Metodo que sirve para acceder al perfil del usuario
-@comprueba_auth
-def pag_perfil(request):
-    usuario = Usuario.objects.get(pseudonimo = request.session['member_id'])
-    return render(request,'perfil.html', {'pseudonimo': request.session['member_id'],'seguidores': seguidores(request), 'sigue':sigue(request), 'posts':usuario.correo})
+# @comprueba_auth
+# def pag_perfil(request):
+#     usuario = Usuario.objects.get(pseudonimo = request.session['member_id'])
+#     return render(request,'perfil.html', {'pseudonimo': request.session['member_id'],'seguidores': seguidores(request), 'sigue':sigue(request), 'posts':"En pruebas"})
 
+
+#Metodo que sirve para calcular el numero de seguidores
+def seguidores(username):
+    aux = Relaciones.objects.filter(sigue = username).count()
+    return aux
+
+#Metodo que sirve para calcular el numero de personas a las que sigue
+def sigue(username):
+    aux = Relaciones.objects.filter(seguidor = username).count()
+    return aux
+
+def follow(request, username):
+    relacion = Relaciones.objects.create(
+                    seguidor = request.session['member_id'],
+                    sigue = username,
+                    )
+    relacion.save()
+
+def pag_perfil(request, username):
+    usuario = Usuario.objects.get(pseudonimo = username)
+    return render(request,'perfil.html', {'pseudonimo': usuario.pseudonimo,'seguidores': seguidores(username), 'sigue':sigue(username), 'posts':"En pruebas"})
 
 @comprueba_auth
 def pag_home(request):
