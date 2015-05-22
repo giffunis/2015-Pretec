@@ -116,11 +116,23 @@ def follow(request):
     return HttpResponseRedirect('/home')#return redirect('/users/')
 
 
+
+#Metodo que sirve para calcular el numero de seguidores
+def seguidores(request):
+    aux = Relaciones.objects.filter(sigue = request.session['member_id']).count()
+    return aux
+
+#Metodo que sirve para calcular el numero de personas a las que sigue
+def sigue(request):
+    aux = Relaciones.objects.filter(seguidor = request.session['member_id']).count()
+    return aux
+
+
 # Metodo que sirve para acceder al perfil del usuario
 @comprueba_auth
 def pag_perfil(request):
     usuario = Usuario.objects.get(pseudonimo = request.session['member_id'])
-    return render(request,'perfil.html', {'pseudonimo': usuario.pseudonimo,'nombre': usuario.nombre, 'apellidos':usuario.apellidos, 'correo':usuario.correo})
+    return render(request,'perfil.html', {'pseudonimo': usuario.pseudonimo,'seguidores': usuario.nombre, 'sigue':usuario.apellidos, 'posts':usuario.correo})
 
 
 @comprueba_auth
@@ -192,7 +204,12 @@ def set_password(request):
         form = EditPasswordForm()
     return render(request, 'set_password.html', {'form' : form})
 
-
+@comprueba_auth
 def users_view(request):
-    usuarios = Usuario.objects.values('pseudonimo').order_by('pseudonimo')
-    return render(request, 'users_view.html', {'usuarios' : usuarios})
+    # usuarios = Usuario.objects.values('pseudonimo').order_by('pseudonimo')
+    # return render(request, 'users_view.html', {'usuarios' : usuarios})
+    usuarios = Usuario.objects.all()
+    names_usuarios = []
+    for i in range(0,usuarios.count()):
+        names_usuarios.append(usuarios[i].pseudonimo)
+    return render(request, 'users_view.html', {'usuarios' : names_usuarios})
