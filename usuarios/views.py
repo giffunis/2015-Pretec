@@ -21,6 +21,8 @@ from .forms import EditPasswordForm
 
 from django import forms
 
+from usuarios.models import Relaciones
+
 
 # Create your views here.
 
@@ -132,7 +134,7 @@ def sigue(request):
 @comprueba_auth
 def pag_perfil(request):
     usuario = Usuario.objects.get(pseudonimo = request.session['member_id'])
-    return render(request,'perfil.html', {'pseudonimo': usuario.pseudonimo,'seguidores': usuario.nombre, 'sigue':usuario.apellidos, 'posts':usuario.correo})
+    return render(request,'perfil.html', {'pseudonimo': request.session['member_id'],'seguidores': seguidores(request), 'sigue':sigue(request), 'posts':usuario.correo})
 
 
 @comprueba_auth
