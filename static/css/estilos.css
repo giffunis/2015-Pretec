@@ -34,3 +34,42 @@ button {
 	background-repeat: no-repeat;
 	background-size: cover;
 }
+
+/* estilos de inicio.html*/
+#titulo_inicio {
+	color: #00FF00;
+	font-weight: bold;
+}
+
+#subtitulo_inicio {
+	color:white;
+	text-align: center;
+	padding-bottom: 20px;
+}
+
+#body_inicio {
+	background-image:url(../imagenes/images1.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+#inicio_registro {
+	background-color: #00FF00;
+}
+
+#inicio_login {
+	background-color: #00FF00;
+
+}
+
+.parrafo_inicio {
+	text-align: center;
+	color: white;
+	font-size:20px;
+	padding-bottom: 20px;
+
+}
+
+.btn_inicio {
+	padding-left: 20px;
+}

@@ -225,3 +225,8 @@ def users_view(request):
     for i in range(0,usuarios.count()):
         names_usuarios.append(usuarios[i].pseudonimo)
     return render(request, 'users_view.html', {'usuarios' : names_usuarios})
+
+
+#funcion que te lleva a la pagina de inicio
+def inicio(request):
+    return render(request, 'inicio.html')
