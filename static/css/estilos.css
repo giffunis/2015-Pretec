@@ -96,6 +96,11 @@ button {
 	background-size: cover;
 }
 
+/*Estilos de formulario_micropost.html*/
+
+#form_post {
+	padding-top: 2%;
+}
 
 
 

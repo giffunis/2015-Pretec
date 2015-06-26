@@ -5,27 +5,23 @@
 {% block title %}
   Crea tu micropost
 {% endblock %}
-
 {% block content %}
 
 <!--<script type="text/javascript" src="/static/js/scriptfecha.js"> </script> -->
-<form role="form" class="form-horizontal" action="#" method="post">{% csrf_token %}
-<script>
+<form role="form" id="form_post" class="form-horizontal" action="#" method="post">{% csrf_token %}
+	<script>
 
-$(document).ready(function(){
+	$(document).ready(function(){
 
-  $("#id_fecha").attr('readonly',true);
+		$("#id_fecha").attr('readonly',true);
 
-});
+	});
 
-</script>
-<h2> Bienvenido {{pseudonimo}} </h2>
+	</script>
 
-  <!-- {{ form.as_p }} -->
-
-{% bootstrap_form form layout="horizontal" %}
-
-{% buttons submit='Enviar'%}{% endbuttons %}
-  <!--<input type="submit" value="Enviar" /> -->
+	{% bootstrap_form form layout="horizontal" %}
+	<div class = "col-md-offset-7">
+		{% buttons submit='Enviar'%}{% endbuttons %}
+	</div>
 </form>
 {% endblock content %}
