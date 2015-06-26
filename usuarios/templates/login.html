@@ -1,10 +1,16 @@
-{%  extends 'base.html' %}
+{%  extends 'formulario_fondo.html' %}
+{% load bootstrap3 %}
 
 {% block title %}
-  Log In
+  Iniciar Sesion
 {% endblock %}
 
 {% block content %}
-<form action="#" method="post">
-  {% csrf_token %}  {{ form.as_p}}  <input type="submit" value="Enviar" /></form>
+<div id = "form_login">
+	<form role="form" class="form-horizontal" action="#" method="post">
+	  	{% csrf_token %}
+	  	{% bootstrap_form form layout="horizontal" %}
+		<button type="submit" class="btn btn-primary col-sm-offset-6">Enviar</button>
+	</form>
+</div>
 {% endblock content %}

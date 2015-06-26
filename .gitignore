@@ -67,3 +67,10 @@ usuarios/migrations
 
 #Archivos del IDE de Joaquín
 .idea/
+
+
+#notas
+.notas-datetimer
+
+#Probando montando un servidor propio
+pretec/wsgi.py

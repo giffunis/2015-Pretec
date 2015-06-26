@@ -1,0 +1,31 @@
+{%  extends 'base.html' %}
+{% load bootstrap3 %}
+{% load static %}
+
+{% block title %}
+  Crea tu micropost
+{% endblock %}
+
+{% block content %}
+
+<!--<script type="text/javascript" src="/static/js/scriptfecha.js"> </script> -->
+<form role="form" class="form-horizontal" action="#" method="post">{% csrf_token %}
+<script>
+
+$(document).ready(function(){
+
+  $("#id_fecha").attr('readonly',true);
+
+});
+
+</script>
+<h2> Bienvenido {{pseudonimo}} </h2>
+
+  <!-- {{ form.as_p }} -->
+
+{% bootstrap_form form layout="horizontal" %}
+
+{% buttons submit='Enviar'%}{% endbuttons %}
+  <!--<input type="submit" value="Enviar" /> -->
+</form>
+{% endblock content %}

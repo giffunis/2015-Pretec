@@ -1,0 +1,36 @@
+h1 {
+	padding: 3%;
+}
+
+#form_registro{
+	background-image: url(../imagenes/opcion5.jpg);
+	padding-bottom: 5%;
+	padding-right: 5%;
+}
+
+
+
+button {
+	margin-top: 4%;
+	color:black;
+
+}
+
+#imagen_perfil img {
+	width: 80%;
+	height: 50%;
+}
+
+#imagen_perfil {
+	padding-left: 3%;
+}
+
+#info_perfil {
+	padding-left: 3%
+}
+
+#fondo_body {
+	background-image: url(../imagenes/fondo3.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+}
