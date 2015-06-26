@@ -9,5 +9,5 @@ def estoy_en_registro(step,url):
 
 @step(u'deberia ver los formularios de inscripcion "([^"]*)"')
 def deberia_ver_el_render_de_registro(step,content):
-    if content not in world.browser.find_element_byid("").text:
+    if content not in world.browser.find_element_byid("titulo").text:
         raise Exception("Pagina no encontrada.")
