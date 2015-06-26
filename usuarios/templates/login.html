@@ -1,16 +1,52 @@
-{%  extends 'formulario_fondo.html' %}
+<!DOCTYPE html>
 {% load bootstrap3 %}
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% block bootstrap3_content %}
 
-{% block title %}
-  Iniciar Sesion
+<html lang="es">
+
+  <head>
+    <meta charset="utf-8" />
+    <title>{{page_title}}</title>
+    <link rel="stylesheet" type="text/css" href="../../static/css/estilos.css">
+
+  </head>
+
+  <body id="fondo_body">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="container-fluid">
+        <div class="header col-sm-6 col-sm-offset-1">
+          <h1 id="titulo_login">Iniciar Sesion</h1>
+        </div>
+      </div>
+      </div>
+    </div>
+
+
+	<div class="col-sm-5 col-sm-offset-0">
+		<div class="container-fluid">
+			<div id = "form_login">
+				<form role="form" class="form-horizontal" action="#" method="post">
+		  			{% csrf_token %}
+		  			{% bootstrap_form form layout="horizontal" %}
+					<button type="submit" class="btn btn-primary col-sm-offset-6">Enviar</button>
+				</form>
+			</div>
+        </div>
+    </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="footer">
+      </div>
+    </div>
+
+  </div>
+  </body>
+
+</html>
+
 {% endblock %}
-
-{% block content %}
-<div id = "form_login">
-	<form role="form" class="form-horizontal" action="#" method="post">
-	  	{% csrf_token %}
-	  	{% bootstrap_form form layout="horizontal" %}
-		<button type="submit" class="btn btn-primary col-sm-offset-6">Enviar</button>
-	</form>
-</div>
-{% endblock content %}

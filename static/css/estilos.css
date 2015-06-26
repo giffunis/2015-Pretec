@@ -1,7 +1,21 @@
+/*generales*/
+
 h1 {
 	padding: 3%;
 }
 
+button {
+	margin-top: 4%;
+	color:black;
+
+}
+
+/*Estilos base_formularios.html*/
+#contenedor_form {
+	padding-left: 5%
+}
+
+/*Estilos regirstro.html*/
 #form_registro{
 	background-image: url(../imagenes/opcion5.jpg);
 	padding-bottom: 5%;
@@ -10,11 +24,7 @@ h1 {
 
 
 
-button {
-	margin-top: 4%;
-	color:black;
 
-}
 
 #imagen_perfil img {
 	width: 80%;
@@ -29,13 +39,9 @@ button {
 	padding-left: 3%
 }
 
-#fondo_body {
-	background-image: url(../imagenes/fondo3.jpg);
-	background-repeat: no-repeat;
-	background-size: cover;
-}
 
-/* estilos de inicio.html*/
+
+/*Estilos de inicio.html*/
 #titulo_inicio {
 	/*color: #00FF00;*/
 	color: #00FF00;
@@ -76,6 +82,20 @@ button {
 	padding-bottom: 5%;
 
 }
+
+/*Estilos login.html*/
+
+#titulo_login {
+	margin-top: 7%;
+	margin-left: 10%;
+}
+
+#fondo_body {
+	background-image: url(../imagenes/prueba3.jpeg);
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
 
 
 
