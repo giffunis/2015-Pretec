@@ -143,9 +143,16 @@ def follow(request, username):
                     )
     relacion.save()
 
-def pag_perfil(request, username):
+@comprueba_auth
+def pag_perfil(request,username):
     usuario = Usuario.objects.get(pseudonimo = username)
     return render(request,'perfil.html', {'pseudonimo': usuario.pseudonimo,'seguidores': seguidores(username), 'sigue':sigue(username), 'posts':"En pruebas"})
+
+@comprueba_auth
+def mi_perfil(request):
+    usuario = Usuario.objects.get(pseudonimo = request.session['member_id'])
+    return render(request,'perfil.html', {'pseudonimo': usuario.pseudonimo,'seguidores': seguidores(usuario.pseudonimo), 'sigue':sigue(usuario.pseudonimo), 'posts':"En pruebas"})
+
 
 @comprueba_auth
 def pag_home(request):

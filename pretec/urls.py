@@ -16,7 +16,7 @@ urlpatterns = [
     url(r'^login/$', usuarios.views.login),
     url(r'^logout/$', usuarios.views.logout),
     url('^perfil/(?P<username>[a-zA-Z0-9\\_]+)/$', usuarios.views.pag_perfil),
-    # url(r'^perfil/$', usuarios.views.pag_perfil),
+    url(r'^mi_perfil/$', usuarios.views.mi_perfil),
     url(r'^home/$', usuarios.views.pag_home),
     url(r'^editProfile/$', usuarios.views.editProfile),
     url(r'^set_name/$', usuarios.views.set_name),
