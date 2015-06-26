@@ -76,4 +76,4 @@ usuarios/migrations
 pretec/wsgi.py
 
 #para evitar el error en el migrate
-microposts/migrations/0001_initial.py
+microposts/migrations/00*
