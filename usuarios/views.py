@@ -188,11 +188,15 @@ def set_email(request):
     if request.method == 'POST':
         form = EditEmailForm(request.POST)
         if form.is_valid():
-            correo = form.cleaned_data['correo']
+            old_email = form.cleaned_data['old_email']
+            new_email = form.cleaned_data['new_email']
             usu = Usuario.objects.get(pseudonimo = request.session['member_id'])
-            usu.correo = correo
-            usu.save()
-            return HttpResponseRedirect('/perfil')
+            if usu.correo == old_email:
+                usu.correo = new_email
+                usu.save()
+                return HttpResponseRedirect('/mi_perfil')
+            else:
+                return HttpResponse('El correo anterior es erroneo')
         else:
             form = EditEmailForm()
         return render(request, 'set_email.html', {'form' : form})
@@ -213,7 +217,7 @@ def set_password(request):
             if old_password == usu.password:
                 usu.password = new_password1
                 usu.save()
-                return HttpResponseRedirect('/perfil')
+                return HttpResponseRedirect('/mi_perfil')
             else:
                 return HttpResponse('La contrasena anterior es erronea')
         else:
