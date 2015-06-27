@@ -25,6 +25,6 @@ def reset_data(scenario):
     call_command('flush', interactive=False, verbosity=0)
     call_command('loaddata', 'all', verbosity=0)
 
-@after.all
-def teardown_browser(total):
-    world.browser.quit()
+# @after.all
+# def teardown_browser(total):
+#     world.browser.quit()
