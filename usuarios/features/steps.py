@@ -2,7 +2,7 @@
 from lettuce import step,world
 from lettuce.django import django_url
 from nose.tools import assert_equals
-from usuarios.models import Usuario
+# from usuarios.models import Usuario
 from django.core import mail
 
 @step(u'voy ala direccion "([^"]*)"')
