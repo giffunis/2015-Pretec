@@ -15,7 +15,6 @@ urlpatterns = [
     url(r'^inicio/$', usuarios.views.inicio),
     url(r'^login/$', usuarios.views.login),
     url(r'^logout/$', usuarios.views.logout),
-    url('^perfil/(?P<username>[a-zA-Z0-9\\_]+)/$', usuarios.views.pag_perfil),
     url(r'^mi_perfil/$', usuarios.views.mi_perfil),
     url(r'^home/$', usuarios.views.pag_home),
     url(r'^editProfile/$', usuarios.views.editProfile),
@@ -25,4 +24,5 @@ urlpatterns = [
     url(r'^microposts/$', microposts.views.set_post),
     url(r'^seguidores/$', usuarios.views.follow),
     url(r'^users/$', usuarios.views.users_view),
+    url(r'^confirmacion/$', usuarios.views.confirmacion)
 ]

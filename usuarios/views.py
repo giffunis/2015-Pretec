@@ -8,7 +8,7 @@ from django.shortcuts import render_to_response
 from django.core.context_processors import csrf
 from django.core.exceptions import ValidationError
 from django.core.exceptions import ObjectDoesNotExist
-
+from django.core.mail import send_mail
 
 # creados por nosotros
 from usuarios.models import Usuario
@@ -35,7 +35,6 @@ def comprueba_auth(funcion):
         except KeyError:
             return HttpResponseRedirect('/login')
     return comprueba_login
-
 
 
 
@@ -102,6 +101,11 @@ def get_registro(request):
 	                        password = password,
 	                        date = date,)
             usuario.save()
+            #enviamos email de confirmacion
+            email_titulo = 'Email de confirmacion'
+            email_mensaje = 'Haz click en este link para confirmar tu cuenta: localhost:8000/confirmacion'
+            send_mail(email_titulo, email_mensaje, 'pretcdsi@gmail.com', [correo], fail_silently = False)
+
             return render(request, 'registro_completado.html')
     else:
         form = RegistroForm()
@@ -125,6 +129,9 @@ def get_registro(request):
 #     usuario = Usuario.objects.get(pseudonimo = request.session['member_id'])
 #     return render(request,'perfil.html', {'pseudonimo': request.session['member_id'],'seguidores': seguidores(request), 'sigue':sigue(request), 'posts':"En pruebas"})
 
+#Metodo que te lleva a la pagina de confirmacion
+def confirmacion(request):
+	return render(request, 'confirmacion.html')
 
 #Metodo que sirve para calcular el numero de seguidores
 def seguidores(username):
@@ -237,3 +244,4 @@ def users_view(request):
 #funcion que te lleva a la pagina de inicio
 def inicio(request):
     return render(request, 'inicio.html')
+
