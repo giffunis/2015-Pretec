@@ -43,5 +43,5 @@ class EditPasswordForm(forms.Form):
     def clean(self):
     	if 'new_password1' in self.cleaned_data and 'new_password2' in self.cleaned_data:
         	if self.cleaned_data['new_password1'] != self.cleaned_data['new_password2']:
-        		raise forms.ValidationError("las contrasenas no coinciden")
+        		raise forms.ValidationError(_(u'las contrasenas no coinciden'))
         return self.cleaned_data
