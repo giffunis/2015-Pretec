@@ -66,11 +66,6 @@ def login(request):
             request.session['member_id'] = pseudonimo #creacion de la cookie
             return HttpResponseRedirect('/home') #'perfil/',pseudonimo
 
-        else:
-            # return render_to_response('register.html', {'form': form}, context_instance=RequestContext(request))
-            return render(request, 'formulario_registro.html', {'form' : form})
-
-
     else:
         form = LoginForm()
     return render(request, 'login.html', {'form' : form})
