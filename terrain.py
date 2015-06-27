@@ -1,52 +1,30 @@
-from django.core.management import call_command
-#from django.test.simple import DjangoTestSuiteRunner
-
 from lettuce import before, after, world
-from logging import getLogger
-from selenium import webdriver
+from splinter.browser import Browser
+from django.test.utils import setup_test_environment, teardown_test_environment
+from django.core.management import call_command
+from django.db import connection
+from django.conf import settings
 
-try:
-	from south.management.commands import patch_for_test_db_setup
-except:
-	pass
+@before.harvest
+def initial_setup(server):
+    call_command('syncdb', interactive=False, verbosity=0)
+    call_command('flush', interactive=False, verbosity=0)
+    call_command('migrate', interactive=False, verbosity=0)
+    call_command('loaddata', 'all', verbosity=0)
+    setup_test_environment()
+    world.browser = Browser('webdriver.firefox')
 
-logger = getLogger(__name__)
-logger.info("Loading the terrain file...")
+@after.harvest
+def cleanup(server):
+    connection.creation.destroy_test_db(settings.DATABASES['default']['NAME'])
+    teardown_test_environment()
 
-
-@before.runserver
-def setup_database(actual_server):
-	'''
-	This will setup your database, sync it, and run migrations if you are using South.
-	It does this before the Test Django server is set up.
-	'''
-	logger.info("Setting up a test database...")
-
-	# Uncomment if you are using South
-	# patch_for_test_db_setup()
-
-	#world.test_runner = DjangoTestSuiteRunner(interactive=False)
-	#DjangoTestSuiteRunner.setup_test_environment(world.test_runner)
-	#world.created_db = DjangoTestSuiteRunner.setup_databases(world.test_runner)
-
-	#call_command('syncdb', interactive=False, verbosity=0)
-
-	# Uncomment if you are using South
-	# call_command('migrate', interactive=False, verbosity=0)
-
-@after.runserver
-def teardown_database(actual_server):
-	'''
-	This will destroy your test database after all of your tests have executed.
-	'''
-	logger.info("Destroying the test database ...")
-
-	#DjangoTestSuiteRunner.teardown_databases(world.test_runner, world.created_db)
-
-@before.all
-def setup_browser():
-	world.browser = webdriver.Firefox()
+@before.each_scenario
+def reset_data(scenario):
+    # Clean up django.
+    call_command('flush', interactive=False, verbosity=0)
+    call_command('loaddata', 'all', verbosity=0)
 
 @after.all
 def teardown_browser(total):
-	world.browser.quit()
+    world.browser.quit()
