@@ -39,22 +39,46 @@ def comprueba_auth(funcion):
 
 
 
+# def login(request):
+#     if request.method == 'POST':
+#         form=LoginForm(request.POST)
+#         try:
+#             usuario = Usuario.objects.get(pseudonimo = request.POST['pseudonimo'])
+#             if usuario.password == request.POST['password']:
+#                 request.session['member_id'] = usuario.pseudonimo #creacion de la cookie
+#                 # return render(request,'home.html', {'pseudonimo': request.session['member_id']})
+#                 return HttpResponseRedirect('/home')
+#             else:
+#                 return HttpResponse('Tu nombre de usuario o contrasena no coinciden')
+#         except Usuario.DoesNotExist:
+#              return HttpResponse('El nombre de usuario no existe')
+#     else:
+#         form = LoginForm()
+#     return render(request, 'login.html', {'form' : form})
+
 def login(request):
     if request.method == 'POST':
-        form=LoginForm(request.POST)
-        try:
-            usuario = Usuario.objects.get(pseudonimo = request.POST['pseudonimo'])
-            if usuario.password == request.POST['password']:
-                request.session['member_id'] = usuario.pseudonimo #creacion de la cookie
-                # return render(request,'home.html', {'pseudonimo': request.session['member_id']})
-                return HttpResponseRedirect('/home')
-            else:
-                return HttpResponse('Tu nombre de usuario o contrasena no coinciden')
-        except Usuario.DoesNotExist:
-             return HttpResponse('El nombre de usuario no existe')
+        form = LoginForm(request.POST)
+
+        if form.is_valid():
+            pseudonimo = form.cleaned_data['pseudonimo']
+            password = form.cleaned_data['password']
+            request.session['member_id'] = pseudonimo #creacion de la cookie
+            return HttpResponseRedirect('/home') #'perfil/',pseudonimo
+
+        else:
+            # return render_to_response('register.html', {'form': form}, context_instance=RequestContext(request))
+            return render(request, 'formulario_registro.html', {'form' : form})
+
+
     else:
         form = LoginForm()
     return render(request, 'login.html', {'form' : form})
+
+
+
+
+
 
 
 def logout(request):
