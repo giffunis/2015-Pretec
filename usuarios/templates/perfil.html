@@ -5,35 +5,40 @@
 {% endblock %}
 
 {% block content%}
-<div class="row" id="imagen_perfil">
-	<div class="col-md-3" >
-		<img src="../../static/imagenes/opcion5.jpg">
+<div class="col-md-offset-1" id="contenedor_perfil">
+	<div class="row" id="imagen_perfil">
+		<div class="col-md-3" >
+			<img src="../../static/imagenes/opcion5.jpg">
+		</div>
+
+		<div class="col-md-3">
+			<h2>{{pseudonimo}}</h2>
+			<button type="submit" class="btn btn-primary" action="/follow">Seguir</button>
+
+		</div>
 	</div>
 
-	<div class="col-md-3">
-		<h2>{{pseudonimo}}</h2>
-		<button type="submit" class="btn btn-primary" action="/follow">Seguir</button>
+	<hr>
 
+	<div class="row">
+		<div class="col-md-3" id="info_perfil">
+			<label>Seguidores: {{seguidores}}</label><br>
+			<label>Sigue: {{sigue}}</label><br>
+			<label>Posts: {{posts}}</label><br>
+			<a href = "/logout"> <button class="btn btn-primary"> Lgout </button></a>
+		</div>
+
+		<div class="col-md-7">
+			{% for item in user_data %}
+				<h2>{{item.titulo}}</h2>
+				<p>{{item.texto}}</p>
+				<p class="pull-right list-inline">{{item.fecha}}</p>
+				<br>
+				<hr>
+			{% endfor %}
+		</div>
 	</div>
 </div>
 
-<div class="row" id="info_perfil">
-	<div class="col-md-3">
-		<label>Seguidores: {{seguidores}}</label><br>
-		<label>Sigue: {{sigue}}</label><br>
-		<!-- <label>Posts: {{posts}}</label><br> -->
-	</div>
-</div>
-
-<div>
-	{% for item in user_data %}
-		{{item.nombre}}
-		{{item.apellidos}}
-		{{item.correo}}
-	{% endfor %}
-</div>
-
-
- <a href = "/logout"> <button> logout </button></a>
-
+ 
 {% endblock content%}

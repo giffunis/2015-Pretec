@@ -25,6 +25,7 @@ from .models import Usuario
 
 from usuarios.models import Relaciones
 from django.template import RequestContext
+from microposts.models import Post
 
 # Create your views here.
 
@@ -172,7 +173,7 @@ def pag_perfil(request,username):
 @comprueba_auth
 def mi_perfil(request):
     usuario = Usuario.objects.get(pseudonimo = request.session['member_id'])
-    query = Usuario.objects.all()
+    query = Post.objects.filter(pseudonimo = request.session['member_id'])
 
     context = {
         "user_data" : query,
@@ -180,13 +181,11 @@ def mi_perfil(request):
         'seguidores': seguidores(usuario.pseudonimo),
         'sigue':sigue(usuario.pseudonimo),
         'posts':"En pruebas",
-
     }
 
     print context
     return render_to_response('perfil.html', context, context_instance=RequestContext(request))
 
-    #return render(request,'perfil.html', {'pseudonimo': usuario.pseudonimo,'seguidores': seguidores(usuario.pseudonimo), 'sigue':sigue(usuario.pseudonimo), 'posts':"En pruebas", 'user_data': query})
 
 
 @comprueba_auth
@@ -277,12 +276,3 @@ def users_view(request):
 def inicio(request):
     return render(request, 'inicio.html')
 
-# def mostrar(request):
-#     query = Usuario.objects.all()
-
-#     query_data = {
-#         "user_data" : query
-#     }
-
-#     print query_data
-#     return render_to_response('perfil.html', query_data, context_instance=RequestContext(request))
