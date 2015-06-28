@@ -37,5 +37,4 @@ def el_deberia_ver(step,text):
 @step(u'El usuario existente es "(.*)"')
 def el_usuario_existente_es(step,campo):
     Usuario=Usuario(pseudonimo=campo,email=campo)
-    Usuario.ZXXXXAQUI VA UNA FUNCION QUE COMPARE ESTO
     Usuario.save()
