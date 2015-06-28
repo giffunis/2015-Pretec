@@ -22,7 +22,7 @@ class RegistroForm(forms.Form):
         		raise forms.ValidationError(_(u'las contrasenas no coinciden'))
         return self.cleaned_data
 
-
+# LoginForm terminado. No tocar.
 class LoginForm(forms.Form):
     pseudonimo = forms.CharField(label= 'Pseudonimo', max_length='20', min_length='5')
     password = forms.CharField(label='Contrasena', widget=forms.PasswordInput)
@@ -43,6 +43,7 @@ class EditNameForm(forms.Form):
     nombre = forms.CharField(label='Nombre', max_length=30, min_length=2)
     apellidos = forms.CharField(label = 'Apellidos', max_length = 50)
 
+# EditEmailForm terminado. No tocar.
 class EditEmailForm(forms.Form):
     old_email = forms.EmailField(label='Correo Antiguo')
     new_email = forms.EmailField(label='Correo Nuevo')
@@ -63,13 +64,8 @@ class EditEmailForm(forms.Form):
 
         raise forms.ValidationError("El nuevo correo no esta disponible")
 
+# EditPasswordForm terminado. No tocar.
 class EditPasswordForm(forms.Form):
     old_password = forms.CharField(label='Contrasena anterior', widget=forms.PasswordInput)
     new_password1 = forms.CharField(label='Nueva contrasena', widget=forms.PasswordInput)
     new_password2 = forms.CharField(label='Repita la nueva contrasena', widget=forms.PasswordInput)
-
-    def clean(self):
-    	if 'new_password1' in self.cleaned_data and 'new_password2' in self.cleaned_data:
-        	if self.cleaned_data['new_password1'] != self.cleaned_data['new_password2']:
-        		raise forms.ValidationError(_(u'las contrasenas no coinciden'))
-        return self.cleaned_data

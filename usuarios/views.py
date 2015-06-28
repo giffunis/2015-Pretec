@@ -209,31 +209,46 @@ def set_email(request):
                 usuario.correo = new_email
                 usuario.save()
                 messages.success(request, 'Su correo se ha actualizado')
+        # En caso de que el formulario no sea valido
+        else:
+            form = EditEmailForm()
+            return render(request, 'set_email.html', {'form' : form})
     else:
         form = EditEmailForm()
     return render(request, 'set_email.html', {'form' : form})
 
 
-
+# set_password terminado. No tocar.
 @comprueba_auth
 def set_password(request):
     if request.method == 'POST':
         form = EditPasswordForm(request.POST)
+        # En el caso de que el formulario sea valido
         if form.is_valid():
+
             old_password = form.cleaned_data['old_password']
             new_password1 = form.cleaned_data['new_password1']
             new_password2 = form.cleaned_data['new_password2']
-            #falta comprobar que la contrasena introducida coincida con la que tenia
-            usu = Usuario.objects.get(pseudonimo = request.session['member_id'])
-            if old_password == usu.password:
-                usu.password = new_password1
-                usu.save()
-                return HttpResponseRedirect('/mi_perfil')
+            # Consulta a la BD
+            usuario = Usuario.objects.get(pseudonimo = request.session['member_id'])
+
+            # Aqui se comprueba que las contrasenas coincidan
+            if new_password1 != new_password2:
+                messages.error(request, 'Las contrasenas no coinciden')
+            # y aqui que la vieja sea correcta
+            elif usuario.password != old_password:
+                messages.error(request, 'La contrasena es incorrecta')
+            # Si es correcta se actualiza
             else:
-                return HttpResponse('La contrasena anterior es erronea')
+                usuario.password = new_password1
+                usuario.save()
+                messages.success(request, 'Su contrasena se ha actualizado correctamente')
+
+        # En caso de que el formulario no sea valido
         else:
             form = EditPasswordForm()
         return render(request, 'set_password.html', {'form' : form})
+    # si se trata de una peticion get
     else:
         form = EditPasswordForm()
     return render(request, 'set_password.html', {'form' : form})
