@@ -67,9 +67,3 @@ class EditPasswordForm(forms.Form):
     old_password = forms.CharField(label='Contrasena anterior', widget=forms.PasswordInput)
     new_password1 = forms.CharField(label='Nueva contrasena', widget=forms.PasswordInput)
     new_password2 = forms.CharField(label='Repita la nueva contrasena', widget=forms.PasswordInput)
-
-    def clean(self):
-    	if 'new_password1' in self.cleaned_data and 'new_password2' in self.cleaned_data:
-        	if self.cleaned_data['new_password1'] != self.cleaned_data['new_password2']:
-        		raise forms.ValidationError(_(u'las contrasenas no coinciden'))
-        return self.cleaned_data
