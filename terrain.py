@@ -4,6 +4,8 @@ from django.test.utils import setup_test_environment, teardown_test_environment
 from django.core.management import call_command
 from django.db import connection
 from django.conf import settings
+from pretec import settings
+
 
 @before.harvest
 def initial_setup(server):
@@ -12,7 +14,9 @@ def initial_setup(server):
     call_command('migrate', interactive=False, verbosity=0)
     call_command('loaddata', 'all', verbosity=0)
     setup_test_environment()
-    world.browser = Browser('webdriver.firefox')
+    world.browser = webdriver.Firefox()
+# def set_browser(data):
+#   world.browser = Browser('webdriver.firefox')
 
 @after.harvest
 def cleanup(server):
@@ -25,6 +29,6 @@ def reset_data(scenario):
     call_command('flush', interactive=False, verbosity=0)
     call_command('loaddata', 'all', verbosity=0)
 
-# @after.all
-# def teardown_browser(total):
-#     world.browser.quit()
+@after.all
+def teardown_browser(total):
+    world.browser.quit()

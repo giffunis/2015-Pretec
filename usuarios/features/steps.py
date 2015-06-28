@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
-from lettuce import step,world
+from lettuce import *
 from lettuce.django import django_url
 from nose.tools import assert_equals
-# from usuarios.models import Usuario
+from splinter.browser import Browser
+#from usuarios.models import Usuario
 from django.core import mail
 
 @step(u'voy ala direccion "([^"]*)"')
