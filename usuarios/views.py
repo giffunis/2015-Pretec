@@ -211,7 +211,7 @@ def set_email(request):
     return render(request, 'set_email.html', {'form' : form})
 
 
-# set_email terminado. No tocar.
+# set_password terminado. No tocar.
 @comprueba_auth
 def set_password(request):
     if request.method == 'POST':
@@ -228,7 +228,7 @@ def set_password(request):
             # Aqui se comprueba que las contrasenas coincidan
             if new_password1 != new_password2:
                 messages.error(request, 'Las contrasenas no coinciden')
-            # y aqui que la vieja sea correcta 
+            # y aqui que la vieja sea correcta
             elif usuario.password != old_password:
                 messages.error(request, 'La contrasena es incorrecta')
             # Si es correcta se actualiza
