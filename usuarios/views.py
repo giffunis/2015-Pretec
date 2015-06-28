@@ -38,24 +38,6 @@ def comprueba_auth(funcion):
 
 
 
-
-# def login(request):
-#     if request.method == 'POST':
-#         form=LoginForm(request.POST)
-#         try:
-#             usuario = Usuario.objects.get(pseudonimo = request.POST['pseudonimo'])
-#             if usuario.password == request.POST['password']:
-#                 request.session['member_id'] = usuario.pseudonimo #creacion de la cookie
-#                 # return render(request,'home.html', {'pseudonimo': request.session['member_id']})
-#                 return HttpResponseRedirect('/home')
-#             else:
-#                 return HttpResponse('Tu nombre de usuario o contrasena no coinciden')
-#         except Usuario.DoesNotExist:
-#              return HttpResponse('El nombre de usuario no existe')
-#     else:
-#         form = LoginForm()
-#     return render(request, 'login.html', {'form' : form})
-
 def login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
@@ -69,11 +51,6 @@ def login(request):
     else:
         form = LoginForm()
     return render(request, 'login.html', {'form' : form})
-
-
-
-
-
 
 
 def logout(request):
@@ -125,24 +102,6 @@ def get_registro(request):
     else:
         form = RegistroForm()
     return render(request, 'formulario_registro.html', {'form' : form})
-
-
-# #Metodo que sirve para calcular el numero de seguidores
-# def seguidores(request):
-#     aux = Relaciones.objects.filter(sigue = request.session['member_id']).count()
-#     return aux
-#
-# #Metodo que sirve para calcular el numero de personas a las que sigue
-# def sigue(request):
-#     aux = Relaciones.objects.filter(seguidor = request.session['member_id']).count()
-#     return aux
-
-
-# Metodo que sirve para acceder al perfil del usuario
-# @comprueba_auth
-# def pag_perfil(request):
-#     usuario = Usuario.objects.get(pseudonimo = request.session['member_id'])
-#     return render(request,'perfil.html', {'pseudonimo': request.session['member_id'],'seguidores': seguidores(request), 'sigue':sigue(request), 'posts':"En pruebas"})
 
 
 #Metodo que sirve para calcular el numero de seguidores
@@ -202,6 +161,27 @@ def set_name(request):
         form = EditNameForm()
     return render(request, 'set_name.html', {'form' : form})
 
+# @comprueba_auth
+# def set_email(request):
+#     if request.method == 'POST':
+#         form = EditEmailForm(request.POST)
+#         if form.is_valid():
+#             old_email = form.cleaned_data['old_email']
+#             new_email = form.cleaned_data['new_email']
+            # usu = Usuario.objects.get(pseudonimo = request.session['member_id'])
+#             if usu.correo == old_email:
+#                 usu.correo = new_email
+#                 usu.save()
+#                 return HttpResponseRedirect('/mi_perfil')
+#             else:
+#                 return HttpResponse('El correo anterior es erroneo')
+#         else:
+#             form = EditEmailForm()
+#         return render(request, 'set_email.html', {'form' : form})
+#     else:
+#         form = EditEmailForm()
+#     return render(request, 'set_email.html', {'form' : form})
+
 @comprueba_auth
 def set_email(request):
     if request.method == 'POST':
@@ -209,19 +189,15 @@ def set_email(request):
         if form.is_valid():
             old_email = form.cleaned_data['old_email']
             new_email = form.cleaned_data['new_email']
-            usu = Usuario.objects.get(pseudonimo = request.session['member_id'])
-            if usu.correo == old_email:
-                usu.correo = new_email
-                usu.save()
-                return HttpResponseRedirect('/mi_perfil')
-            else:
-                return HttpResponse('El correo anterior es erroneo')
-        else:
-            form = EditEmailForm()
-        return render(request, 'set_email.html', {'form' : form})
+            usuario = Usuario.objects.get(correo = old_email)
+            usuario.correo = new_email
+            usuario.save()
+            return HttpResponseRedirect('/home') #'perfil/',pseudonimo
     else:
         form = EditEmailForm()
     return render(request, 'set_email.html', {'form' : form})
+
+
 
 @comprueba_auth
 def set_password(request):
