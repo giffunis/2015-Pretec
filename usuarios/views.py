@@ -40,7 +40,7 @@ def comprueba_auth(funcion):
     return comprueba_login
 
 
-
+# Login terminado. No tocar.
 def login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
@@ -164,27 +164,7 @@ def set_name(request):
         form = EditNameForm()
     return render(request, 'set_name.html', {'form' : form})
 
-# @comprueba_auth
-# def set_email(request):
-#     if request.method == 'POST':
-#         form = EditEmailForm(request.POST)
-#         if form.is_valid():
-#             old_email = form.cleaned_data['old_email']
-#             new_email = form.cleaned_data['new_email']
-            # usu = Usuario.objects.get(pseudonimo = request.session['member_id'])
-#             if usu.correo == old_email:
-#                 usu.correo = new_email
-#                 usu.save()
-#                 return HttpResponseRedirect('/mi_perfil')
-#             else:
-#                 return HttpResponse('El correo anterior es erroneo')
-#         else:
-#             form = EditEmailForm()
-#         return render(request, 'set_email.html', {'form' : form})
-#     else:
-#         form = EditEmailForm()
-#     return render(request, 'set_email.html', {'form' : form})
-
+# set_email terminado. No tocar.
 @comprueba_auth
 def set_email(request):
     if request.method == 'POST':
