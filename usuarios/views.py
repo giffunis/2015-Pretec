@@ -66,7 +66,7 @@ def logout(request):
         del request.session['member_id']
     except KeyError:
         pass
-    return HttpResponse("You're logged out.")
+    return render(request, 'inicio.html')
 
 def authenticate(name, pswd):
     try:
