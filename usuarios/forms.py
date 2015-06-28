@@ -47,6 +47,22 @@ class EditEmailForm(forms.Form):
     old_email = forms.EmailField(label='Correo Antiguo')
     new_email = forms.EmailField(label='Correo Nuevo')
 
+    def clean(self):
+        old_email = self.cleaned_data['old_email']
+        new_email = self.cleaned_data['new_email']
+
+        try:
+            Usuario.objects.get(correo = old_email)
+        except Usuario.DoesNotExist:
+            raise forms.ValidationError("El correo antiguo es incorrecto")
+
+        try:
+            Usuario.objects.get(correo = new_email)
+        except Usuario.DoesNotExist:
+            return self.cleaned_data
+
+        raise forms.ValidationError("El nuevo correo no esta disponible")
+
 class EditPasswordForm(forms.Form):
     old_password = forms.CharField(label='Contrasena anterior', widget=forms.PasswordInput)
     new_password1 = forms.CharField(label='Nueva contrasena', widget=forms.PasswordInput)
