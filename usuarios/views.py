@@ -66,7 +66,7 @@ def logout(request):
         del request.session['member_id']
     except KeyError:
         pass
-    return HttpResponse("You're logged out.")
+    return render(request, 'inicio.html')
 
 def authenticate(name, pswd):
     try:
@@ -160,7 +160,14 @@ def mi_perfil(request):
 
 @comprueba_auth
 def pag_home(request):
-    return render(request,'home.html', {'pseudonimo': request.session['member_id']})
+    query = Post.objects.all().order_by('-fecha')
+
+    context = {
+        "user_data" : query,
+    }
+
+    print context
+    return render_to_response('home.html', context, context_instance=RequestContext(request))
 
 
 @comprueba_auth
