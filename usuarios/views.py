@@ -137,7 +137,7 @@ def post(username):
 @comprueba_auth
 def pag_perfil(request,username):
     usuario = Usuario.objects.get(pseudonimo = username)
-    return render(request,'perfil.html', {'pseudonimo': usuario.pseudonimo,'seguidores': seguidores(username), 'sigue':sigue(username), 'posts':posts(username)})
+    return render(request,'perfil.html', {'pseudonimo': usuario.pseudonimo,'seguidores': seguidores(username), 'sigue':sigue(username), 'posts':post(username)})
 
 
 @comprueba_auth
