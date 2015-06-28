@@ -10,7 +10,6 @@ from django.core.context_processors import csrf
 from django.core.exceptions import ValidationError
 from django.core.exceptions import ObjectDoesNotExist
 
-
 # creados por nosotros
 from usuarios.models import Usuario
 from .forms import RegistroForm
@@ -130,10 +129,16 @@ def follow(request, username):
                     )
     relacion.save()
 
+def post(username):
+
+     aux = Post.objects.filter(pseudonimo = username).count()
+     return aux
+
 @comprueba_auth
 def pag_perfil(request,username):
     usuario = Usuario.objects.get(pseudonimo = username)
-    return render(request,'perfil.html', {'pseudonimo': usuario.pseudonimo,'seguidores': seguidores(username), 'sigue':sigue(username), 'posts':"En pruebas"})
+    return render(request,'perfil.html', {'pseudonimo': usuario.pseudonimo,'seguidores': seguidores(username), 'sigue':sigue(username), 'posts':posts(username)})
+
 
 @comprueba_auth
 def mi_perfil(request):
@@ -145,7 +150,7 @@ def mi_perfil(request):
         'pseudonimo': usuario.pseudonimo,
         'seguidores': seguidores(usuario.pseudonimo),
         'sigue':sigue(usuario.pseudonimo),
-        'posts':"En pruebas",
+        'posts':post(usuario.pseudonimo),
     }
 
     print context
