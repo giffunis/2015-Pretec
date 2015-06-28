@@ -222,14 +222,14 @@ def set_password(request):
             old_password = form.cleaned_data['old_password']
             new_password1 = form.cleaned_data['new_password1']
             new_password2 = form.cleaned_data['new_password2']
-            # en el forms.py se comprueba que la contrasena 1 y la 2 sean iguales
-            try:
-                new_password1 == new_password2
-            except FALSE:
-                messages.error(request, 'Las contrasenas no son iguales')
-            # Aqui se comprueba que la anterior sea la contrasena correcta
+            # Consulta a la BD
             usuario = Usuario.objects.get(pseudonimo = request.session['member_id'])
-            if usuario.password != old_password:
+
+            # Aqui se comprueba que las contrasenas coincidan
+            if new_password1 != new_password2:
+                messages.error(request, 'Las contrasenas no coinciden')
+            # y aqui que la vieja sea correcta 
+            elif usuario.password != old_password:
                 messages.error(request, 'La contrasena es incorrecta')
             # Si es correcta se actualiza
             else:
