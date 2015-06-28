@@ -1,0 +1,38 @@
+Feature: Registro
+	Testing de registro
+	Para saber si un usuario puede registrarse
+	Aquí van los escenarios
+
+	Scenario: Usuario puede ir a la pagina de registro
+		Given voy a la direccion "/registro/" url
+    Then deberia ver "Únete a Pretec"
+
+	Scenario: Usuario puede registrarse
+		Given un usuario se quiere registrar "jota"
+		When El llena el "nombre" con "joaquin"
+		And El llena el "apelliodo" con "escobar"
+		And El llena el "pseudonimo" con "jota"
+		And El llena el "correo" con "jota@jota.com"
+		And El llena el "password1" con "123456"
+		And El llena el "password2" con "123456"
+		And El llena el "date" con "02/17/1991"
+		And El presiona "Registrarse"
+		Then El deberia ver "REGISTRO COMPLETADO"
+
+	Scenario: Usuario no llena los campos de forma correcta
+    When El va a la direccion "/registro/" URL
+    And El presiona "Registrarse"
+    Then El deberia ver "Por favor llene los campos obligatorios"
+
+	Scenario: Usuario ingresa un usuario ya existente
+		Given El usuario existente es "jojojo"
+		When El va a la direccion "/register/" URL
+		And El llena el "pseudonimo" con "jojojo"
+		Then El deberia ver "Pseudonimo ya existe"
+
+
+	Scenario: Usuario ingresa un correo ya existente
+		Given El usuario existente es "jota@jota.com"
+		When El va a la direccion "/registro/" URL
+		And El llena el "correo" con "jota@jota.com"
+		Then El deberia ver "Correo ya existe"
