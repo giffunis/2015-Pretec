@@ -23,6 +23,9 @@ from django import forms
 
 from usuarios.models import Relaciones
 
+# Para importar los mensajes del settings.py
+from django.contrib import messages
+
 
 # Create your views here.
 
@@ -189,10 +192,13 @@ def set_email(request):
         if form.is_valid():
             old_email = form.cleaned_data['old_email']
             new_email = form.cleaned_data['new_email']
-            usuario = Usuario.objects.get(correo = old_email)
-            usuario.correo = new_email
-            usuario.save()
-            return HttpResponseRedirect('/home') #'perfil/',pseudonimo
+            usuario = Usuario.objects.get(pseudonimo = request.session['member_id'])
+            if usuario.correo != old_email:
+                messages.error(request, 'El correo es erroneo')
+            else:
+                usuario.correo = new_email
+                usuario.save()
+                messages.success(request, 'Su correo se ha actualizado')
     else:
         form = EditEmailForm()
     return render(request, 'set_email.html', {'form' : form})
