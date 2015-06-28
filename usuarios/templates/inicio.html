@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+{% load bootstrap3 %}
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% block bootstrap3_content %}
+
+<html lang="es">
+
+  <head>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.js"> </script>
+    <link rel="stylesheet" type="text/css" href="/static/css/estilos.css">
+    {{ form.media }}
+    <meta charset="utf-8" />
+    <title>{{page_title}}</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../static/css/estilos.css"
+  </head>
+
+  <body id="body_inicio">
+    
+
+    <div class="row">
+      <div class="col-md-10 col-md-offset-4">
+
+        <h1 id="titulo_inicio">Bienvenido a Pretec</h1>
+      </div>
+      <div class="col-md-5 col-md-offset-1" id="contenido_inicio">
+        <h2 id="subtitulo_inicio"> ¡Resuelve todas tus dudas tecnológicas en Pretec! </h2>
+        <p id="parrafo_inicio"> ¿Aún no eres miembro de esta comunidad? </p>
+        <p><a class="btn btn-success col-md-offset-1 btn-lg" id="inicio_registro" role="button" href="/registro">¡Registrate Ya!</a></p>
+        <p><a class="btn btn-success col-lg-offset-1" id="inicio_login" role="button" href="/login">¡Inicia sesion!</a></p>
+
+
+      </div> 
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="footer">
+
+        </div>
+      </div>
+
+    </div>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"> </script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+  </body>
+
+</html>
+
+{% endblock %}

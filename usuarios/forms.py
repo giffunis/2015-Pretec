@@ -27,6 +27,18 @@ class LoginForm(forms.Form):
     pseudonimo = forms.CharField(label= 'Pseudonimo', max_length='20', min_length='5')
     password = forms.CharField(label='Contrasena', widget=forms.PasswordInput)
 
+    def clean(self):
+        pseudonimo = self.cleaned_data['pseudonimo']
+        password = self.cleaned_data['password']
+        try:
+            usuario = Usuario.objects.get(pseudonimo = pseudonimo)
+        except Usuario.DoesNotExist:
+            raise forms.ValidationError("El usuario no existe")
+        if usuario.password != password:
+            raise forms.ValidationError("El nombre de usuario o la contrasena no coinciden")
+        return self.cleaned_data
+
+
 class EditNameForm(forms.Form):
     nombre = forms.CharField(label='Nombre', max_length=30, min_length=2)
     apellidos = forms.CharField(label = 'Apellidos', max_length = 50)
@@ -34,6 +46,22 @@ class EditNameForm(forms.Form):
 class EditEmailForm(forms.Form):
     old_email = forms.EmailField(label='Correo Antiguo')
     new_email = forms.EmailField(label='Correo Nuevo')
+
+    def clean(self):
+        old_email = self.cleaned_data['old_email']
+        new_email = self.cleaned_data['new_email']
+
+        try:
+            Usuario.objects.get(correo = old_email)
+        except Usuario.DoesNotExist:
+            raise forms.ValidationError("El correo antiguo es incorrecto")
+
+        try:
+            Usuario.objects.get(correo = new_email)
+        except Usuario.DoesNotExist:
+            return self.cleaned_data
+
+        raise forms.ValidationError("El nuevo correo no esta disponible")
 
 class EditPasswordForm(forms.Form):
     old_password = forms.CharField(label='Contrasena anterior', widget=forms.PasswordInput)

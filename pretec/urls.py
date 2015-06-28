@@ -12,9 +12,11 @@ urlpatterns = [
     # url(r'^blog/', include('blog.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^registro/$', usuarios.views.get_registro),
+    url(r'^inicio/$', usuarios.views.inicio),
     url(r'^login/$', usuarios.views.login),
     url(r'^logout/$', usuarios.views.logout),
-    url(r'^perfil/$', usuarios.views.pag_perfil),
+    url('^perfil/(?P<username>[a-zA-Z0-9\\_]+)/$', usuarios.views.pag_perfil),
+    url(r'^mi_perfil/$', usuarios.views.mi_perfil),
     url(r'^home/$', usuarios.views.pag_home),
     url(r'^editProfile/$', usuarios.views.editProfile),
     url(r'^set_name/$', usuarios.views.set_name),
@@ -22,4 +24,5 @@ urlpatterns = [
     url(r'^set_password/$', usuarios.views.set_password),
     url(r'^microposts/$', microposts.views.set_post),
     url(r'^seguidores/$', usuarios.views.follow),
+    url(r'^users/$', usuarios.views.users_view),
 ]

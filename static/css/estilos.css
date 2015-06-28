@@ -1,14 +1,8 @@
+/*generales*/
+
 h1 {
 	padding: 3%;
 }
-
-#form_registro{
-	background-image: url(../imagenes/opcion5.jpg);
-	padding-bottom: 5%;
-	padding-right: 5%;
-}
-
-
 
 button {
 	margin-top: 4%;
@@ -16,6 +10,20 @@ button {
 
 }
 
+/*Estilos base_formularios.html*/
+#contenedor_form {
+	padding-left: 5%
+}
+
+/*Estilos regirstro.html*/
+#form_registro{
+	background-image: url(../imagenes/opcion5.jpg);
+	padding-bottom: 5%;
+	padding-right: 5%;
+}
+
+
+/*estilos porfil.html*/
 #imagen_perfil img {
 	width: 80%;
 	height: 50%;
@@ -29,8 +37,68 @@ button {
 	padding-left: 3%
 }
 
-#fondo_body {
-	background-image: url(../imagenes/fondo3.jpg);
+
+/*Estilos de inicio.html*/
+#titulo_inicio {
+	/*color: #00FF00;*/
+	color: #00FF00;
+	font-weight: bold;
+}
+
+#subtitulo_inicio {
+	color:white;
+	text-align: center;
+	padding-bottom: 20px;
+}
+
+#body_inicio {
+	background-image:url(../imagenes/image2.png);
 	background-repeat: no-repeat;
 	background-size: cover;
 }
+
+#contenido_inicio {
+	padding-left: 9%;
+	padding-top: 2%;
+}
+
+#inicio_registro {
+	background-color: #32CD32;
+	margin-bottom: 3%;
+}
+
+#inicio_login {
+	background-color: #32CD32;
+
+}
+
+#parrafo_inicio {
+	text-align: center;
+	color: white;
+	font-size:145%;
+	padding-bottom: 5%;
+
+}
+
+/*Estilos login.html*/
+
+#titulo_login {
+	margin-top: 7%;
+	margin-left: 10%;
+}
+
+#fondo_body {
+	background-image: url(../imagenes/prueba3.jpeg);
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+/*Estilos de formulario_micropost.html*/
+
+#form_post {
+	padding-top: 2%;
+}
+
+
+
+

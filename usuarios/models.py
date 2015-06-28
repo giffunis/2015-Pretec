@@ -43,7 +43,6 @@ class Usuario(models.Model):
 
 #base de datos con los seguidores y a quien esta siguiendo un usuario
 class Relaciones(models.Model):
-	seguidor =  models.ForeignKey(Usuario, related_name = 'seguidor');
-	sigue = models.ForeignKey(Usuario, related_name = 'sigue');
 
-
+	seguidor =  models.ForeignKey(Usuario, related_name = 'seguidor')
+	sigue = models.ForeignKey(Usuario, related_name = 'sigue')
