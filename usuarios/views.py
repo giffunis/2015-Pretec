@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.utils.translation import gettext as _
 
 from django.shortcuts import render_to_response
+
 # from django.http import HttpResponseRedirect
 from django.core.context_processors import csrf
 from django.core.exceptions import ValidationError
@@ -20,9 +21,10 @@ from .forms import EditEmailForm
 from .forms import EditPasswordForm
 
 from django import forms
+from .models import Usuario
 
 from usuarios.models import Relaciones
-
+from django.template import RequestContext
 
 # Create your views here.
 
@@ -170,7 +172,15 @@ def pag_perfil(request,username):
 @comprueba_auth
 def mi_perfil(request):
     usuario = Usuario.objects.get(pseudonimo = request.session['member_id'])
-    return render(request,'perfil.html', {'pseudonimo': usuario.pseudonimo,'seguidores': seguidores(usuario.pseudonimo), 'sigue':sigue(usuario.pseudonimo), 'posts':"En pruebas"})
+    query = Usuario.objects.all()
+
+    query_data = {
+        "user_data" : query
+    }
+    print query_data
+    return render_to_response('perfil.html', query_data, context_instance=RequestContext(request))
+
+    #return render(request,'perfil.html', {'pseudonimo': usuario.pseudonimo,'seguidores': seguidores(usuario.pseudonimo), 'sigue':sigue(usuario.pseudonimo), 'posts':"En pruebas"})
 
 
 @comprueba_auth
@@ -260,3 +270,13 @@ def users_view(request):
 #funcion que te lleva a la pagina de inicio
 def inicio(request):
     return render(request, 'inicio.html')
+
+# def mostrar(request):
+#     query = Usuario.objects.all()
+
+#     query_data = {
+#         "user_data" : query
+#     }
+
+#     print query_data
+#     return render_to_response('perfil.html', query_data, context_instance=RequestContext(request))

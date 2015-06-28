@@ -25,6 +25,14 @@
 	</div>
 </div>
 
+<div>
+	{% for item in user_data %}
+		{{item.nombre}}
+		{{item.apellidos}}
+		{{item.correo}}
+	{% endfor %}
+</div>
+
 
  <a href = "/logout"> <button> logout </button></a>
 
