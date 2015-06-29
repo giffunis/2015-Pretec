@@ -165,17 +165,17 @@ def pag_home(request):
 
     if request.is_ajax():
         return HttpResponse("ajax")
+    else:
+        usuario = Usuario.objects.get(pseudonimo = request.session['member_id'])
+        query = Post.objects.all().order_by('-fecha')
 
-    usuario = Usuario.objects.get(pseudonimo = request.session['member_id'])
-    query = Post.objects.all().order_by('-fecha')
+        context = {
+            "user_data" : query,
+            'pseudonimo': usuario.pseudonimo,
+        }
 
-    context = {
-        "user_data" : query,
-        'pseudonimo': usuario.pseudonimo,
-    }
-
-    print context
-    return render_to_response('home.html', context, context_instance=RequestContext(request))
+        print context
+        return render_to_response('home.html', context, context_instance=RequestContext(request))
 
 
 # def bPost(request):

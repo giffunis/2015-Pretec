@@ -2,19 +2,22 @@
 {% load bootstrap3 %}
 {# Load CSS and JavaScript #}
 {% bootstrap_css %}
-{% bootstrap_javascript %}
 {% block bootstrap3_content %}
 
 <html lang="es">
 
   <head>
-
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.js"> </script>
     <link rel="stylesheet" type="text/css" href="/static/css/estilos.css">
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.3.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    {% bootstrap_javascript %}
+
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     {{ form.media }}
     <meta charset="utf-8" />
     <title>{{page_title}}</title>
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../../static/css/estilos.css">
   </head>
 
@@ -49,7 +52,8 @@
                   <li><a href="/microposts">Publicar Pregunta</a></li>
               </ul>
 
-              <form class="navbar-form navbar-left" role="search" method="post">
+              <form class="navbar-form navbar-left" role="form" method="post">
+                {% csrf_token %}
                 <div class="form-group">
                   <input type="text" class="form-control" id="buscarPost" name="buscarPost" placeholder="Buscar post">
                 </div>
@@ -81,19 +85,16 @@
 
         </div>
       </div>
-
     </div>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"> </script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script>
+
+    <script type="text/javascript">
       $(document).ready(function(){
         $('#btn_buscarPost').on('click',function(){
           var busqueda = $('#buscarPost').val();
           $.ajax({
             method: "POST",
-            url: "/pag_home/",
-            data: 'busqueda='+busqueda,
+            url: "http://localhost:8000/home/",
+            data: {csrfmiddlewaretoken: '{{csrf_token }}'},
             success: function(valor){
               alert(valor);
             },
