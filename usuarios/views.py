@@ -138,6 +138,12 @@ def follow(request, username):
                     sigue = username,)
     relacion.save()
 
+def unfollow(request, username):
+    relacion = Relaciones.objects.delete(
+                    seguidor = request.session['member_id'],
+                    sigue = username,)
+    relacion.save()
+
 def post(username):
     aux = Post.objects.filter(pseudonimo = username).count()
     return aux
