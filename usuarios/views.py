@@ -203,12 +203,19 @@ def set_email(request):
             old_email = form.cleaned_data['old_email']
             new_email = form.cleaned_data['new_email']
             usuario = Usuario.objects.get(pseudonimo = request.session['member_id'])
+
             if usuario.correo != old_email:
                 messages.error(request, 'El correo es erroneo')
+            elif usuario.correo == new_email:
+                messages.error(request, 'El correo es el mismo')
             else:
-                usuario.correo = new_email
-                usuario.save()
-                messages.success(request, 'Su correo se ha actualizado')
+                try:
+                    usuario2 = Usuario.objects.get(correo = new_email)
+                    messages.error(request, 'El correo no se encuentra disponible')
+                except Usuario.DoesNotExist:
+                    usuario.correo = new_email
+                    usuario.save()
+                    messages.success(request, 'Su correo se ha actualizado')
         # En caso de que el formulario no sea valido
         else:
             form = EditEmailForm()
@@ -216,6 +223,8 @@ def set_email(request):
     else:
         form = EditEmailForm()
     return render(request, 'set_email.html', {'form' : form})
+
+
 
 
 # set_password terminado. No tocar.
