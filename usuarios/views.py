@@ -174,6 +174,7 @@ def pag_home(request):
 def editProfile(request):
     return render(request,'editProfile.html',{'pseudonimo': request.session['member_id']})
 
+# set_name terminado. No tocar.
 @comprueba_auth
 def set_name(request):
     if request.method == 'POST':
@@ -186,7 +187,7 @@ def set_name(request):
             usu.nombre = nombre
             usu.apellidos = apellidos
             usu.save()
-            return HttpResponseRedirect('/perfil')
+            messages.success(request, 'El nombre y los apellidos se han actualizado correctamente')
         else:
             form = EditNameForm()
         return render(request, 'set_name.html', {'form' : form})
