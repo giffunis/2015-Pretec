@@ -5,7 +5,7 @@ from django.utils.translation import gettext as _
 
 
 
-
+# RegistroForm completado. No tocar
 class RegistroForm(forms.Form):
 
     nombre = forms.CharField(label='Nombre', max_length=30, min_length=2)

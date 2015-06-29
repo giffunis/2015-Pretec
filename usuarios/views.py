@@ -88,6 +88,7 @@ def authenticate(name, pswd):
 
 
 # Metodo que sirve para registrarse
+# get_registro terminado. No tocar.
 def get_registro(request):
     if request.method == 'POST':
         form=RegistroForm(request.POST)
@@ -98,15 +99,24 @@ def get_registro(request):
             correo = form.cleaned_data['correo']
             password = form.cleaned_data['password1']
             date  = form.cleaned_data['date']
-            usuario = Usuario.objects.create(
-	                        nombre = nombre,
-	                        apellidos = apellidos,
-	                        pseudonimo = pseudonimo,
-	                        correo = correo,
-	                        password = password,
-	                        date = date,)
-            usuario.save()
-            return render(request, 'registro_completado.html')
+            # La comprobacion de las contrasenas la lleva a cabo el valido
+            try:
+                usuario2 = Usuario.objects.get(pseudonimo = pseudonimo)
+                messages.error(request, 'El pseudonimo no se encuentra disponible')
+            except Usuario.DoesNotExist:
+                try:
+                    usuario2 = Usuario.objects.get(correo = correo)
+                    messages.error(request, 'El correo no se encuentra disponible')
+                except Usuario.DoesNotExist:
+                    usuario = Usuario.objects.create(
+        	                        nombre = nombre,
+        	                        apellidos = apellidos,
+        	                        pseudonimo = pseudonimo,
+        	                        correo = correo,
+        	                        password = password,
+        	                        date = date,)
+                    usuario.save()
+                    return render(request, 'registro_completado.html')
     else:
         form = RegistroForm()
     return render(request, 'formulario_registro.html', {'form' : form})
