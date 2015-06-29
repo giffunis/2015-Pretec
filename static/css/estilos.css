@@ -10,6 +10,16 @@ button {
 
 }
 
+/*Estilos base.html*/
+#ul_navbar li {
+	padding-top: 2%;
+}
+
+#btn_cerrarsesion {
+	padding-top: 6%;
+}
+
+
 /*Estilos base_formularios.html*/
 #contenedor_form {
 	padding-left: 5%
@@ -34,9 +44,14 @@ button {
 }
 
 #info_perfil {
-	padding-left: 3%
+	padding-left: 3%;
 }
 
+
+/**/
+#home_izq {
+	margin-top: 11%;
+}
 
 /*Estilos de inicio.html*/
 #titulo_inicio {

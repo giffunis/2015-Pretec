@@ -88,6 +88,7 @@ def authenticate(name, pswd):
 
 
 # Metodo que sirve para registrarse
+# get_registro terminado. No tocar.
 def get_registro(request):
     if request.method == 'POST':
         form=RegistroForm(request.POST)
@@ -98,15 +99,24 @@ def get_registro(request):
             correo = form.cleaned_data['correo']
             password = form.cleaned_data['password1']
             date  = form.cleaned_data['date']
-            usuario = Usuario.objects.create(
-	                        nombre = nombre,
-	                        apellidos = apellidos,
-	                        pseudonimo = pseudonimo,
-	                        correo = correo,
-	                        password = password,
-	                        date = date,)
-            usuario.save()
-            return render(request, 'registro_completado.html')
+            # La comprobacion de las contrasenas la lleva a cabo el valido
+            try:
+                usuario2 = Usuario.objects.get(pseudonimo = pseudonimo)
+                messages.error(request, 'El pseudonimo no se encuentra disponible')
+            except Usuario.DoesNotExist:
+                try:
+                    usuario2 = Usuario.objects.get(correo = correo)
+                    messages.error(request, 'El correo no se encuentra disponible')
+                except Usuario.DoesNotExist:
+                    usuario = Usuario.objects.create(
+        	                        nombre = nombre,
+        	                        apellidos = apellidos,
+        	                        pseudonimo = pseudonimo,
+        	                        correo = correo,
+        	                        password = password,
+        	                        date = date,)
+                    usuario.save()
+                    return render(request, 'registro_completado.html')
     else:
         form = RegistroForm()
     return render(request, 'formulario_registro.html', {'form' : form})
@@ -158,13 +168,21 @@ def mi_perfil(request):
 
 @comprueba_auth
 def pag_home(request):
-    return render(request,'home.html', {'pseudonimo': request.session['member_id']})
+    query = Post.objects.all().order_by('-fecha')
+
+    context = {
+        "user_data" : query,
+    }
+
+    print context
+    return render_to_response('home.html', context, context_instance=RequestContext(request))
 
 
 @comprueba_auth
 def editProfile(request):
     return render(request,'editProfile.html',{'pseudonimo': request.session['member_id']})
 
+# set_name terminado. No tocar.
 @comprueba_auth
 def set_name(request):
     if request.method == 'POST':
@@ -177,7 +195,7 @@ def set_name(request):
             usu.nombre = nombre
             usu.apellidos = apellidos
             usu.save()
-            return HttpResponseRedirect('/perfil')
+            messages.success(request, 'El nombre y los apellidos se han actualizado correctamente')
         else:
             form = EditNameForm()
         return render(request, 'set_name.html', {'form' : form})
@@ -194,37 +212,61 @@ def set_email(request):
             old_email = form.cleaned_data['old_email']
             new_email = form.cleaned_data['new_email']
             usuario = Usuario.objects.get(pseudonimo = request.session['member_id'])
+
             if usuario.correo != old_email:
                 messages.error(request, 'El correo es erroneo')
+            elif usuario.correo == new_email:
+                messages.error(request, 'El correo es el mismo')
             else:
-                usuario.correo = new_email
-                usuario.save()
-                messages.success(request, 'Su correo se ha actualizado')
+                try:
+                    usuario2 = Usuario.objects.get(correo = new_email)
+                    messages.error(request, 'El correo no se encuentra disponible')
+                except Usuario.DoesNotExist:
+                    usuario.correo = new_email
+                    usuario.save()
+                    messages.success(request, 'Su correo se ha actualizado')
+        # En caso de que el formulario no sea valido
+        else:
+            form = EditEmailForm()
+            return render(request, 'set_email.html', {'form' : form})
     else:
         form = EditEmailForm()
     return render(request, 'set_email.html', {'form' : form})
 
 
 
+
+# set_password terminado. No tocar.
 @comprueba_auth
 def set_password(request):
     if request.method == 'POST':
         form = EditPasswordForm(request.POST)
+        # En el caso de que el formulario sea valido
         if form.is_valid():
+
             old_password = form.cleaned_data['old_password']
             new_password1 = form.cleaned_data['new_password1']
             new_password2 = form.cleaned_data['new_password2']
-            #falta comprobar que la contrasena introducida coincida con la que tenia
-            usu = Usuario.objects.get(pseudonimo = request.session['member_id'])
-            if old_password == usu.password:
-                usu.password = new_password1
-                usu.save()
-                return HttpResponseRedirect('/mi_perfil')
+            # Consulta a la BD
+            usuario = Usuario.objects.get(pseudonimo = request.session['member_id'])
+
+            # Aqui se comprueba que las contrasenas coincidan
+            if new_password1 != new_password2:
+                messages.error(request, 'Las contrasenas no coinciden')
+            # y aqui que la vieja sea correcta
+            elif usuario.password != old_password:
+                messages.error(request, 'La contrasena es incorrecta')
+            # Si es correcta se actualiza
             else:
-                return HttpResponse('La contrasena anterior es erronea')
+                usuario.password = new_password1
+                usuario.save()
+                messages.success(request, 'Su contrasena se ha actualizado correctamente')
+
+        # En caso de que el formulario no sea valido
         else:
             form = EditPasswordForm()
         return render(request, 'set_password.html', {'form' : form})
+    # si se trata de una peticion get
     else:
         form = EditPasswordForm()
     return render(request, 'set_password.html', {'form' : form})
