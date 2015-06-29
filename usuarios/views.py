@@ -19,6 +19,7 @@ from .forms import EditNameForm
 from .forms import EditEmailForm
 from .forms import EditPasswordForm
 
+
 from django import forms
 from .models import Usuario
 
@@ -142,6 +143,7 @@ def pag_perfil(request,username):
 
 @comprueba_auth
 def mi_perfil(request):
+
     usuario = Usuario.objects.get(pseudonimo = request.session['member_id'])
     query = Post.objects.filter(pseudonimo = request.session['member_id'])
 
@@ -160,14 +162,26 @@ def mi_perfil(request):
 
 @comprueba_auth
 def pag_home(request):
+
+    if request.is_ajax():
+        return HttpResponse("ajax")
+
+    usuario = Usuario.objects.get(pseudonimo = request.session['member_id'])
     query = Post.objects.all().order_by('-fecha')
 
     context = {
         "user_data" : query,
+        'pseudonimo': usuario.pseudonimo,
     }
 
     print context
     return render_to_response('home.html', context, context_instance=RequestContext(request))
+
+
+# def bPost(request):
+#     if request.is_ajax():
+#         return HttpResponse("ajax")
+#     return HttpResponse("NO ajax")
 
 
 @comprueba_auth
@@ -267,3 +281,23 @@ def users_view(request):
 #funcion que te lleva a la pagina de inicio
 def inicio(request):
     return render(request, 'inicio.html')
+
+# @comprueba_auth
+# def buscarPost(request):
+#     if request.method == 'POST':
+#         form=BuscarPost(request.POST)
+#         if form.is_valid():
+#             busqueda = form.cleaned_data['busqueda']
+
+#             query = Post.objects.filter(titulo=busqueda)
+
+#             context = {
+#                 "user_data" : query,
+#             }
+
+#             print context
+#             return render_to_response('home.html', context, context_instance=RequestContext(request))
+
+#     else:
+#         form = BuscarPost()
+#     return render(request, 'home.html', {'form' : form})

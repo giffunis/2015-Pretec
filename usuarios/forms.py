@@ -69,3 +69,4 @@ class EditPasswordForm(forms.Form):
     old_password = forms.CharField(label='Contrasena anterior', widget=forms.PasswordInput)
     new_password1 = forms.CharField(label='Nueva contrasena', widget=forms.PasswordInput)
     new_password2 = forms.CharField(label='Repita la nueva contrasena', widget=forms.PasswordInput)
+

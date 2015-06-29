@@ -15,7 +15,7 @@
     <meta charset="utf-8" />
     <title>{{page_title}}</title>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="../../static/css/estilos.css"
+    <link rel="stylesheet" type="text/css" href="../../static/css/estilos.css">
   </head>
 
   <body>
@@ -49,11 +49,11 @@
                   <li><a href="/microposts">Publicar Pregunta</a></li>
               </ul>
 
-              <form class="navbar-form navbar-left" role="search">
+              <form class="navbar-form navbar-left" role="search" method="post">
                 <div class="form-group">
-                  <input type="text" class="form-control" placeholder="Search">
+                  <input type="text" class="form-control" id="buscarPost" name="buscarPost" placeholder="Buscar post">
                 </div>
-                <button type="submit" class="btn btn-default navbar-btn">Submit</button>
+                <button type="submit" class="btn btn-default navbar-btn" id="btn_buscarPost">Buscar</button>
               </form>   
 
               <ul class="nav navbar-nav navbar-right">
@@ -86,9 +86,29 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"> </script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        $('#btn_buscarPost').on('click',function(){
+          var busqueda = $('#buscarPost').val();
+          $.ajax({
+            method: "POST",
+            url: "/pag_home/",
+            data: 'busqueda='+busqueda,
+            success: function(valor){
+              alert(valor);
+            },
+            error: function(valor){
+              alert("Error");
+            }
+          })
+          return false;
+        })
+      })
+    </script>
 
   </body>
 
 </html>
 
 {% endblock %}
+

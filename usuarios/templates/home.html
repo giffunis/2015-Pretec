@@ -14,8 +14,8 @@
         </div>
         <hr>
         <div class="panel panel-default">
-         	<div class="panel-heading">Title</div>
-         	<div class="panel-body">Content here..</div>
+         	<div class="panel-heading"><span class="glyphicon glyphicon-user"></span> Encuentra a tus amigos</div>
+         	<div class="panel-body"><a href=""> Buscar amigos</a></div>
         </div>
         <hr>
         <div class="panel panel-default">
@@ -37,7 +37,8 @@
       {% for item in user_data %}
         <h2>{{item.titulo}}</h2>
         <p>{{item.texto}}</p>
-        <p class="pull-right list-inline">{{item.fecha}}</p>
+        <p class="pull-right list-inline">{{item.pseudonimo.pseudonimo}} {{item.fecha}}</p>
+        <p class="pull-right list-inline"></p>
         <br>
         <hr>
       {% endfor %}
