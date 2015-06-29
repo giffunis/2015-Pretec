@@ -125,19 +125,17 @@ def sigue(username):
 def follow(request, username):
     relacion = Relaciones.objects.create(
                     seguidor = request.session['member_id'],
-                    sigue = username,
-                    )
+                    sigue = username,)
     relacion.save()
 
 def post(username):
-
-     aux = Post.objects.filter(pseudonimo = username).count()
-     return aux
+    aux = Post.objects.filter(pseudonimo = username).count()
+    return aux
 
 @comprueba_auth
 def pag_perfil(request,username):
     usuario = Usuario.objects.get(pseudonimo = username)
-    return render(request,'perfil.html', {'pseudonimo': usuario.pseudonimo,'seguidores': seguidores(username), 'sigue':sigue(username), 'posts':posts(username)})
+    return render(request,'perfil.html', {'pseudonimo': usuario.pseudonimo,'seguidores': seguidores(username), 'sigue':sigue(username), 'posts':post(username)})
 
 
 @comprueba_auth
