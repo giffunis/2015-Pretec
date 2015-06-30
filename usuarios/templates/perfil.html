@@ -13,11 +13,31 @@
 
 		<div class="col-md-8">
 			<h2>{{pseudonimo}}</h2>
-				<button type="submit" class="btn btn-primary" id="btn_seguir">Seguir</button>
-				<button type="submit" class="btn btn-primary" id="btn_noseguir">Dejar de Seguir</button>
+      {% if messages %}
+    <div class="row">
+      <!-- <div class='col-sm-12'> -->
+      <div class='col-sm-6 col-sm-offset-3'>
+        {% for message in messages %}
+          {% if message.tags == "success" %} <p class="alert alert-success">{{ message }}</p> {% endif %}
+          {% if message.tags == "error" %} <p class="alert alert-danger">{{ message }}</p> {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+      <form method="post">{% csrf_token %}
+        <div class="form-group ocultar" style='display:none;'>
+            <select  name="seguir" id="seguir">
+              <option value="{{pseudonimo}}" checked>{{pseudonimo}}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary" id="btn_seguir">Seguir</button>
+      </form>
 		</div>
 
-		
+
+
+
+
 	</div>
 
 	<hr>
@@ -42,7 +62,7 @@
 	</div>
 </div>
 
-<script type="text/javascript">
+<!--script type="text/javascript">
       $(document).ready(function(){
         $('#btn_seguir').on('click',function(){
           $.ajax({
@@ -59,7 +79,7 @@
           return false;
         })
       })
-    </script>
+    </script -->
 
- 
-{% endblock content%}
+
+{% endblock content %}

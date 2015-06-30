@@ -60,7 +60,7 @@ def login(request):
         form = LoginForm()
     return render(request, 'login.html', {'form' : form})
 
-
+# Logout terminado. No tocar.
 def logout(request):
     try:
         del request.session['member_id']
@@ -132,10 +132,10 @@ def sigue(username):
     aux = Relaciones.objects.filter(seguidor = username).count()
     return aux
 
-def follow(request, username):
+def follow(seguidor,sigue):
     relacion = Relaciones.objects.create(
-                    seguidor = request.session['member_id'],
-                    sigue = username,)
+                    seguidor = Usuario.objects.get(pseudonimo = seguidor),
+                    sigue = Usuario.objects.get(pseudonimo = sigue),)
     relacion.save()
 
 def unfollow(request, username):
@@ -148,8 +148,12 @@ def post(username):
     aux = Post.objects.filter(pseudonimo = username).count()
     return aux
 
-@comprueba_auth
+# @comprueba_auth
 def pag_perfil(request,username):
+    if request.method == 'POST':
+        seguir = request.POST['seguir']
+        follow(request.session['member_id'],seguir)
+        messages.success(request, "Siguiendo!!")
     usuario = Usuario.objects.get(pseudonimo = username)
     return render(request,'perfil.html', {'pseudonimo': usuario.pseudonimo,'seguidores': seguidores(username), 'sigue':sigue(username), 'posts':post(username)})
 
