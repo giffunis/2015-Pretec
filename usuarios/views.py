@@ -2,7 +2,6 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse
 from django.utils.translation import gettext as _
-
 from django.shortcuts import render_to_response
 
 # from django.http import HttpResponseRedirect
@@ -18,6 +17,8 @@ from .forms import LoginForm
 from .forms import EditNameForm
 from .forms import EditEmailForm
 from .forms import EditPasswordForm
+from .forms import BuscarPost
+from .forms import BuscarUsuario
 
 from django import forms
 from .models import Usuario
@@ -77,14 +78,6 @@ def authenticate(name, pswd):
             return None
     except KeyError:
         return None
-
-
-# def decorador(funcion):
-#     def funcion_decorada(*args, **kwargs):
-#         if()
-#         funcion(*args, **kwargs)
-#         print "Despues de llamar a la funcion %s" % funcion.__name__
-#     return funcion_decorada
 
 
 # Metodo que sirve para registrarse
@@ -166,7 +159,16 @@ def pag_perfil(request,username):
                 messages.success(request, "Ya sigues a este usuario!!")
 
     usuario = Usuario.objects.get(pseudonimo = username)
-    return render(request,'perfil.html', {'pseudonimo': usuario.pseudonimo,'seguidores': seguidores(username), 'sigue':sigue(username), 'posts':post(username)})
+    query = Post.objects.filter(pseudonimo=usuario)
+    context = {
+        'user_data' : query,
+        'pseudonimo': usuario.pseudonimo,
+        'seguidores': seguidores(username),
+        'sigue':sigue(username),
+        'posts':post(username),
+    }
+    return render_to_response('perfil.html', context, context_instance=RequestContext(request))
+    #return render(request,'perfil.html', {'pseudonimo': usuario.pseudonimo,'seguidores': seguidores(username), 'sigue':sigue(username), 'posts':post(username)})
 
 
 @comprueba_auth
@@ -189,18 +191,29 @@ def mi_perfil(request):
 
 @comprueba_auth
 def pag_home(request):
-    query = Post.objects.all().order_by('-fecha')
+        usuario = Usuario.objects.get(pseudonimo = request.session['member_id'])
+        query = Post.objects.all().order_by('-fecha')
 
-    context = {
-        "user_data" : query,
-    }
+        context = {
+            "user_data" : query,
+            'pseudonimo': usuario.pseudonimo,
+        }
 
-    print context
-    return render_to_response('home.html', context, context_instance=RequestContext(request))
+        print context
+        return render_to_response('home.html', context, context_instance=RequestContext(request))
+
+#funcion que te lleva a busquedaPost.html, donde se muestran los posts buscados
+#def busquedaPosts(request):
+
+
 
 
 @comprueba_auth
 def editProfile(request):
+    if request.is_ajax():
+        a = funcionBuscar(request)
+        return HttpResponse(a)
+
     return render(request,'editProfile.html',{'pseudonimo': request.session['member_id']})
 
 # set_name terminado. No tocar.
@@ -306,3 +319,47 @@ def users_view(request):
 #funcion que te lleva a la pagina de inicio
 def inicio(request):
     return render(request, 'inicio.html')
+
+#funcion para buscar usuarios, si el formulrio es correcto te envia a la pagina con los posts que coinciden con la busqueda
+
+@comprueba_auth
+def buscarUsuario(request):
+    if request.method == 'POST':
+        form=BuscarUsuario(request.POST)
+        if form.is_valid():
+            buscar = form.cleaned_data['busquedaUsu']
+            query = Usuario.objects.filter(pseudonimo=buscar)
+
+            context = {
+                "usu_data" : query,
+                "usuario" : buscar,
+            }
+            return render_to_response('usuariosBuscados.html', context, context_instance=RequestContext(request))
+    else:
+        form=BuscarUsuario()
+    return render(request, 'busquedaUsuarios.html', {'form' : form})
+
+#funcion para buscar post, si el formulrio es correcto te envia a la pagina con los posts que coinciden con la busqueda
+
+@comprueba_auth
+def buscarPosts(request):
+    if request.method == 'POST':
+        form=BuscarPost(request.POST)
+        if form.is_valid():
+            busqueda = form.cleaned_data['busqueda']
+            query = Post.objects.filter(titulo=busqueda)
+
+            context = {
+                "post_data" : query,
+                "busqueda" : busqueda,
+            }
+
+            print context
+            return render_to_response('postsBuscados.html', context, context_instance=RequestContext(request))
+
+    else:
+        form = BuscarPost()
+    return render(request, 'busquedaPosts.html', {'form' : form})
+
+
+
