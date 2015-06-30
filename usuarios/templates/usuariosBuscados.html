@@ -1,0 +1,22 @@
+{%  extends 'base.html' %}
+{% load bootstrap3 %}
+
+{% block title %}
+  Usuario : {{usuario}}
+{% endblock %}
+
+{% block content %}
+<div class="col-md-6 col-md-offset-4">
+{% if usu_data %}
+	{% for item in usu_data %}
+		<h3>{{item.pseudonimo}}</h3>
+		<h5>{{item.nombre}} {{item.apellidos}}</h5>
+		<br>
+		<hr>
+	{% endfor %}
+{% else %}
+	<h3>Ningun usuario coincide con su busqueda</h3><br>
+
+{% endif %}
+</div>
+{% endblock content %}

@@ -272,7 +272,27 @@ def users_view(request):
 def inicio(request):
     return render(request, 'inicio.html')
 
+#funcion para buscar usuarios, si el formulrio es correcto te envia a la pagina con los posts que coinciden con la busqueda
+
+@comprueba_auth
+def buscarUsuario(request):
+    if request.method == 'POST':
+        form=BuscarUsuario(request.POST)
+        if form.is_valid():
+            buscar = form.cleaned_data['busquedaUsu']
+            query = Usuario.objects.filter(pseudonimo=buscar)
+
+            context = {
+                "usu_data" : query,
+                "usuario" : buscar,
+            }
+            return render_to_response('usuariosBuscados.html', context, context_instance=RequestContext(request))
+    else:
+        form=BuscarUsuario()
+    return render(request, 'busquedaUsuarios.html', {'form' : form})
+
 #funcion para buscar post, si el formulrio es correcto te envia a la pagina con los posts que coinciden con la busqueda
+
 @comprueba_auth
 def buscarPosts(request):
     if request.method == 'POST':
