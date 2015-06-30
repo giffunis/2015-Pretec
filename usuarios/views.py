@@ -2,7 +2,6 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse
 from django.utils.translation import gettext as _
-
 from django.shortcuts import render_to_response
 
 # from django.http import HttpResponseRedirect
@@ -18,6 +17,8 @@ from .forms import LoginForm
 from .forms import EditNameForm
 from .forms import EditEmailForm
 from .forms import EditPasswordForm
+from .forms import BuscarPost
+from .forms import BuscarUsuario
 
 from django import forms
 from .models import Usuario
@@ -60,13 +61,13 @@ def login(request):
         form = LoginForm()
     return render(request, 'login.html', {'form' : form})
 
-
+# Logout terminado. No tocar.
 def logout(request):
     try:
         del request.session['member_id']
     except KeyError:
         pass
-    return HttpResponse("You're logged out.")
+    return render(request, 'inicio.html')
 
 def authenticate(name, pswd):
     try:
@@ -79,15 +80,8 @@ def authenticate(name, pswd):
         return None
 
 
-# def decorador(funcion):
-#     def funcion_decorada(*args, **kwargs):
-#         if()
-#         funcion(*args, **kwargs)
-#         print "Despues de llamar a la funcion %s" % funcion.__name__
-#     return funcion_decorada
-
-
 # Metodo que sirve para registrarse
+# get_registro terminado. No tocar.
 def get_registro(request):
     if request.method == 'POST':
         form=RegistroForm(request.POST)
@@ -98,15 +92,24 @@ def get_registro(request):
             correo = form.cleaned_data['correo']
             password = form.cleaned_data['password1']
             date  = form.cleaned_data['date']
-            usuario = Usuario.objects.create(
-	                        nombre = nombre,
-	                        apellidos = apellidos,
-	                        pseudonimo = pseudonimo,
-	                        correo = correo,
-	                        password = password,
-	                        date = date,)
-            usuario.save()
-            return render(request, 'registro_completado.html')
+            # La comprobacion de las contrasenas la lleva a cabo el valido
+            try:
+                usuario2 = Usuario.objects.get(pseudonimo = pseudonimo)
+                messages.error(request, 'El pseudonimo no se encuentra disponible')
+            except Usuario.DoesNotExist:
+                try:
+                    usuario2 = Usuario.objects.get(correo = correo)
+                    messages.error(request, 'El correo no se encuentra disponible')
+                except Usuario.DoesNotExist:
+                    usuario = Usuario.objects.create(
+        	                        nombre = nombre,
+        	                        apellidos = apellidos,
+        	                        pseudonimo = pseudonimo,
+        	                        correo = correo,
+        	                        password = password,
+        	                        date = date,)
+                    usuario.save()
+                    return render(request, 'registro_completado.html')
     else:
         form = RegistroForm()
     return render(request, 'formulario_registro.html', {'form' : form})
@@ -122,22 +125,50 @@ def sigue(username):
     aux = Relaciones.objects.filter(seguidor = username).count()
     return aux
 
-def follow(request, username):
+def follow(seguidor,sigue):
     relacion = Relaciones.objects.create(
+                    seguidor = Usuario.objects.get(pseudonimo = seguidor),
+                    sigue = Usuario.objects.get(pseudonimo = sigue),)
+    relacion.save()
+
+def unfollow(request, username):
+    relacion = Relaciones.objects.delete(
                     seguidor = request.session['member_id'],
-                    sigue = username,
-                    )
+                    sigue = username,)
     relacion.save()
 
 def post(username):
+    aux = Post.objects.filter(pseudonimo = username).count()
+    return aux
 
-     aux = Post.objects.filter(pseudonimo = username).count()
-     return aux
-
-@comprueba_auth
+# @comprueba_auth
 def pag_perfil(request,username):
+    if request.method == 'POST':
+        seguir = request.POST['seguir']
+        seguidor = request.session['member_id']
+        if(seguir == seguidor):
+            messages.error(request, "No te puedes seguir a ti mismo, majo!")
+        else:
+            try:
+                relacion = Relaciones.objects.get(sigue = seguir, seguidor = seguidor)
+
+            except Relaciones.DoesNotExist:
+                follow(seguidor,seguir)
+                messages.success(request, "Siguiendo!!")
+            else:
+                messages.success(request, "Ya sigues a este usuario!!")
+
     usuario = Usuario.objects.get(pseudonimo = username)
-    return render(request,'perfil.html', {'pseudonimo': usuario.pseudonimo,'seguidores': seguidores(username), 'sigue':sigue(username), 'posts':posts(username)})
+    query = Post.objects.filter(pseudonimo=usuario)
+    context = {
+        'user_data' : query,
+        'pseudonimo': usuario.pseudonimo,
+        'seguidores': seguidores(username),
+        'sigue':sigue(username),
+        'posts':post(username),
+    }
+    return render_to_response('perfil.html', context, context_instance=RequestContext(request))
+    #return render(request,'perfil.html', {'pseudonimo': usuario.pseudonimo,'seguidores': seguidores(username), 'sigue':sigue(username), 'posts':post(username)})
 
 
 @comprueba_auth
@@ -160,13 +191,32 @@ def mi_perfil(request):
 
 @comprueba_auth
 def pag_home(request):
-    return render(request,'home.html', {'pseudonimo': request.session['member_id']})
+        usuario = Usuario.objects.get(pseudonimo = request.session['member_id'])
+        query = Post.objects.all().order_by('-fecha')
+
+        context = {
+            "user_data" : query,
+            'pseudonimo': usuario.pseudonimo,
+        }
+
+        print context
+        return render_to_response('home.html', context, context_instance=RequestContext(request))
+
+#funcion que te lleva a busquedaPost.html, donde se muestran los posts buscados
+#def busquedaPosts(request):
+
+
 
 
 @comprueba_auth
 def editProfile(request):
+    if request.is_ajax():
+        a = funcionBuscar(request)
+        return HttpResponse(a)
+
     return render(request,'editProfile.html',{'pseudonimo': request.session['member_id']})
 
+# set_name terminado. No tocar.
 @comprueba_auth
 def set_name(request):
     if request.method == 'POST':
@@ -179,7 +229,7 @@ def set_name(request):
             usu.nombre = nombre
             usu.apellidos = apellidos
             usu.save()
-            return HttpResponseRedirect('/perfil')
+            messages.success(request, 'El nombre y los apellidos se han actualizado correctamente')
         else:
             form = EditNameForm()
         return render(request, 'set_name.html', {'form' : form})
@@ -196,37 +246,61 @@ def set_email(request):
             old_email = form.cleaned_data['old_email']
             new_email = form.cleaned_data['new_email']
             usuario = Usuario.objects.get(pseudonimo = request.session['member_id'])
+
             if usuario.correo != old_email:
                 messages.error(request, 'El correo es erroneo')
+            elif usuario.correo == new_email:
+                messages.error(request, 'El correo es el mismo')
             else:
-                usuario.correo = new_email
-                usuario.save()
-                messages.success(request, 'Su correo se ha actualizado')
+                try:
+                    usuario2 = Usuario.objects.get(correo = new_email)
+                    messages.error(request, 'El correo no se encuentra disponible')
+                except Usuario.DoesNotExist:
+                    usuario.correo = new_email
+                    usuario.save()
+                    messages.success(request, 'Su correo se ha actualizado')
+        # En caso de que el formulario no sea valido
+        else:
+            form = EditEmailForm()
+            return render(request, 'set_email.html', {'form' : form})
     else:
         form = EditEmailForm()
     return render(request, 'set_email.html', {'form' : form})
 
 
 
+
+# set_password terminado. No tocar.
 @comprueba_auth
 def set_password(request):
     if request.method == 'POST':
         form = EditPasswordForm(request.POST)
+        # En el caso de que el formulario sea valido
         if form.is_valid():
+
             old_password = form.cleaned_data['old_password']
             new_password1 = form.cleaned_data['new_password1']
             new_password2 = form.cleaned_data['new_password2']
-            #falta comprobar que la contrasena introducida coincida con la que tenia
-            usu = Usuario.objects.get(pseudonimo = request.session['member_id'])
-            if old_password == usu.password:
-                usu.password = new_password1
-                usu.save()
-                return HttpResponseRedirect('/mi_perfil')
+            # Consulta a la BD
+            usuario = Usuario.objects.get(pseudonimo = request.session['member_id'])
+
+            # Aqui se comprueba que las contrasenas coincidan
+            if new_password1 != new_password2:
+                messages.error(request, 'Las contrasenas no coinciden')
+            # y aqui que la vieja sea correcta
+            elif usuario.password != old_password:
+                messages.error(request, 'La contrasena es incorrecta')
+            # Si es correcta se actualiza
             else:
-                return HttpResponse('La contrasena anterior es erronea')
+                usuario.password = new_password1
+                usuario.save()
+                messages.success(request, 'Su contrasena se ha actualizado correctamente')
+
+        # En caso de que el formulario no sea valido
         else:
             form = EditPasswordForm()
         return render(request, 'set_password.html', {'form' : form})
+    # si se trata de una peticion get
     else:
         form = EditPasswordForm()
     return render(request, 'set_password.html', {'form' : form})
@@ -245,3 +319,47 @@ def users_view(request):
 #funcion que te lleva a la pagina de inicio
 def inicio(request):
     return render(request, 'inicio.html')
+
+#funcion para buscar usuarios, si el formulrio es correcto te envia a la pagina con los posts que coinciden con la busqueda
+
+@comprueba_auth
+def buscarUsuario(request):
+    if request.method == 'POST':
+        form=BuscarUsuario(request.POST)
+        if form.is_valid():
+            buscar = form.cleaned_data['busquedaUsu']
+            query = Usuario.objects.filter(pseudonimo=buscar)
+
+            context = {
+                "usu_data" : query,
+                "usuario" : buscar,
+            }
+            return render_to_response('usuariosBuscados.html', context, context_instance=RequestContext(request))
+    else:
+        form=BuscarUsuario()
+    return render(request, 'busquedaUsuarios.html', {'form' : form})
+
+#funcion para buscar post, si el formulrio es correcto te envia a la pagina con los posts que coinciden con la busqueda
+
+@comprueba_auth
+def buscarPosts(request):
+    if request.method == 'POST':
+        form=BuscarPost(request.POST)
+        if form.is_valid():
+            busqueda = form.cleaned_data['busqueda']
+            query = Post.objects.filter(titulo=busqueda)
+
+            context = {
+                "post_data" : query,
+                "busqueda" : busqueda,
+            }
+
+            print context
+            return render_to_response('postsBuscados.html', context, context_instance=RequestContext(request))
+
+    else:
+        form = BuscarPost()
+    return render(request, 'busquedaPosts.html', {'form' : form})
+
+
+

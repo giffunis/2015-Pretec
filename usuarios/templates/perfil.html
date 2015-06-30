@@ -11,11 +11,33 @@
 			<img src="../../static/imagenes/opcion5.jpg">
 		</div>
 
-		<div class="col-md-3">
+		<div class="col-md-8">
 			<h2>{{pseudonimo}}</h2>
-			<button type="submit" class="btn btn-primary" action="/follow">Seguir</button>
-
+      {% if messages %}
+    <div class="row">
+      <!-- <div class='col-sm-12'> -->
+      <div class='col-sm-6 '>
+        {% for message in messages %}
+          {% if message.tags == "success" %} <p class="alert alert-success">{{ message }}</p> {% endif %}
+          {% if message.tags == "error" %} <p class="alert alert-danger">{{ message }}</p> {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+      <form method="post">{% csrf_token %}
+        <div class="form-group ocultar" style='display:none;'>
+            <select  name="seguir" id="seguir">
+              <option value="{{pseudonimo}}" checked>{{pseudonimo}}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary" id="btn_seguir">Seguir</button>
+      </form>
 		</div>
+
+
+
+
+
 	</div>
 
 	<hr>
@@ -25,7 +47,9 @@
 			<label>Seguidores: {{seguidores}}</label><br>
 			<label>Sigue: {{sigue}}</label><br>
 			<label>Posts: {{posts}}</label><br>
-			<a href = "/logout"> <button class="btn btn-primary"> Lgout </button></a>
+
+			<a href = "/logout"> <button class="btn btn-primary"> Logout </button></a>
+
 		</div>
 
 		<div class="col-md-7">
@@ -40,5 +64,24 @@
 	</div>
 </div>
 
- 
-{% endblock content%}
+<!--script type="text/javascript">
+      $(document).ready(function(){
+        $('#btn_seguir').on('click',function(){
+          $.ajax({
+            method: "POST",
+            url: "http://localhost:8000/seguidores/",
+            data: {csrfmiddlewaretoken: '{{csrf_token }}'},
+            success: function(valor){
+              alert("Exito");
+            },
+            error: function(valor){
+              alert("Error");
+            }
+          })
+          return false;
+        })
+      })
+    </script -->
+
+
+{% endblock content %}
