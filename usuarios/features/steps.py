@@ -32,11 +32,14 @@ def el_llena_el(step,field,value):
     # world.browser.fill(field,value)
     campo_input=world.browser.find_element_by_id(field)
     campo_input.send_keys(value)
-#
-# @step(u'El presiona "(.*)"')
-# def el_presiona(step,button_label):
-#     button=world.browser.find_element_byid('//button[text()="%s"]') % button_label.first
-#
+
+@step(u'El presiona "(.*)"')
+def el_presiona(step,button_label):
+    # button=world.browser.find_element_byid('//button[text()="%s"]') % button_label.first
+    botton_registro=world.browser.find_element_by_id(button_label)
+    botton_registro.click()
+
+
 # @step(u'El deberia ver "(.*)"')
 # def el_deberia_ver(step,text):
 #     assert text in world.browser.html

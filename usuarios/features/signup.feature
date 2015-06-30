@@ -9,15 +9,15 @@ Feature: Registro
 
 	Scenario: Usuario puede registrarse
 		Given un usuario se quiere registrar "jota"
-		When El llena el "nombre" con "joaquin"
-		And El llena el "apelliodo" con "escobar"
-		And El llena el "pseudonimo" con "jota"
-		And El llena el "correo" con "jota@jota.com"
-		And El llena el "password1" con "123456"
-		And El llena el "password2" con "123456"
-		And El llena el "date" con "02/17/1991"
+		When El llena el "id_nombre" con "joaquin"
+		And El llena el "id_apellidos" con "escobar"
+		And El llena el "id_pseudonimo" con "jotajota"
+		And El llena el "id_correo" con "jota@jota.com"
+		And El llena el "id_password1" con "123456"
+		And El llena el "id_password2" con "123456"
+		And El llena el "id_date" con "02/17/1991"
 		And El presiona "Registrarse"
-		Then El deberia ver "REGISTRO COMPLETADO"
+		Then deberia ver "REGISTRO COMPLETADO"
 
 	Scenario: Usuario no llena los campos de forma correcta
     When El va a la direccion "/registro/" URL
