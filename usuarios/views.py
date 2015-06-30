@@ -131,11 +131,11 @@ def follow(seguidor,sigue):
                     sigue = Usuario.objects.get(pseudonimo = sigue),)
     relacion.save()
 
-def unfollow(request, username):
-    relacion = Relaciones.objects.delete(
-                    seguidor = request.session['member_id'],
-                    sigue = username,)
-    relacion.save()
+def unfollow(seguidor, sigue):
+    relacion = Relaciones.objects.get(
+                    seguidor = Usuario.objects.get(pseudonimo = seguidor),
+                    sigue = Usuario.objects.get(pseudonimo = sigue),).delete()
+    #relacion.save()
 
 def post(username):
     aux = Post.objects.filter(pseudonimo = username).count()
@@ -156,7 +156,8 @@ def pag_perfil(request,username):
                 follow(seguidor,seguir)
                 messages.success(request, "Siguiendo!!")
             else:
-                messages.success(request, "Ya sigues a este usuario!!")
+                unfollow(seguidor,seguir)
+                messages.success(request, "Ya no sigues a este usuario")
 
     usuario = Usuario.objects.get(pseudonimo = username)
     query = Post.objects.filter(pseudonimo=usuario)

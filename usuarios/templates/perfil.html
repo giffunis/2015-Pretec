@@ -14,29 +14,25 @@
 		<div class="col-md-8">
 			<h2>{{pseudonimo}}</h2>
       {% if messages %}
-    <div class="row">
-      <!-- <div class='col-sm-12'> -->
-      <div class='col-sm-6 '>
-        {% for message in messages %}
-          {% if message.tags == "success" %} <p class="alert alert-success">{{ message }}</p> {% endif %}
-          {% if message.tags == "error" %} <p class="alert alert-danger">{{ message }}</p> {% endif %}
-        {% endfor %}
-      </div>
-    </div>
-  {% endif %}
+        <div class="row">
+          <!-- <div class='col-sm-12'> -->
+          <div class='col-sm-6 '>
+            {% for message in messages %}
+              {% if message.tags == "success" %} <p class="alert alert-success">{{ message }}</p> {% endif %}
+              {% if message.tags == "error" %} <p class="alert alert-danger">{{ message }}</p> {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
       <form method="post">{% csrf_token %}
         <div class="form-group ocultar" style='display:none;'>
             <select  name="seguir" id="seguir">
-              <option value="{{pseudonimo}}" checked>{{pseudonimo}}
+              <option value="{{pseudonimo}}" checked>{{pseudonimo}}</option>
             </select>
         </div>
-        <button type="submit" class="btn btn-primary" id="btn_seguir">Seguir</button>
+          <button type="submit" class="btn btn-primary" id="btn_seguir">Seguir</button>
       </form>
 		</div>
-
-
-
-
 
 	</div>
 
@@ -64,24 +60,17 @@
 	</div>
 </div>
 
-<!--script type="text/javascript">
-      $(document).ready(function(){
-        $('#btn_seguir').on('click',function(){
-          $.ajax({
-            method: "POST",
-            url: "http://localhost:8000/seguidores/",
-            data: {csrfmiddlewaretoken: '{{csrf_token }}'},
-            success: function(valor){
-              alert("Exito");
-            },
-            error: function(valor){
-              alert("Error");
-            }
-          })
-          return false;
-        })
-      })
-    </script -->
-
+<script type="text/javascript">
+    $('#btn_seguir').click(function() 
+    { 
+      if ($(this).text() == "Seguir") 
+      { 
+         $(this).text("Dejar de Seguir"); 
+      } 
+      else
+         $(this).text("Seguir");
+    });
+</script>  
 
 {% endblock content %}
+
