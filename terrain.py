@@ -25,11 +25,11 @@ def initial_setup(server):
 #     connection.creation.destroy_test_db(settings.DATABASES['default']['NAME'])
 #     teardown_test_environment()
 
-@before.each_scenario
-def reset_data(scenario):
-    # Clean up django.
-    call_command('flush', interactive=False, verbosity=0)
-    call_command('loaddata', 'all', verbosity=0)
+# @before.each_scenario
+# def reset_data(scenario):
+#     # Clean up django.
+#     call_command('flush', interactive=False, verbosity=0)
+#     call_command('loaddata', 'all', verbosity=0)
 
 # @after.all
 # def teardown_browser(total):
