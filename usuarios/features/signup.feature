@@ -5,7 +5,7 @@ Feature: Registro
 
 	Scenario: Usuario puede ir a la pagina de registro
 		Given voy a la direccion "http://127.0.0.1:8000/registro/" url
-    Then deberia ver "Únete a Pretec"
+    Then deberia ver "¡Únete a pretec!"
 
 	Scenario: Usuario puede registrarse
 		Given un usuario se quiere registrar "jota"

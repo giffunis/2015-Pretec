@@ -2,7 +2,11 @@
 from lettuce import *
 from lettuce.django import django_url
 from nose.tools import assert_equals
-from splinter.browser import Browser
+from lettuce.django import django_url
+from nose.tools import *
+from selenium.webdriver.common.by import By
+from selenium.common.exceptions import NoSuchElementException
+
 #from usuarios.models import Usuario
 
 
