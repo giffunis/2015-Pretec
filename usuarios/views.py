@@ -130,7 +130,16 @@ def post(username):
 @comprueba_auth
 def pag_perfil(request,username):
     usuario = Usuario.objects.get(pseudonimo = username)
-    return render(request,'perfil.html', {'pseudonimo': usuario.pseudonimo,'seguidores': seguidores(username), 'sigue':sigue(username), 'posts':post(username)})
+    query = Post.objects.filter(pseudonimo=usuario)
+    context = {
+        'user_data' : query,
+        'pseudonimo': usuario.pseudonimo,
+        'seguidores': seguidores(username),
+        'sigue':sigue(username),
+        'posts':post(username),
+    }
+    return render_to_response('perfil.html', context, context_instance=RequestContext(request))
+    #return render(request,'perfil.html', {'pseudonimo': usuario.pseudonimo,'seguidores': seguidores(username), 'sigue':sigue(username), 'posts':post(username)})
 
 
 @comprueba_auth
