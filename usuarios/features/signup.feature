@@ -4,7 +4,7 @@ Feature: Registro
 	Aquí van los escenarios
 
 	Scenario: Usuario puede ir a la pagina de registro
-		Given voy a la direccion "/registro/" url
+		Given voy a la direccion "http://127.0.0.1:8000/registro/" url
     Then deberia ver "Únete a Pretec"
 
 	Scenario: Usuario puede registrarse
