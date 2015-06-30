@@ -151,9 +151,18 @@ def post(username):
 # @comprueba_auth
 def pag_perfil(request,username):
     if request.method == 'POST':
-        seguir = request.POST['seguir']
-        follow(request.session['member_id'],seguir)
-        messages.success(request, "Siguiendo!!")
+        try:
+            seguir = request.POST['seguir']
+            seguidor = request.session['member_id']
+            relacion = Relaciones.objects.get(sigue = seguir, seguidor = seguidor)
+        except seguir == seguidor:
+            messages.error(request, "No te puedes seguir a ti mismo, majo!")
+        except Relaciones.DoesNotExist:
+            follow(seguidor,seguir)
+            messages.success(request, "Siguiendo!!")
+        else:
+            messages.success(request, "Ya sigues a este usuario!!")
+
     usuario = Usuario.objects.get(pseudonimo = username)
     return render(request,'perfil.html', {'pseudonimo': usuario.pseudonimo,'seguidores': seguidores(username), 'sigue':sigue(username), 'posts':post(username)})
 
