@@ -25,4 +25,5 @@ urlpatterns = [
     url(r'^microposts/$', microposts.views.set_post),
     url(r'^seguidores/$', usuarios.views.follow),
     url(r'^users/$', usuarios.views.users_view),
+    url(r'^busquedaPosts/$', usuarios.views.buscarPosts),
 ]

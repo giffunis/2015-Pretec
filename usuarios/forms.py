@@ -70,3 +70,9 @@ class EditPasswordForm(forms.Form):
     new_password1 = forms.CharField(label='Nueva contrasena', widget=forms.PasswordInput)
     new_password2 = forms.CharField(label='Repita la nueva contrasena', widget=forms.PasswordInput)
 
+
+class BuscarPost(forms.Form):
+    busqueda = forms.CharField(label='Titutlo del post', max_length=100, min_length=2)
+
+class BuscarUsuario(forms.Form):
+    busquedaUsu = forms.CharField(label='Nombre de usuario', max_length=50, min_length=2)

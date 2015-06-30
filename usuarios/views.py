@@ -2,7 +2,6 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse
 from django.utils.translation import gettext as _
-
 from django.shortcuts import render_to_response
 
 # from django.http import HttpResponseRedirect
@@ -18,7 +17,8 @@ from .forms import LoginForm
 from .forms import EditNameForm
 from .forms import EditEmailForm
 from .forms import EditPasswordForm
-
+from .forms import BuscarPost
+from .forms import BuscarUsuario
 
 from django import forms
 from .models import Usuario
@@ -80,14 +80,6 @@ def authenticate(name, pswd):
         return None
 
 
-# def decorador(funcion):
-#     def funcion_decorada(*args, **kwargs):
-#         if()
-#         funcion(*args, **kwargs)
-#         print "Despues de llamar a la funcion %s" % funcion.__name__
-#     return funcion_decorada
-
-
 # Metodo que sirve para registrarse
 def get_registro(request):
     if request.method == 'POST':
@@ -143,7 +135,6 @@ def pag_perfil(request,username):
 
 @comprueba_auth
 def mi_perfil(request):
-
     usuario = Usuario.objects.get(pseudonimo = request.session['member_id'])
     query = Post.objects.filter(pseudonimo = request.session['member_id'])
 
@@ -162,10 +153,6 @@ def mi_perfil(request):
 
 @comprueba_auth
 def pag_home(request):
-
-    if request.is_ajax():
-        return HttpResponse("ajax")
-    else:
         usuario = Usuario.objects.get(pseudonimo = request.session['member_id'])
         query = Post.objects.all().order_by('-fecha')
 
@@ -177,15 +164,18 @@ def pag_home(request):
         print context
         return render_to_response('home.html', context, context_instance=RequestContext(request))
 
+#funcion que te lleva a busquedaPost.html, donde se muestran los posts buscados
+#def busquedaPosts(request):
 
-# def bPost(request):
-#     if request.is_ajax():
-#         return HttpResponse("ajax")
-#     return HttpResponse("NO ajax")
+
 
 
 @comprueba_auth
 def editProfile(request):
+    if request.is_ajax():
+        a = funcionBuscar(request)
+        return HttpResponse(a)
+
     return render(request,'editProfile.html',{'pseudonimo': request.session['member_id']})
 
 @comprueba_auth
@@ -282,22 +272,26 @@ def users_view(request):
 def inicio(request):
     return render(request, 'inicio.html')
 
-# @comprueba_auth
-# def buscarPost(request):
-#     if request.method == 'POST':
-#         form=BuscarPost(request.POST)
-#         if form.is_valid():
-#             busqueda = form.cleaned_data['busqueda']
+#funcion para buscar post, si el formulrio es correcto te envia a la pagina con los posts que coinciden con la busqueda
+@comprueba_auth
+def buscarPosts(request):
+    if request.method == 'POST':
+        form=BuscarPost(request.POST)
+        if form.is_valid():
+            busqueda = form.cleaned_data['busqueda']
+            query = Post.objects.filter(titulo=busqueda)
 
-#             query = Post.objects.filter(titulo=busqueda)
+            context = {
+                "post_data" : query,
+                "busqueda" : busqueda,
+            }
 
-#             context = {
-#                 "user_data" : query,
-#             }
+            print context
+            return render_to_response('postsBuscados.html', context, context_instance=RequestContext(request))
 
-#             print context
-#             return render_to_response('home.html', context, context_instance=RequestContext(request))
+    else:
+        form = BuscarPost()
+    return render(request, 'busquedaPosts.html', {'form' : form})
 
-#     else:
-#         form = BuscarPost()
-#     return render(request, 'home.html', {'form' : form})
+
+
