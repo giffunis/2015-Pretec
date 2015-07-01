@@ -44,7 +44,7 @@
             {% if messages %}
               <div class="row">
                 <!-- <div class='col-sm-12'> -->
-                <div class='col-sm-6 col-sm-offset-3'>
+                <div id="error" class='col-sm-6 col-sm-offset-3'>
                   {% for message in messages %}
                     {% if message.tags == "success" %} <p class="alert alert-success">{{ message }}</p> {% endif %}
                     {% if message.tags == "error" %} <p class="alert alert-danger">{{ message }}</p> {% endif %}

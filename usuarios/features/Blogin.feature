@@ -20,7 +20,7 @@ Feature: Login
     When El llena el "id_pseudonimo" con "jotajota"
     And El llena el "id_password" con "654321"
     And El presiona "Enviar"
-    Then deberia ver el error "El nombre de usuario o la contrasena no coinciden "
+    Then deberia ver el error "El nombre de usuario o la contrasena no coinciden"
 
   Scenario: Usuario intenta loguearse con un usuario que no existe
     Given El usuario existente es "jojojo"
@@ -28,4 +28,4 @@ Feature: Login
     When El llena el "id_pseudonimo" con "jojojo"
     And El llena el "id_password" con "654321123456"
     And El presiona "Enviar"
-    Then deberia ver el error "El usuario no existe "
+    Then deberia ver el error "El usuario no existe"
