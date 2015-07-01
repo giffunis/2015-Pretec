@@ -33,9 +33,9 @@ class LoginForm(forms.Form):
         try:
             usuario = Usuario.objects.get(pseudonimo = pseudonimo)
         except Usuario.DoesNotExist:
-            raise forms.ValidationError("El usuario no existe")
+            raise forms.ValidationError(u"El usuario no existe")
         if usuario.password != password:
-            raise forms.ValidationError("El nombre de usuario o la contrasena no coinciden")
+            raise forms.ValidationError(u"El nombre de usuario o la contrasena no coinciden")
         return self.cleaned_data
 
 
