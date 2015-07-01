@@ -34,21 +34,15 @@
       </form>
 		</div>
 
-
-
-
-
 	</div>
 
 	<hr>
 
 	<div class="row">
 		<div class="col-md-3" id="info_perfil">
-			<label>Seguidores: {{seguidores}}</label><br>
-			<label>Sigue: {{sigue}}</label><br>
+			<a href="/seguidores"><label>Seguidores: {{seguidores}}</label></a><br>
+			<a href="/siguiendo"><label>Sigues: {{sigue}}</label></a><br>
 			<label>Posts: {{posts}}</label><br>
-
-			<a href = "/logout"> <button class="btn btn-primary"> Logout </button></a>
 
 		</div>
 
@@ -56,23 +50,30 @@
 			{% for item in user_data %}
 				<h2>{{item.titulo}}</h2>
 				<p>{{item.texto}}</p>
+        <!--<p id="id_post">{{item.id}}</p>-->
 				<p class="pull-right list-inline">{{item.fecha}}</p>
+        <!--<button id="btn_Borrar"><a href="">Borrar</a></button>-->
 				<br>
 				<hr>
 			{% endfor %}
 		</div>
+
+
+
 	</div>
 </div>
 
-<!--script type="text/javascript">
-      $(document).ready(function(){
-        $('#btn_seguir').on('click',function(){
+    <!--<script type="text/javascript">
+        $('#btn_Borrar').on('click',function(){
+
+          var x = $('#id_post').text()
+          alert(x);
           $.ajax({
             method: "POST",
-            url: "http://localhost:8000/seguidores/",
-            data: {csrfmiddlewaretoken: '{{csrf_token }}'},
+            url: "http://localhost:8000/mi_perfil/",
+            data: {csrfmiddlewaretoken: '{{csrf_token }}', 'id': x},
             success: function(valor){
-              alert("Exito");
+              document.location.href = "/mi_perfil";
             },
             error: function(valor){
               alert("Error");
@@ -80,8 +81,8 @@
           })
           return false;
         })
-      })
-    </script -->
+    
+    </script>-->
 
 
 {% endblock content %}

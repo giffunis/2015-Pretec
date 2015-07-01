@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Usuarios a los que sigues
+{% endblock %}
+
+{% block content%}
+<div class="col-md-6 col-md-offset-4">
+{% if sigues %}
+	{% for item in seguidores %}
+		<a href="/perfil/{{item.seguidor.pseudonimo}}"><h3>{{item.seguidor.pseudonimo}}</h3></a>
+		<h5>{{item.seguidor.nombre}} {{item.seguidor.apellidos}}</h5>
+		<br>
+		<hr>
+	{% endfor %}
+{% else %}
+	<h3> No tienes ningun seguidor :( </h3><br>
+
+{% endif %}
+</div>
+
+{% endblock content %}

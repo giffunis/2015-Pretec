@@ -170,9 +170,35 @@ def pag_perfil(request,username):
     return render_to_response('perfil.html', context, context_instance=RequestContext(request))
     #return render(request,'perfil.html', {'pseudonimo': usuario.pseudonimo,'seguidores': seguidores(username), 'sigue':sigue(username), 'posts':post(username)})
 
+#funcion que te muestra a quien estas siguiendo
+@comprueba_auth
+def verSigue(request):
+    query = Relaciones.objects.filter(seguidor=request.session['member_id'])
+
+    context = {
+        'sigues': query,
+    }
+
+    return render_to_response('siguiendo.html', context, context_instance=RequestContext(request))
+
+@comprueba_auth
+def verSeguidores(request):
+    query = Relaciones.objects.filter(sigue=request.session['member_id'])
+    context = {
+        'seguidores': query
+    }
+    return render_to_response('seguidores.html', context, context_instance=RequestContext(request))
+
 
 @comprueba_auth
 def mi_perfil(request):
+
+    #if request.is_ajax():
+    #    idd = request.POST["id"]
+    #    query = Post.objects.get(id=idd)
+    #    query.delete()
+    #    return HttpResponse(idd)
+
     usuario = Usuario.objects.get(pseudonimo = request.session['member_id'])
     query = Post.objects.filter(pseudonimo = request.session['member_id'])
 
@@ -347,7 +373,7 @@ def buscarPosts(request):
         form=BuscarPost(request.POST)
         if form.is_valid():
             busqueda = form.cleaned_data['busqueda']
-            query = Post.objects.filter(titulo=busqueda)
+            query = Post.objects.filter(titulo__contains=form.cleaned_data['busqueda'] )
 
             context = {
                 "post_data" : query,
@@ -361,5 +387,5 @@ def buscarPosts(request):
         form = BuscarPost()
     return render(request, 'busquedaPosts.html', {'form' : form})
 
-
-
+def borrarPost(request):
+    return render(request, 'borrar.html')

@@ -1,5 +1,9 @@
 /*generales*/
 
+#id_fecha{
+	display: none;
+}
+
 h1 {
 	padding: 3%;
 }
