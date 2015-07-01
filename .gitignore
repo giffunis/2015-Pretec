@@ -80,3 +80,6 @@ microposts/migrations/00*
 
 #temporales que no se que son
 tmp*/
+
+#fichero que crea lettuce
+lettuce-django.pid
