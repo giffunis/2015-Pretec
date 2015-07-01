@@ -6,7 +6,7 @@
 
 {% block content%}
 <div class="col-md-6 col-md-offset-4">
-{% if sigues %}
+{% if seguidores %}
 	{% for item in seguidores %}
 		<a href="/perfil/{{item.seguidor.pseudonimo}}"><h3>{{item.seguidor.pseudonimo}}</h3></a>
 		<h5>{{item.seguidor.nombre}} {{item.seguidor.apellidos}}</h5>

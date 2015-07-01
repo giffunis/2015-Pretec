@@ -186,7 +186,7 @@ def pag_perfil(request,username):
     return salida
     #return render(request,'perfil.html', {'pseudonimo': usuario.pseudonimo,'seguidores': seguidores(username), 'sigue':sigue(username), 'posts':post(username)})
 
-#funcion que te muestra a quien estas siguiendo
+# verSigue terminado. No tocar.
 @comprueba_auth
 def verSigue(request):
     query = Relaciones.objects.filter(seguidor=request.COOKIES.get('usuario_a_ver'))
@@ -197,6 +197,7 @@ def verSigue(request):
 
     return render_to_response('siguiendo.html', context, context_instance=RequestContext(request))
 
+# verSeguidores terminado. No tocar.
 @comprueba_auth
 def verSeguidores(request):
     query = Relaciones.objects.filter(sigue=request.COOKIES.get('usuario_a_ver'))
