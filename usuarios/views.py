@@ -172,7 +172,7 @@ def pag_perfil(request,username):
 @comprueba_auth
 def mi_perfil(request):
     usuario = Usuario.objects.get(pseudonimo = request.session['member_id'])
-    query = Post.objects.filter(pseudonimo = request.session['member_id'])
+    query = Post.objects.filter(pseudonimo = request.session['member_id']).order_by('-id')
 
     context = {
         "user_data" : query,
@@ -189,7 +189,7 @@ def mi_perfil(request):
 
 @comprueba_auth
 def pag_home(request):
-    query = Post.objects.all().order_by('-fecha')
+    query = Post.objects.all().order_by('-id')
 
     context = {
         "user_data" : query,
