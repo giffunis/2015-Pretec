@@ -54,8 +54,17 @@ def login(request):
         if form.is_valid():
             pseudonimo = form.cleaned_data['pseudonimo']
             password = form.cleaned_data['password']
-            request.session['member_id'] = pseudonimo #creacion de la cookie
-            return HttpResponseRedirect('/home') #'perfil/',pseudonimo
+            try:
+                usuario = Usuario.objects.get(pseudonimo = pseudonimo)
+            except Usuario.DoesNotExist:
+                messages.error(request, 'El usuario no existe')
+            else:
+                usuario = Usuario.objects.get(pseudonimo = pseudonimo)
+                if usuario.password != password:
+                    messages.error(request, 'El nombre de usuario o la contrasena no coinciden')
+                else:
+                    request.session['member_id'] = pseudonimo #creacion de la cookie
+                    return HttpResponseRedirect('/home') #'perfil/',pseudonimo
 
     else:
         form = LoginForm()
@@ -174,7 +183,7 @@ def pag_perfil(request,username):
 @comprueba_auth
 def mi_perfil(request):
     usuario = Usuario.objects.get(pseudonimo = request.session['member_id'])
-    query = Post.objects.filter(pseudonimo = request.session['member_id'])
+    query = Post.objects.filter(pseudonimo = request.session['member_id']).order_by('-id')
 
     context = {
         "user_data" : query,
@@ -191,19 +200,15 @@ def mi_perfil(request):
 
 @comprueba_auth
 def pag_home(request):
-        usuario = Usuario.objects.get(pseudonimo = request.session['member_id'])
-        query = Post.objects.all().order_by('-fecha')
+    query = Post.objects.all().order_by('-id')
 
-        context = {
-            "user_data" : query,
-            'pseudonimo': usuario.pseudonimo,
-        }
+    context = {
+        "user_data" : query,
+    }
 
-        print context
-        return render_to_response('home.html', context, context_instance=RequestContext(request))
+    print context
+    return render_to_response('home.html', context, context_instance=RequestContext(request))
 
-#funcion que te lleva a busquedaPost.html, donde se muestran los posts buscados
-#def busquedaPosts(request):
 
 
 
@@ -360,6 +365,3 @@ def buscarPosts(request):
     else:
         form = BuscarPost()
     return render(request, 'busquedaPosts.html', {'form' : form})
-
-
-
