@@ -1,11 +1,11 @@
 {%  extends 'base_formularios.html' %}
 {% load bootstrap3 %}
 
-{% block content %}
-<div id="content" >
+
 {% block title %}
   ¡Únete a pretec!
-{% endblock %}</div>
+{% endblock %}
+{% block content %}
 <div id = "form_registro">
 	<form role="form" class="form-horizontal" action="#" method="post">{% csrf_token %}
 	  <!-- {{ form.as_p }} -->
