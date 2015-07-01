@@ -24,6 +24,7 @@
       </div>
     </div>
   {% endif %}
+    <div>
       <form method="post">{% csrf_token %}
         <div class="form-group ocultar" style='display:none;'>
             <select  name="seguir" id="seguir">
@@ -32,6 +33,7 @@
         </div>
         <button type="submit" class="btn btn-primary" id="btn_seguir">Seguir</button>
       </form>
+    </div>
 		</div>
 
 	</div>
@@ -81,7 +83,7 @@
           })
           return false;
         })
-    
+
     </script>-->
 
 

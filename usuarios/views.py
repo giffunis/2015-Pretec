@@ -181,13 +181,15 @@ def pag_perfil(request,username):
         'sigue':sigue(username),
         'posts':post(username),
     }
-    return render_to_response('perfil.html', context, context_instance=RequestContext(request))
+    salida = render_to_response('perfil.html', context, context_instance=RequestContext(request))
+    salida.set_cookie('usuario_a_ver', username)
+    return salida
     #return render(request,'perfil.html', {'pseudonimo': usuario.pseudonimo,'seguidores': seguidores(username), 'sigue':sigue(username), 'posts':post(username)})
 
 #funcion que te muestra a quien estas siguiendo
 @comprueba_auth
 def verSigue(request):
-    query = Relaciones.objects.filter(seguidor=request.session['member_id'])
+    query = Relaciones.objects.filter(seguidor=request.COOKIES.get('usuario_a_ver'))
 
     context = {
         'sigues': query,
@@ -197,9 +199,9 @@ def verSigue(request):
 
 @comprueba_auth
 def verSeguidores(request):
-    query = Relaciones.objects.filter(sigue=request.session['member_id'])
+    query = Relaciones.objects.filter(sigue=request.COOKIES.get('usuario_a_ver'))
     context = {
-        'seguidores': query
+        'seguidores': query,
     }
     return render_to_response('seguidores.html', context, context_instance=RequestContext(request))
 
@@ -225,8 +227,9 @@ def mi_perfil(request):
     }
 
     print context
-    return render_to_response('perfil.html', context, context_instance=RequestContext(request))
-
+    salida = render_to_response('perfil.html', context, context_instance=RequestContext(request))
+    salida.set_cookie('usuario_a_ver', request.session['member_id'])
+    return salida
 
 
 @comprueba_auth
