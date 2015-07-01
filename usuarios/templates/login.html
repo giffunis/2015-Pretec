@@ -40,6 +40,18 @@
               {% endfor %}
             {% endif %}
 
+            {% if messages %}
+              <div class="row">
+                <!-- <div class='col-sm-12'> -->
+                <div class='col-sm-6 col-sm-offset-3'>
+                  {% for message in messages %}
+                    {% if message.tags == "success" %} <p class="alert alert-success">{{ message }}</p> {% endif %}
+                    {% if message.tags == "error" %} <p class="alert alert-danger">{{ message }}</p> {% endif %}
+                  {% endfor %}
+                </div>
+              </div>
+            {% endif %}
+
 		  			{% bootstrap_form form layout="horizontal" %}
 					<button type="submit" class="btn btn-primary col-sm-offset-6">Enviar</button>
 				</form>

@@ -27,18 +27,6 @@ class LoginForm(forms.Form):
     pseudonimo = forms.CharField(label= 'Pseudonimo', max_length='20', min_length='5')
     password = forms.CharField(label='Contrasena', widget=forms.PasswordInput)
 
-    def clean(self):
-        pseudonimo = self.cleaned_data['pseudonimo']
-        password = self.cleaned_data['password']
-        try:
-            usuario = Usuario.objects.get(pseudonimo = pseudonimo)
-        except Usuario.DoesNotExist:
-            raise forms.ValidationError("El usuario no existe")
-        if usuario.password != password:
-            raise forms.ValidationError("El nombre de usuario o la contrasena no coinciden")
-        return self.cleaned_data
-
-
 class EditNameForm(forms.Form):
     nombre = forms.CharField(label='Nombre', max_length=30, min_length=2)
     apellidos = forms.CharField(label = 'Apellidos', max_length = 50)

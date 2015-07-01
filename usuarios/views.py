@@ -54,8 +54,17 @@ def login(request):
         if form.is_valid():
             pseudonimo = form.cleaned_data['pseudonimo']
             password = form.cleaned_data['password']
-            request.session['member_id'] = pseudonimo #creacion de la cookie
-            return HttpResponseRedirect('/home') #'perfil/',pseudonimo
+            try:
+                usuario = Usuario.objects.get(pseudonimo = pseudonimo)
+            except Usuario.DoesNotExist:
+                messages.error(request, 'El usuario no existe')
+            else:
+                usuario = Usuario.objects.get(pseudonimo = pseudonimo)
+                if usuario.password != password:
+                    messages.error(request, 'El nombre de usuario o la contrasena no coinciden')
+                else:
+                    request.session['member_id'] = pseudonimo #creacion de la cookie
+                    return HttpResponseRedirect('/home') #'perfil/',pseudonimo
 
     else:
         form = LoginForm()
