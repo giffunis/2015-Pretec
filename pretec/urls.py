@@ -23,7 +23,6 @@ urlpatterns = [
     url(r'^set_email/$', usuarios.views.set_email),
     url(r'^set_password/$', usuarios.views.set_password),
     url(r'^microposts/$', microposts.views.set_post),
-    url(r'^seguidores/$', usuarios.views.follow),
     url(r'^users/$', usuarios.views.users_view),
     url(r'^busquedaPosts/$', usuarios.views.buscarPosts),
     url(r'^busquedaUsu/$', usuarios.views.buscarUsuario),
