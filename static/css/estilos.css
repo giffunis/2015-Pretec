@@ -10,6 +10,15 @@ button {
 
 }
 
+/*Estilos base.html*/
+#ul_navbar li {
+	padding-top: 2%;
+}
+
+#btn_cerrarsesion {
+	padding-top: 6%;
+}
+
 
 /*Estilos base_formularios.html*/
 #contenedor_form {
@@ -107,5 +116,3 @@ button {
 #form_post {
 	padding-top: 2%;
 }
-
-

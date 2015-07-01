@@ -174,7 +174,7 @@ def pag_perfil(request,username):
 @comprueba_auth
 def mi_perfil(request):
     usuario = Usuario.objects.get(pseudonimo = request.session['member_id'])
-    query = Post.objects.filter(pseudonimo = request.session['member_id'])
+    query = Post.objects.filter(pseudonimo = request.session['member_id']).order_by('-id')
 
     context = {
         "user_data" : query,
@@ -191,19 +191,15 @@ def mi_perfil(request):
 
 @comprueba_auth
 def pag_home(request):
-        usuario = Usuario.objects.get(pseudonimo = request.session['member_id'])
-        query = Post.objects.all().order_by('-fecha')
+    query = Post.objects.all().order_by('-id')
 
-        context = {
-            "user_data" : query,
-            'pseudonimo': usuario.pseudonimo,
-        }
+    context = {
+        "user_data" : query,
+    }
 
-        print context
-        return render_to_response('home.html', context, context_instance=RequestContext(request))
+    print context
+    return render_to_response('home.html', context, context_instance=RequestContext(request))
 
-#funcion que te lleva a busquedaPost.html, donde se muestran los posts buscados
-#def busquedaPosts(request):
 
 
 
@@ -360,6 +356,3 @@ def buscarPosts(request):
     else:
         form = BuscarPost()
     return render(request, 'busquedaPosts.html', {'form' : form})
-
-
-
