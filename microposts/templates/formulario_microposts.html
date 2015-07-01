@@ -1,11 +1,11 @@
 {%  extends 'base.html' %}
 {% load bootstrap3 %}
 {% load static %}
-{% block content %}
-<div  id="content" class="hidden">
+
 {% block title %}
   Crea tu micropost
-{% endblock %}</div>
+{% endblock %}
+{% block content %}
 
 <!--<script type="text/javascript" src="/static/js/scriptfecha.js"> </script> -->
 <form role="form" id="form_post" class="form-horizontal" action="#" method="post">{% csrf_token %}
@@ -20,8 +20,9 @@
 	</script>
 
 	{% bootstrap_form form layout="horizontal" %}
-	<div id="Enviar" class = "col-md-offset-7">
+  <button id="Enviar" type="submit" class="btn btn-primary col-sm-offset-6">Registrarse</button>
+	<!-- <div id="Enviar" class = "col-md-offset-7">
 		{% buttons submit='Enviar'%}{% endbuttons %}
-	</div>
+	</div> -->
 </form>
 {% endblock content %}
