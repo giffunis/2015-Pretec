@@ -116,15 +116,18 @@ def get_registro(request):
 
 
 #Metodo que sirve para calcular el numero de seguidores
+# Seguidores terminado. No tocar.
 def seguidores(username):
     aux = Relaciones.objects.filter(sigue = username).count()
     return aux
 
 #Metodo que sirve para calcular el numero de personas a las que sigue
+# Sigue terminado. No tocar.
 def sigue(username):
     aux = Relaciones.objects.filter(seguidor = username).count()
     return aux
 
+# Follow terminado. No tocar.
 def follow(seguidor,sigue):
     relacion = Relaciones.objects.create(
                     seguidor = Usuario.objects.get(pseudonimo = seguidor),
@@ -137,11 +140,13 @@ def unfollow(request, username):
                     sigue = username,)
     relacion.save()
 
+# Post terminado. No tocar.
 def post(username):
     aux = Post.objects.filter(pseudonimo = username).count()
     return aux
 
-# @comprueba_auth
+# Pag_perfil terminado. No tocar. 
+@comprueba_auth
 def pag_perfil(request,username):
     if request.method == 'POST':
         seguir = request.POST['seguir']
