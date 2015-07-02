@@ -77,3 +77,6 @@ pretec/wsgi.py
 
 #para evitar el error en el migrate
 microposts/migrations/00*
+
+#no copiar env-heroku
+env-heroku/
