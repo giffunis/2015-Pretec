@@ -37,7 +37,14 @@
               <option value="{{pseudonimo}}" checked>{{pseudonimo}}</option>
             </select>
         </div>
+        {% if pseudonimo == logueado %}
+        
+        {% else %}
           <button type="submit" class="btn btn-primary" id="btn_seguir">Seguir</button>
+        {% endif %}
+        
+        
+          
       </form>
     </div>
 		</div>
