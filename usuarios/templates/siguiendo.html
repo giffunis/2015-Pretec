@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Usuarios a los que sigues
+{% endblock %}
+
+{% block content%}
+<div class="col-md-6 col-md-offset-4">
+{% if sigues %}
+	{% for item in sigues %}
+		<a href="/perfil/{{item.sigue.pseudonimo}}"><h3>{{item.sigue.pseudonimo}}</h3></a>
+		<h5>{{item.sigue.nombre}} {{item.sigue.apellidos}}</h5>
+		<br>
+		<hr>
+	{% endfor %}
+{% else %}
+	<h3> No sigues a nungun usuario </h3><br>
+	<a href="/busquedaUsu"><button class="btn btn-primary">Busca Usuarios</button></a>
+
+{% endif %}
+</div>
+
+{% endblock content %}

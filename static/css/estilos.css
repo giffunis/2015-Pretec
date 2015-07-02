@@ -1,5 +1,9 @@
 /*generales*/
 
+#id_fecha{
+	display: none;
+}
+
 h1 {
 	padding: 3%;
 }
@@ -8,6 +12,15 @@ button {
 	margin-top: 4%;
 	color:black;
 
+}
+
+/*Estilos base.html*/
+#ul_navbar li {
+	padding-top: 2%;
+}
+
+#btn_cerrarsesion {
+	padding-top: 6%;
 }
 
 
@@ -107,5 +120,3 @@ button {
 #form_post {
 	padding-top: 2%;
 }
-
-

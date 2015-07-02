@@ -14,16 +14,17 @@
 		<div class="col-md-8">
 			<h2>{{pseudonimo}}</h2>
       {% if messages %}
-        <div class="row">
-          <!-- <div class='col-sm-12'> -->
-          <div class='col-sm-6 '>
-            {% for message in messages %}
-              {% if message.tags == "success" %} <p class="alert alert-success">{{ message }}</p> {% endif %}
-              {% if message.tags == "error" %} <p class="alert alert-danger">{{ message }}</p> {% endif %}
-            {% endfor %}
-          </div>
-        </div>
-      {% endif %}
+    <div class="row">
+      <!-- <div class='col-sm-12'> -->
+      <div class='col-sm-6 '>
+        {% for message in messages %}
+          {% if message.tags == "success" %} <p class="alert alert-success">{{ message }}</p> {% endif %}
+          {% if message.tags == "error" %} <p class="alert alert-danger">{{ message }}</p> {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+    <div>
       <form method="post">{% csrf_token %}
         <div class="form-group ocultar" style='display:none;'>
             <select  name="seguir" id="seguir">
@@ -32,6 +33,7 @@
         </div>
           <button type="submit" class="btn btn-primary" id="btn_seguir">Seguir</button>
       </form>
+    </div>
 		</div>
 
 	</div>
@@ -40,11 +42,9 @@
 
 	<div class="row">
 		<div class="col-md-3" id="info_perfil">
-			<label>Seguidores: {{seguidores}}</label><br>
-			<label>Sigue: {{sigue}}</label><br>
+			<a href="/seguidores"><label>Seguidores: {{seguidores}}</label></a><br>
+			<a href="/siguiendo"><label>Sigues: {{sigue}}</label></a><br>
 			<label>Posts: {{posts}}</label><br>
-
-			<a href = "/logout"> <button class="btn btn-primary"> Logout </button></a>
 
 		</div>
 
@@ -52,25 +52,31 @@
 			{% for item in user_data %}
 				<h2>{{item.titulo}}</h2>
 				<p>{{item.texto}}</p>
+        <!--<p id="id_post">{{item.id}}</p>-->
 				<p class="pull-right list-inline">{{item.fecha}}</p>
+        <!--<button id="btn_Borrar"><a href="">Borrar</a></button>-->
 				<br>
 				<hr>
 			{% endfor %}
 		</div>
+
+
+
 	</div>
 </div>
 
+
 <script type="text/javascript">
-    $('#btn_seguir').click(function() 
-    { 
-      if ($(this).text() == "Seguir") 
-      { 
-         $(this).text("Dejar de Seguir"); 
-      } 
+    $('#btn_seguir').click(function()
+    {
+      if ($(this).text() == "Seguir")
+      {
+         $(this).text("Dejar de Seguir");
+      }
       else
          $(this).text("Seguir");
     });
-</script>  
+</script>
+
 
 {% endblock content %}
-

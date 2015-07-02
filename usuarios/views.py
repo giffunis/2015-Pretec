@@ -54,8 +54,17 @@ def login(request):
         if form.is_valid():
             pseudonimo = form.cleaned_data['pseudonimo']
             password = form.cleaned_data['password']
-            request.session['member_id'] = pseudonimo #creacion de la cookie
-            return HttpResponseRedirect('/home') #'perfil/',pseudonimo
+            try:
+                usuario = Usuario.objects.get(pseudonimo = pseudonimo)
+            except Usuario.DoesNotExist:
+                messages.error(request, 'El usuario no existe')
+            else:
+                usuario = Usuario.objects.get(pseudonimo = pseudonimo)
+                if usuario.password != password:
+                    messages.error(request, 'El nombre de usuario o la contrasena no coinciden')
+                else:
+                    request.session['member_id'] = pseudonimo #creacion de la cookie
+                    return HttpResponseRedirect('/home') #'perfil/',pseudonimo
 
     else:
         form = LoginForm()
@@ -116,15 +125,18 @@ def get_registro(request):
 
 
 #Metodo que sirve para calcular el numero de seguidores
+# Seguidores terminado. No tocar.
 def seguidores(username):
     aux = Relaciones.objects.filter(sigue = username).count()
     return aux
 
 #Metodo que sirve para calcular el numero de personas a las que sigue
+# Sigue terminado. No tocar.
 def sigue(username):
     aux = Relaciones.objects.filter(seguidor = username).count()
     return aux
 
+# Follow terminado. No tocar.
 def follow(seguidor,sigue):
     relacion = Relaciones.objects.create(
                     seguidor = Usuario.objects.get(pseudonimo = seguidor),
@@ -137,11 +149,13 @@ def unfollow(seguidor, sigue):
                     sigue = Usuario.objects.get(pseudonimo = sigue),).delete()
     #relacion.save()
 
+# Post terminado. No tocar.
 def post(username):
     aux = Post.objects.filter(pseudonimo = username).count()
     return aux
 
-# @comprueba_auth
+# Pag_perfil terminado. No tocar.
+@comprueba_auth
 def pag_perfil(request,username):
     if request.method == 'POST':
         seguir = request.POST['seguir']
@@ -168,14 +182,43 @@ def pag_perfil(request,username):
         'sigue':sigue(username),
         'posts':post(username),
     }
-    return render_to_response('perfil.html', context, context_instance=RequestContext(request))
+    salida = render_to_response('perfil.html', context, context_instance=RequestContext(request))
+    salida.set_cookie('usuario_a_ver', username)
+    return salida
     #return render(request,'perfil.html', {'pseudonimo': usuario.pseudonimo,'seguidores': seguidores(username), 'sigue':sigue(username), 'posts':post(username)})
+
+# verSigue terminado. No tocar.
+@comprueba_auth
+def verSigue(request):
+    query = Relaciones.objects.filter(seguidor=request.COOKIES.get('usuario_a_ver'))
+
+    context = {
+        'sigues': query,
+    }
+
+    return render_to_response('siguiendo.html', context, context_instance=RequestContext(request))
+
+# verSeguidores terminado. No tocar.
+@comprueba_auth
+def verSeguidores(request):
+    query = Relaciones.objects.filter(sigue=request.COOKIES.get('usuario_a_ver'))
+    context = {
+        'seguidores': query,
+    }
+    return render_to_response('seguidores.html', context, context_instance=RequestContext(request))
 
 
 @comprueba_auth
 def mi_perfil(request):
+
+    #if request.is_ajax():
+    #    idd = request.POST["id"]
+    #    query = Post.objects.get(id=idd)
+    #    query.delete()
+    #    return HttpResponse(idd)
+
     usuario = Usuario.objects.get(pseudonimo = request.session['member_id'])
-    query = Post.objects.filter(pseudonimo = request.session['member_id'])
+    query = Post.objects.filter(pseudonimo = request.session['member_id']).order_by('-id')
 
     context = {
         "user_data" : query,
@@ -186,25 +229,22 @@ def mi_perfil(request):
     }
 
     print context
-    return render_to_response('perfil.html', context, context_instance=RequestContext(request))
-
+    salida = render_to_response('perfil.html', context, context_instance=RequestContext(request))
+    salida.set_cookie('usuario_a_ver', request.session['member_id'])
+    return salida
 
 
 @comprueba_auth
 def pag_home(request):
-        usuario = Usuario.objects.get(pseudonimo = request.session['member_id'])
-        query = Post.objects.all().order_by('-fecha')
+    query = Post.objects.all().order_by('-id')
 
-        context = {
-            "user_data" : query,
-            'pseudonimo': usuario.pseudonimo,
-        }
+    context = {
+        "user_data" : query,
+    }
 
-        print context
-        return render_to_response('home.html', context, context_instance=RequestContext(request))
+    print context
+    return render_to_response('home.html', context, context_instance=RequestContext(request))
 
-#funcion que te lleva a busquedaPost.html, donde se muestran los posts buscados
-#def busquedaPosts(request):
 
 
 
@@ -348,7 +388,7 @@ def buscarPosts(request):
         form=BuscarPost(request.POST)
         if form.is_valid():
             busqueda = form.cleaned_data['busqueda']
-            query = Post.objects.filter(titulo=busqueda)
+            query = Post.objects.filter(titulo__contains=form.cleaned_data['busqueda'] )
 
             context = {
                 "post_data" : query,
@@ -362,5 +402,5 @@ def buscarPosts(request):
         form = BuscarPost()
     return render(request, 'busquedaPosts.html', {'form' : form})
 
-
-
+def borrarPost(request):
+    return render(request, 'borrar.html')
