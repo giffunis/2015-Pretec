@@ -370,4 +370,17 @@ def delete_post(request,post_id):
     query = Post.objects.get(id=post_id)
     query.delete()
 
-    return  HttpResponseRedirect('/perfil.html/')
+    usuario = Usuario.objects.get(pseudonimo = request.session['member_id'])
+    query = Post.objects.filter(pseudonimo = request.session['member_id']).order_by('-id')
+
+    context = {
+        "user_data" : query,
+        'pseudonimo': usuario.pseudonimo,
+        'seguidores': seguidores(usuario.pseudonimo),
+        'sigue':sigue(usuario.pseudonimo),
+        'posts':post(usuario.pseudonimo),
+    }
+
+    print context
+
+    return  render_to_response('perfil.html', context, context_instance=RequestContext(request))
