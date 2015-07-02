@@ -367,7 +367,7 @@ def buscarPosts(request):
     return render(request, 'busquedaPosts.html', {'form' : form})
 
 def delete_post(request,post_id):
-    query = Post.objects.get(pk=post_id)
+    query = Post.objects.get(id=post_id)
     query.delete()
     usuario = Usuario.objects.get(pseudonimo = request.session['member_id'])
     query = Post.objects.filter(pseudonimo = request.session['member_id']).order_by('-id')
