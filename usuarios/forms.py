@@ -45,7 +45,7 @@ class EditPasswordForm(forms.Form):
 
 
 class BuscarPost(forms.Form):
-    busqueda = forms.CharField(label='Titutlo del post', max_length=100, min_length=2)
+    busqueda = forms.CharField(label='Titulo del post', max_length=100, min_length=2)
 
 class BuscarUsuario(forms.Form):
     busquedaUsu = forms.CharField(label='Nombre de usuario', max_length=50, min_length=2)

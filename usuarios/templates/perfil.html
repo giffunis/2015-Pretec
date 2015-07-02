@@ -56,6 +56,9 @@
 			{% for item in user_data %}
 				<h2>{{item.titulo}}</h2>
 				<p>{{item.texto}}</p>
+        <p>Id del micropost {{ item.id}}</p>
+        <a href = ""> <button class="btn-info btn btn-xs"> Editar </button></a>
+        <a href = "{% url deletePost item.id %}"> <button class="btn-info btn btn-xs btn-danger"> Eliminar </button></a>
 				<p class="pull-right list-inline">{{item.fecha}}</p>
 				<br>
 				<hr>

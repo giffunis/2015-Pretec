@@ -27,5 +27,6 @@ urlpatterns = [
     url(r'^users/$', usuarios.views.users_view),
     url(r'^busquedaPosts/$', usuarios.views.buscarPosts),
     url(r'^busquedaUsu/$', usuarios.views.buscarUsuario),
+    url(r'^mi_perfil/delete/(?P<post_id>[\d+])', usuarios.views.delete_post, name='deletePost')
 
 ]

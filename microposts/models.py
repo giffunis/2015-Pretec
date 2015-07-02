@@ -9,3 +9,4 @@ class Post(models.Model):
 	titulo = models.CharField(max_length=30)
 	texto = models.CharField(max_length=240)
 	fecha = models.DateField()
+	# id_post = models.AutoField(primary_key=True)
