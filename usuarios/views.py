@@ -184,6 +184,13 @@ def pag_perfil(request,username):
     }
     salida = render_to_response('perfil.html', context, context_instance=RequestContext(request))
     salida.set_cookie('usuario_a_ver', username)
+    try:
+        relacion = Relaciones.objects.get(sigue = username, seguidor = request.session['member_id'])
+    except Relaciones.DoesNotExist:
+        salida.set_cookie('lo_sigo', 'no')
+    else:
+        salida.set_cookie('lo_sigo', 'yes')
+
     return salida
     #return render(request,'perfil.html', {'pseudonimo': usuario.pseudonimo,'seguidores': seguidores(username), 'sigue':sigue(username), 'posts':post(username)})
 

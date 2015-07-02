@@ -67,16 +67,31 @@
 
 
 <script type="text/javascript">
-    $('#btn_seguir').click(function()
-    {
-      if ($(this).text() == "Seguir")
-      {
-         $(this).text("Dejar de Seguir");
-      }
-      else
-         $(this).text("Seguir");
-    });
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1);
+        if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
+    }
+    return "";
+}
+
+window.onload = function() {
+  // alert(getCookie('lo_sigo'));
+  aux = getCookie('lo_sigo');
+  if(aux == 'yes'){
+    $('#btn_seguir').text('Dejar de Seguir');
+  }
+  else{
+    $('#btn_seguir').text('Seguir');
+  }
+};
 </script>
+
+
+
 
 
 {% endblock content %}
