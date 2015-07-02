@@ -371,13 +371,14 @@ def delete_post(request,post_id):
     query.delete()
     usuario = Usuario.objects.get(pseudonimo = request.session['member_id'])
     query = Post.objects.filter(pseudonimo = request.session['member_id']).order_by('-id')
-
+    borrar = "true"
     context = {
         "user_data" : query,
         'pseudonimo': usuario.pseudonimo,
         'seguidores': seguidores(usuario.pseudonimo),
         'sigue':sigue(usuario.pseudonimo),
         'posts':post(usuario.pseudonimo),
+        'borrar': borrar,
     }
 
     print context

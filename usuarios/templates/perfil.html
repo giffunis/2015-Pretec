@@ -50,6 +50,11 @@
 		</div>
 
 		<div class="col-md-7">
+    {% if borrar %}
+    <div id="post_borrado">
+      <p style="color:red"> Post eliminado correctamente </p>      
+    </div>
+    {% endif %}
 			{% for item in user_data %}
 				<h2>{{item.titulo}}</h2>
 				<p>{{item.texto}}</p>
