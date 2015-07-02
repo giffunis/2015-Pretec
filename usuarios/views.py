@@ -216,6 +216,7 @@ def pag_perfil(request,username):
         'seguidores': seguidores(username),
         'sigue':sigue(username),
         'posts':post(username),
+        'logueado': request.session['member_id']
     }
     salida = render_to_response('perfil.html', context, context_instance=RequestContext(request))
     salida.set_cookie('usuario_a_ver', username)
@@ -269,6 +270,8 @@ def mi_perfil(request):
         'seguidores': seguidores(usuario.pseudonimo),
         'sigue':sigue(usuario.pseudonimo),
         'posts':post(usuario.pseudonimo),
+        'logueado': request.session['member_id']
+
     }
 
     print context
