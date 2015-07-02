@@ -369,5 +369,17 @@ def buscarPosts(request):
 def delete_post(request,post_id):
     query = Post.objects.get(pk=post_id)
     query.delete()
+    usuario = Usuario.objects.get(pseudonimo = request.session['member_id'])
+    query = Post.objects.filter(pseudonimo = request.session['member_id']).order_by('-id')
 
-    return  render(request, 'mi_perfil.html')
+    context = {
+        "user_data" : query,
+        'pseudonimo': usuario.pseudonimo,
+        'seguidores': seguidores(usuario.pseudonimo),
+        'sigue':sigue(usuario.pseudonimo),
+        'posts':post(usuario.pseudonimo),
+    }
+
+    print context
+    return render_to_response('perfil.html', context, context_instance=RequestContext(request))
+
