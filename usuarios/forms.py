@@ -15,6 +15,7 @@ class RegistroForm(forms.Form):
     password1 = forms.CharField(label='Contrasena', widget=forms.PasswordInput)
     password2 = forms.CharField(label='Repita la contrasena', widget=forms.PasswordInput)
     date = forms.DateField()
+    
 
     def clean(self):
     	if 'password1' in self.cleaned_data and 'password2' in self.cleaned_data:
@@ -48,3 +49,6 @@ class BuscarPost(forms.Form):
 
 class BuscarUsuario(forms.Form):
     busquedaUsu = forms.CharField(label='Nombre de usuario', max_length=50, min_length=2)
+
+class SubirFoto(forms.Form):
+    foto = forms.ImageField()

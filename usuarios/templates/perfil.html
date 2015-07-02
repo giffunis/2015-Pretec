@@ -8,7 +8,13 @@
 <div class="col-md-offset-1" id="contenedor_perfil">
 	<div class="row" id="imagen_perfil">
 		<div class="col-md-3" >
-			<img src="../../static/imagenes/opcion5.jpg">
+    {% if foto_usu %}
+      <a href="/fotoUsu"><img src="../../static/uploads/{{foto_usu}}" style="height:30%%"></a>
+    {% else %}
+      <a href="/fotoUsu"><img src="../../static/uploads/defecto.jpg" style="height:30%%"></a>
+    {% endif %}      
+			<!--<a href="/fotoUsu"><img src="../../static/imagenes/opcion5.jpg"></a>-->
+    
 		</div>
 
 		<div class="col-md-8">
