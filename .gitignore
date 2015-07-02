@@ -80,3 +80,5 @@ microposts/migrations/00*
 
 #no copiar env-heroku
 env-heroku/
+*.pyc
+staticfiles
