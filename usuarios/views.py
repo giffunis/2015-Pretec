@@ -19,6 +19,7 @@ from .forms import EditEmailForm
 from .forms import EditPasswordForm
 from .forms import BuscarPost
 from .forms import BuscarUsuario
+from .forms import SubirFoto
 
 from django import forms
 from .models import Usuario
@@ -123,6 +124,40 @@ def get_registro(request):
         form = RegistroForm()
     return render(request, 'formulario_registro.html', {'form' : form})
 
+def fotoUsu(request):
+    if request.method == 'POST':
+        form=SubirFoto(request.POST, request.FILES)
+        if form.is_valid():
+            #cogemos la foto y la almacenamos en la carpeta correspondiente
+            foto = request.FILES['foto']
+            ruta = open('/home/rebecca/DSI/pretec/static/uploads/' + foto.name, 'wb+')
+            for chunk in foto.chunks():
+                ruta.write(chunk)
+            ruta.close()
+
+            #post del usuario para mostrar en su perfil
+            usu_post = Post.objects.filter(pseudonimo = request.session['member_id']).order_by('-id')
+
+            #actualizamos el campo foto
+            Usuario.objects.filter(pseudonimo=request.session['member_id']).update(foto=foto)
+            
+            #todos los datos del usuario para mostrar en el perfil
+            query = Usuario.objects.get(pseudonimo=request.session['member_id'])
+
+            context = {
+                'user_data': usu_post,
+                'foto_usu' : query.foto,
+                'pseudonimo': query.pseudonimo,
+                'seguidores': seguidores(query.pseudonimo),
+                'sigue':sigue(query.pseudonimo),
+                'posts':post(query.pseudonimo),
+            }
+            print context
+            return render_to_response('perfil.html', context, context_instance=RequestContext(request))
+    else:
+        form=SubirFoto()
+    return render(request, 'cambiarFoto.html', {'form' : form})
+
 
 #Metodo que sirve para calcular el numero de seguidores
 # Seguidores terminado. No tocar.
@@ -221,6 +256,7 @@ def mi_perfil(request):
 
     context = {
         "user_data" : query,
+        'foto_usu' : usuario.foto,
         'pseudonimo': usuario.pseudonimo,
         'seguidores': seguidores(usuario.pseudonimo),
         'sigue':sigue(usuario.pseudonimo),

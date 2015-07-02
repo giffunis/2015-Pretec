@@ -28,6 +28,7 @@ urlpatterns = [
     url(r'^busquedaUsu/$', usuarios.views.buscarUsuario),
     url(r'^siguiendo/$', usuarios.views.verSigue),
     url(r'^seguidores/$', usuarios.views.verSeguidores),
+    url(r'^fotoUsu/$', usuarios.views.fotoUsu),
 
 
 ]
