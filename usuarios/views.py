@@ -208,8 +208,8 @@ def pag_perfil(request,username):
             else:
                 unfollow(seguidor,seguir)
                 messages.success(request, "Ya no sigues a este usuario")
-
     usuario = Usuario.objects.get(pseudonimo = username)
+    foto_visitado = Usuario.objects.get(pseudonimo=username)
     query = Post.objects.filter(pseudonimo=usuario)
     context = {
         'user_data' : query,
@@ -217,7 +217,8 @@ def pag_perfil(request,username):
         'seguidores': seguidores(username),
         'sigue':sigue(username),
         'posts':post(username),
-        'logueado': request.session['member_id']
+        'foto_usu': foto_visitado.foto,
+        'logueado': request.session['member_id'],
     }
     salida = render_to_response('perfil.html', context, context_instance=RequestContext(request))
     salida.set_cookie('usuario_a_ver', username)
