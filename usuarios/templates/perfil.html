@@ -14,16 +14,17 @@
         <a href="/fotoUsu"><img src="../../static/uploads/{{foto_usu}}" style="height:30%%"></a>
       {% else %}
         <a href="/fotoUsu"><img src="../../static/uploads/defecto.jpg" style="height:30%%"></a>
-      {% endif %}      
+      {% endif %}
   {% else %}
     <div class="col-md-3" >
     {% if foto_usu %}
       <a href="/fotoUsu"><img src="../../static/uploads/{{foto_usu}}"></a>
     {% else %}
       <a href="/fotoUsu"><img src="../../static/uploads/defecto.jpg"></a>
-    {% endif %}      
+    {% endif %}
+    {% endif %}
 			<!--<a href="/fotoUsu"><img src="../../static/imagenes/opcion5.jpg"></a>-->
-    
+
 		</div>
 
 		<div class="col-md-8">
@@ -47,21 +48,17 @@
             </select>
         </div>
         {% if pseudonimo == logueado %}
-        
+
         {% else %}
           <button type="submit" class="btn btn-primary" id="btn_seguir">Seguir</button>
         {% endif %}
-        
-        
-          
+
+
+
       </form>
     </div>
 		</div>
 
-<<<<<<< HEAD
-
-=======
->>>>>>> master
 	</div>
 
 	<hr>
@@ -76,30 +73,22 @@
 
 		<div class="col-md-7">
     {% if borrar %}
-<<<<<<< HEAD
+
     <div >
       <p id="content" style="color:red">Post eliminado correctamente</p>
-=======
-     <div id="post_borrado">
-      <p style="color:red"> Post eliminado correctamente </p>
->>>>>>> master
+
     </div>
     {% endif %}
 			{% for item in user_data %}
 				<h2>{{item.titulo}}</h2>
 				<p>{{item.texto}}</p>
-<<<<<<< HEAD
+
         <p id="id_post" style="display:none">{{ item.id}}</p>
         <a href = ""> <button id="Editar_post" class="btn-info btn btn-xs"> Editar </button></a>
 
         <a href = "/mi_perfil/delete/{{item.id}}"> <button id="Eliminar_post" class="btn-info btn btn-xs btn-danger"> Eliminar </button></a>
 
-=======
 
-        <p style="display:none">Id del micropost {{ item.id}}</p>
-        <a href = ""> <button class="btn-info btn btn-xs"> Editar </button></a>
-        <a href = "/mi_perfil/delete/{{item.id}}"> <button class="btn-info btn btn-xs btn-danger"> Eliminar </button></a>
->>>>>>> master
 				<p class="pull-right list-inline">{{item.fecha}}</p>
 				<br>
 				<hr>
