@@ -23,3 +23,8 @@ Feature: Micropost
     And El llena el "id_texto" con "Esto es un microposts"
     And El presiona "Enviar"
     Then deberia ver "POST ENVIADO"
+
+  Scenario: Un usuario puede borrar un post
+    Given voy a la direccion "http://127.0.0.1:8000/mi_perfil/" URL
+    And El presiona "Eliminar_post"
+    Then deberia ver "Post eliminado correctamente"

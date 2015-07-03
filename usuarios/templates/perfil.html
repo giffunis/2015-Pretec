@@ -51,17 +51,17 @@
 
 		<div class="col-md-7">
     {% if borrar %}
-    <div id="post_borrado">
-      <p style="color:red"> Post eliminado correctamente </p>      
+    <div >
+      <p id="content" style="color:red">Post eliminado correctamente</p>
     </div>
     {% endif %}
 			{% for item in user_data %}
 				<h2>{{item.titulo}}</h2>
 				<p>{{item.texto}}</p>
-        <p style="display:none">Id del micropost {{ item.id}}</p>
-        <a href = ""> <button class="btn-info btn btn-xs"> Editar </button></a>
+        <p id="id_post" style="display:none">{{ item.id}}</p>
+        <a href = ""> <button id="Editar_post" class="btn-info btn btn-xs"> Editar </button></a>
 
-        <a href = "/mi_perfil/delete/{{item.id}}"> <button class="btn-info btn btn-xs btn-danger"> Eliminar </button></a>
+        <a href = "/mi_perfil/delete/{{item.id}}"> <button id="Eliminar_post" class="btn-info btn btn-xs btn-danger"> Eliminar </button></a>
 
 				<p class="pull-right list-inline">{{item.fecha}}</p>
 				<br>
