@@ -1,5 +1,5 @@
 # 2015-Pretec
-# Desarrollo de Sistemas Informáticos: ZoomApp
+# Desarrollo de Sistemas Informáticos: Pretec
 
 **Integrantes**
   - Escobar Gómez José Joaquín (alu0100537094@ull.edu.es)
