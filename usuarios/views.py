@@ -448,3 +448,15 @@ def delete_post(request,post_id):
     query.delete()
 
     return render(request, 'micropost_borrado.html')
+
+
+@comprueba_auth
+def edit_post(request, post_id):
+    query = Post.objects.get(pk=post_id)
+
+    context = {
+        'titulo': query.titulo,
+        'texto': query.texto,
+    }
+
+    return render_to_response('editar_post.html', context, context_instance=RequestContext(request))
