@@ -80,7 +80,7 @@
 				<h2>{{item.titulo}}</h2>
 				<p>{{item.texto}}</p>
         {% if pseudonimo == logueado %}
-          <p style="display:none">Id del micropost {{ item.id}}</p>
+          <p style="display:none">Id del micropost {{item.id}}</p>
           <a href = "/mi_perfil/editar_post/{{item.id}}"> <button class="btn-info btn btn-xs"> Editar </button></a>
           <a href = "/mi_perfil/delete/{{item.id}}"> <button class="btn-info btn btn-xs btn-danger"> Eliminar </button></a>
           <p class="pull-right list-inline">{{item.fecha}}</p>
