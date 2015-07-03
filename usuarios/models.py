@@ -11,7 +11,7 @@ from microposts.models import Post
 
 # Create your models here.
 class Usuario(models.Model):
-    nombre = models.CharField(max_length = 2) # *
+    nombre = models.CharField(max_length = 30) # *
     apellidos = models.CharField(max_length = 30) # *
     pseudonimo = models.CharField(primary_key = True, max_length = 30) # *
     correo = models.EmailField(max_length = 30) # *
@@ -19,6 +19,7 @@ class Usuario(models.Model):
     date = models.DateField() # *
     posts = models.ManyToManyField(Post);
     seguidores = models.ManyToManyField('self', symmetrical = False, through = 'Relaciones');
+    foto = models.ImageField() 
 
 
     def __str__(self):
@@ -45,3 +46,6 @@ class Usuario(models.Model):
 class Relaciones(models.Model):
 	seguidor =  models.ForeignKey(Usuario, related_name = 'seguidor')
 	sigue = models.ForeignKey(Usuario, related_name = 'sigue')
+
+# class FotoUsua(models.Model):
+# 	foto = models.ImageField(upload_to ='fotosUsu/') 

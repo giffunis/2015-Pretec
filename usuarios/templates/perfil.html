@@ -7,8 +7,23 @@
 {% block content%}
 <div class="col-md-offset-1" id="contenedor_perfil">
 	<div class="row" id="imagen_perfil">
+  <!-- si el usuarrio esta en su perfil podra cambiar su foto de perfli, sino no-->
+  {% if pseudonimo == logueado %}
 		<div class="col-md-3" >
-			<img src="../../static/imagenes/opcion5.jpg">
+      {% if foto_usu %}
+        <a href="/fotoUsu"><img src="../../static/uploads/{{foto_usu}}" style="height:30%%"></a>
+      {% else %}
+        <a href="/fotoUsu"><img src="../../static/uploads/defecto.jpg" style="height:30%%"></a>
+      {% endif %}      
+  {% else %}
+    <div class="col-md-3" >
+    {% if foto_usu %}
+      <a href="/fotoUsu"><img src="../../static/uploads/{{foto_usu}}"></a>
+    {% else %}
+      <a href="/fotoUsu"><img src="../../static/uploads/defecto.jpg"></a>
+    {% endif %}      
+			<!--<a href="/fotoUsu"><img src="../../static/imagenes/opcion5.jpg"></a>-->
+    
 		</div>
 
 		<div class="col-md-8">
@@ -24,71 +39,105 @@
       </div>
     </div>
   {% endif %}
+    <div>
       <form method="post">{% csrf_token %}
         <div class="form-group ocultar" style='display:none;'>
             <select  name="seguir" id="seguir">
-              <option value="{{pseudonimo}}" checked>{{pseudonimo}}
+              <option value="{{pseudonimo}}" checked>{{pseudonimo}}</option>
             </select>
         </div>
-        <button type="submit" class="btn btn-primary" id="btn_seguir">Seguir</button>
+        {% if pseudonimo == logueado %}
+        
+        {% else %}
+          <button type="submit" class="btn btn-primary" id="btn_seguir">Seguir</button>
+        {% endif %}
+        
+        
+          
       </form>
+    </div>
 		</div>
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
 	</div>
 
 	<hr>
 
 	<div class="row">
 		<div class="col-md-3" id="info_perfil">
-			<label>Seguidores: {{seguidores}}</label><br>
-			<label>Sigue: {{sigue}}</label><br>
+			<a href="/seguidores"><label>Seguidores: {{seguidores}}</label></a><br>
+			<a href="/siguiendo"><label>Sigues: {{sigue}}</label></a><br>
 			<label>Posts: {{posts}}</label><br>
-
-			<a href = "/logout"> <button class="btn btn-primary"> Logout </button></a>
 
 		</div>
 
 		<div class="col-md-7">
     {% if borrar %}
+<<<<<<< HEAD
     <div >
       <p id="content" style="color:red">Post eliminado correctamente</p>
+=======
+     <div id="post_borrado">
+      <p style="color:red"> Post eliminado correctamente </p>
+>>>>>>> master
     </div>
     {% endif %}
 			{% for item in user_data %}
 				<h2>{{item.titulo}}</h2>
 				<p>{{item.texto}}</p>
+<<<<<<< HEAD
         <p id="id_post" style="display:none">{{ item.id}}</p>
         <a href = ""> <button id="Editar_post" class="btn-info btn btn-xs"> Editar </button></a>
 
         <a href = "/mi_perfil/delete/{{item.id}}"> <button id="Eliminar_post" class="btn-info btn btn-xs btn-danger"> Eliminar </button></a>
 
+=======
+
+        <p style="display:none">Id del micropost {{ item.id}}</p>
+        <a href = ""> <button class="btn-info btn btn-xs"> Editar </button></a>
+        <a href = "/mi_perfil/delete/{{item.id}}"> <button class="btn-info btn btn-xs btn-danger"> Eliminar </button></a>
+>>>>>>> master
 				<p class="pull-right list-inline">{{item.fecha}}</p>
 				<br>
 				<hr>
 			{% endfor %}
 		</div>
+
+
+
 	</div>
 </div>
 
-<!--script type="text/javascript">
-      $(document).ready(function(){
-        $('#btn_seguir').on('click',function(){
-          $.ajax({
-            method: "POST",
-            url: "http://localhost:8000/seguidores/",
-            data: {csrfmiddlewaretoken: '{{csrf_token }}'},
-            success: function(valor){
-              alert("Exito");
-            },
-            error: function(valor){
-              alert("Error");
-            }
-          })
-          return false;
-        })
-      })
-    </script -->
+
+<script type="text/javascript">
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1);
+        if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
+    }
+    return "";
+}
+
+window.onload = function() {
+  // alert(getCookie('lo_sigo'));
+  aux = getCookie('lo_sigo');
+  if(aux == 'yes'){
+    $('#btn_seguir').text('Dejar de Seguir');
+  }
+  else{
+    $('#btn_seguir').text('Seguir');
+  }
+};
+</script>
+
+
+
 
 
 {% endblock content %}

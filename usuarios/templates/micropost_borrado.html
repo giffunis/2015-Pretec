@@ -23,16 +23,12 @@
   </head>
 
   <body>
-    <div  id="content" class="row">
+    <div class="row">
       <div class="col-sm-12">
         <div class="container-fluid">
         <div class="col-md-4">
-          <h1>{% block title %}{% endblock %}</h1>
+          <h1>Post Eliminado</h1>
         </div>
-        <div class="col-md-offset-10">
-          <img src="../../static/imagenes/robot1.jpg" style="width:90%;height:70%">
-        </div>
-
       </div>
       </div>
     </div>
@@ -55,8 +51,7 @@
                   <li><a href="/mi_perfil">Perfil</a></li>
                   <li><a href="/editProfile">Editar perfil</a></li>
                   <li><a href="/microposts">Publicar post</a></li>
-              </ul>
-
+              </ul> 
 
               <ul class="nav navbar-nav navbar-right">
                 <li id="btn_cerrarsesion"><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Cerrar Sesion</a></li>
@@ -70,7 +65,11 @@
 
         <div class="container-fluid">
 
-          {% block content %}{% endblock content %}
+			<div class="col-md-offset-5">
+
+				<h4> El post se ha eliminado correctamente =D</h4>
+
+			</div>
         </div>
 
 
@@ -85,29 +84,13 @@
       </div>
     </div>
 
-  <!--<script type="text/javascript">
-      $(document).ready(function(){
-        $('#btn_buscarPost').on('click',function(){
-          $.ajax({
-            type: "POST",
-            url: "#", /*# = http://localhost:8000/home/*/
-            data: {busqueda: $('#buscarPost').val(), csrfmiddlewaretoken: '{{csrf_token }}'},
-            success: function(valor){
-              //document.location.href = '/busquedaPosts'
-              alert(valor);
-            },
-            error: function(valor){
-              alert("Error");
-            }
-          })
-          return false;
-        })
-      })
-    </script>-->
-
-
   </body>
 
 </html>
 {% bootstrap_javascript %}
 {% endblock %}
+
+
+
+
+

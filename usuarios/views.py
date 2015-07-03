@@ -19,6 +19,7 @@ from .forms import EditEmailForm
 from .forms import EditPasswordForm
 from .forms import BuscarPost
 from .forms import BuscarUsuario
+from .forms import SubirFoto
 
 from django import forms
 from .models import Usuario
@@ -123,34 +124,74 @@ def get_registro(request):
         form = RegistroForm()
     return render(request, 'formulario_registro.html', {'form' : form})
 
+def fotoUsu(request):
+    if request.method == 'POST':
+        form=SubirFoto(request.POST, request.FILES)
+        if form.is_valid():
+            #cogemos la foto y la almacenamos en la carpeta correspondiente
+            foto = request.FILES['foto']
+            ruta = open('/home/alex/dsi/proyecto_dsi/2015-Pretec/static/uploads/' + foto.name, 'wb+')
+            for chunk in foto.chunks():
+                ruta.write(chunk)
+            ruta.close()
+
+            #post del usuario para mostrar en su perfil
+            usu_post = Post.objects.filter(pseudonimo = request.session['member_id']).order_by('-id')
+
+            #actualizamos el campo foto
+            Usuario.objects.filter(pseudonimo=request.session['member_id']).update(foto=foto)
+
+            #todos los datos del usuario para mostrar en el perfil
+            query = Usuario.objects.get(pseudonimo=request.session['member_id'])
+
+            context = {
+                'user_data': usu_post,
+                'foto_usu' : query.foto,
+                'pseudonimo': query.pseudonimo,
+                'seguidores': seguidores(query.pseudonimo),
+                'sigue':sigue(query.pseudonimo),
+                'posts':post(query.pseudonimo),
+                'logueado': request.session['member_id'],
+            }
+            print context
+            return render_to_response('perfil.html', context, context_instance=RequestContext(request))
+    else:
+        form=SubirFoto()
+    return render(request, 'cambiarFoto.html', {'form' : form})
+
 
 #Metodo que sirve para calcular el numero de seguidores
+# Seguidores terminado. No tocar.
 def seguidores(username):
     aux = Relaciones.objects.filter(sigue = username).count()
     return aux
 
 #Metodo que sirve para calcular el numero de personas a las que sigue
+# Sigue terminado. No tocar.
 def sigue(username):
     aux = Relaciones.objects.filter(seguidor = username).count()
     return aux
 
+# Follow terminado. No tocar.
 def follow(seguidor,sigue):
     relacion = Relaciones.objects.create(
                     seguidor = Usuario.objects.get(pseudonimo = seguidor),
                     sigue = Usuario.objects.get(pseudonimo = sigue),)
     relacion.save()
 
-def unfollow(request, username):
-    relacion = Relaciones.objects.delete(
-                    seguidor = request.session['member_id'],
-                    sigue = username,)
-    relacion.save()
+def unfollow(seguidor, sigue):
+    relacion = Relaciones.objects.get(
+                    seguidor = Usuario.objects.get(pseudonimo = seguidor),
+                    sigue = Usuario.objects.get(pseudonimo = sigue),).delete()
+    #relacion.save()
 
+# Post terminado. No tocar.
 def post(username):
     aux = Post.objects.filter(pseudonimo = username).count()
     return aux
 
-# @comprueba_auth
+# Pag_perfil terminado. No tocar.
+@comprueba_auth
 def pag_perfil(request,username):
     if request.method == 'POST':
         seguir = request.POST['seguir']
@@ -165,9 +206,10 @@ def pag_perfil(request,username):
                 follow(seguidor,seguir)
                 messages.success(request, "Siguiendo!!")
             else:
-                messages.success(request, "Ya sigues a este usuario!!")
-
+                unfollow(seguidor,seguir)
+                messages.success(request, "Ya no sigues a este usuario")
     usuario = Usuario.objects.get(pseudonimo = username)
+    foto_visitado = Usuario.objects.get(pseudonimo=username)
     query = Post.objects.filter(pseudonimo=usuario)
     context = {
         'user_data' : query,
@@ -175,27 +217,63 @@ def pag_perfil(request,username):
         'seguidores': seguidores(username),
         'sigue':sigue(username),
         'posts':post(username),
+        'foto_usu': foto_visitado.foto,
+        'logueado': request.session['member_id'],
     }
-    return render_to_response('perfil.html', context, context_instance=RequestContext(request))
+    salida = render_to_response('perfil.html', context, context_instance=RequestContext(request))
+    salida.set_cookie('usuario_a_ver', username)
+    try:
+        relacion = Relaciones.objects.get(sigue = username, seguidor = request.session['member_id'])
+    except Relaciones.DoesNotExist:
+        salida.set_cookie('lo_sigo', 'no')
+    else:
+        salida.set_cookie('lo_sigo', 'yes')
+
+    return salida
     #return render(request,'perfil.html', {'pseudonimo': usuario.pseudonimo,'seguidores': seguidores(username), 'sigue':sigue(username), 'posts':post(username)})
+
+# verSigue terminado. No tocar.
+@comprueba_auth
+def verSigue(request):
+    query = Relaciones.objects.filter(seguidor=request.COOKIES.get('usuario_a_ver'))
+
+    context = {
+        'sigues': query,
+    }
+
+    return render_to_response('siguiendo.html', context, context_instance=RequestContext(request))
+
+# verSeguidores terminado. No tocar.
+@comprueba_auth
+def verSeguidores(request):
+    query = Relaciones.objects.filter(sigue=request.COOKIES.get('usuario_a_ver'))
+    context = {
+        'seguidores': query,
+    }
+    return render_to_response('seguidores.html', context, context_instance=RequestContext(request))
 
 
 @comprueba_auth
 def mi_perfil(request):
+
     usuario = Usuario.objects.get(pseudonimo = request.session['member_id'])
     query = Post.objects.filter(pseudonimo = request.session['member_id']).order_by('-id')
 
     context = {
         "user_data" : query,
+        'foto_usu' : usuario.foto,
         'pseudonimo': usuario.pseudonimo,
         'seguidores': seguidores(usuario.pseudonimo),
         'sigue':sigue(usuario.pseudonimo),
         'posts':post(usuario.pseudonimo),
+        'logueado': request.session['member_id'],
+
     }
 
     print context
-    return render_to_response('perfil.html', context, context_instance=RequestContext(request))
-
+    salida = render_to_response('perfil.html', context, context_instance=RequestContext(request))
+    salida.set_cookie('usuario_a_ver', request.session['member_id'])
+    return salida
 
 
 @comprueba_auth
@@ -352,7 +430,7 @@ def buscarPosts(request):
         form=BuscarPost(request.POST)
         if form.is_valid():
             busqueda = form.cleaned_data['busqueda']
-            query = Post.objects.filter(titulo=busqueda)
+            query = Post.objects.filter(titulo__contains=form.cleaned_data['busqueda'] )
 
             context = {
                 "post_data" : query,
@@ -369,18 +447,4 @@ def buscarPosts(request):
 def delete_post(request,post_id):
     query = Post.objects.get(id=post_id)
     query.delete()
-    usuario = Usuario.objects.get(pseudonimo = request.session['member_id'])
-    query = Post.objects.filter(pseudonimo = request.session['member_id']).order_by('-id')
-    borrar = "true"
-    context = {
-        "user_data" : query,
-        'pseudonimo': usuario.pseudonimo,
-        'seguidores': seguidores(usuario.pseudonimo),
-        'sigue':sigue(usuario.pseudonimo),
-        'posts':post(usuario.pseudonimo),
-        'borrar': borrar,
-    }
-
-    print context
-    return render_to_response('perfil.html', context, context_instance=RequestContext(request))
-
+    return render(request, 'micropost_borrado.html')

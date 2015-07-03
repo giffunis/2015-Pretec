@@ -78,8 +78,14 @@ pretec/wsgi.py
 #para evitar el error en el migrate
 microposts/migrations/00*
 
+
 #temporales que no se que son
 tmp*/
 
 #fichero que crea lettuce
 lettuce-django.pid
+
+#no copiar env-heroku
+env-heroku/
+*.pyc
+staticfiles
