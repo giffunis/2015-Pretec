@@ -14,6 +14,11 @@ Feature: Login
     And El presiona "Enviar"
     Then deberia ver "Home"
 
+    Scenario: Usuario se puede desloguear
+  	Given voy a la direccion "http://127.0.0.1:8000/home/" URL
+    And El presiona "btn_cerrarsesion"
+  	Then deberia ver "Bienvenido a Pretec"
+
   Scenario: Usuario intenta loguearse incorrectamente
     Given El usuario existente es "jotajota"
     And voy a la direccion "http://127.0.0.1:8000/login/" url

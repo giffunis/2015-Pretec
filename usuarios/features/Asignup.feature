@@ -45,3 +45,4 @@ Feature: Registro
 		And El llena el "id_date" con "02/17/1991"
 		And El presiona "Registrarse"
 		Then deberia ver el error "El correo no se encuentra disponible"
+		
