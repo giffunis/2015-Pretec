@@ -448,5 +448,8 @@ def buscarPosts(request):
         form = BuscarPost()
     return render(request, 'busquedaPosts.html', {'form' : form})
 
-def borrarPost(request):
-    return render(request, 'borrar.html')
+def delete_post(request,post_id):
+    query = Post.objects.get(id=post_id)
+    query.delete()
+
+    return render(request, 'micropost_borrado.html')

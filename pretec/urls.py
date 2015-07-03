@@ -29,6 +29,7 @@ urlpatterns = [
     url(r'^siguiendo/$', usuarios.views.verSigue),
     url(r'^seguidores/$', usuarios.views.verSeguidores),
     url(r'^fotoUsu/$', usuarios.views.fotoUsu),
+    url(r'^mi_perfil/delete/(?P<post_id>\d+)/$', usuarios.views.delete_post, name='deletePost'),
 
 
 ]

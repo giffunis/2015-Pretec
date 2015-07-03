@@ -7,14 +7,23 @@
 {% block content%}
 <div class="col-md-offset-1" id="contenedor_perfil">
 	<div class="row" id="imagen_perfil">
+  <!-- si el usuarrio esta en su perfil podra cambiar su foto de perfli, sino no-->
+  {% if pseudonimo == logueado %}
 		<div class="col-md-3" >
-    {% if foto_usu %}
-      <a href="/fotoUsu"><img src="../../static/uploads/{{foto_usu}}" style="height:30%%"></a>
-    {% else %}
-      <a href="/fotoUsu"><img src="../../static/uploads/defecto.jpg" style="height:30%%"></a>
-    {% endif %}      
-			<!--<a href="/fotoUsu"><img src="../../static/imagenes/opcion5.jpg"></a>-->
-    
+      {% if foto_usu %}
+        <a href="/fotoUsu"><img src="../../static/uploads/{{foto_usu}}" style="height:30%%"></a>
+      {% else %}
+        <a href="/fotoUsu"><img src="../../static/uploads/defecto.jpg" style="height:30%%"></a>
+      {% endif %}      
+  {% else %}
+    <div class="col-md-3" >
+      {% if foto_usu %}
+        <img src="../../static/uploads/{{foto_usu}}" style="height:30%%">
+      {% else %}
+        <img src="../../static/uploads/defecto.jpg" style="height:30%%">
+      {% endif %}   
+  {% endif %}   
+
 		</div>
 
 		<div class="col-md-8">
@@ -62,12 +71,19 @@
 		</div>
 
 		<div class="col-md-7">
+    {% if borrar %}
+     <div id="post_borrado">
+      <p style="color:red"> Post eliminado correctamente </p>
+    </div>
+    {% endif %}
 			{% for item in user_data %}
 				<h2>{{item.titulo}}</h2>
 				<p>{{item.texto}}</p>
-        <!--<p id="id_post">{{item.id}}</p>-->
+
+        <p style="display:none">Id del micropost {{ item.id}}</p>
+        <a href = ""> <button class="btn-info btn btn-xs"> Editar </button></a>
+        <a href = "/mi_perfil/delete/{{item.id}}"> <button class="btn-info btn btn-xs btn-danger"> Eliminar </button></a>
 				<p class="pull-right list-inline">{{item.fecha}}</p>
-        <!--<button id="btn_Borrar"><a href="">Borrar</a></button>-->
 				<br>
 				<hr>
 			{% endfor %}
