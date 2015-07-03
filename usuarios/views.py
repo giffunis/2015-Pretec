@@ -151,6 +151,7 @@ def fotoUsu(request):
                 'seguidores': seguidores(query.pseudonimo),
                 'sigue':sigue(query.pseudonimo),
                 'posts':post(query.pseudonimo),
+                'logueado': request.session['member_id'],
             }
             print context
             return render_to_response('perfil.html', context, context_instance=RequestContext(request))
@@ -254,12 +255,6 @@ def verSeguidores(request):
 @comprueba_auth
 def mi_perfil(request):
 
-    #if request.is_ajax():
-    #    idd = request.POST["id"]
-    #    query = Post.objects.get(id=idd)
-    #    query.delete()
-    #    return HttpResponse(idd)
-
     usuario = Usuario.objects.get(pseudonimo = request.session['member_id'])
     query = Post.objects.filter(pseudonimo = request.session['member_id']).order_by('-id')
 
@@ -270,7 +265,7 @@ def mi_perfil(request):
         'seguidores': seguidores(usuario.pseudonimo),
         'sigue':sigue(usuario.pseudonimo),
         'posts':post(usuario.pseudonimo),
-        'logueado': request.session['member_id']
+        'logueado': request.session['member_id'],
 
     }
 
