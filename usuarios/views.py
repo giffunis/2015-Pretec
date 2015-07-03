@@ -130,7 +130,7 @@ def fotoUsu(request):
         if form.is_valid():
             #cogemos la foto y la almacenamos en la carpeta correspondiente
             foto = request.FILES['foto']
-            ruta = open('/home/rebecca/DSI/pretec/static/uploads/' + foto.name, 'wb+')
+            ruta = open('/home/alex/dsi/proyecto_dsi/2015-Pretec/static/uploads/' + foto.name, 'wb+')
             for chunk in foto.chunks():
                 ruta.write(chunk)
             ruta.close()
