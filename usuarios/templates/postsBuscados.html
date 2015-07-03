@@ -11,7 +11,7 @@
 	{% for item in post_data %}
 		<h2>{{item.titulo}}</h2>
 		<p>{{item.texto}}</p>
-		<p class="pull-right list-inline">{{item.fecha}}</p>
+		<p class="pull-right list-inline">{{item.pseudonimo.pseudonimo}} {{item.fecha}}</p>
 		<br>
 		<hr>
 	{% endfor %}
