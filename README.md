@@ -13,7 +13,7 @@
 
 ##Aplicación en Heroku
 
-Aplicación en [Heroku](http://zoomv1.herokuapp.com/).
+Aplicación en [Heroku](http://pretec2.herokuapp.com/inicio).
 
 
 ##Tests
