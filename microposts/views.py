@@ -46,9 +46,23 @@ def set_post(request):
     return render(request, 'formulario_microposts.html', {'pseudonimo':request.session['member_id'],'form' : form})
 
 @comprueba_auth
-def editPosts(request):
-    if request.is_ajax():
-        a = funcionBuscar(request)
-        return HttpResponse(a)
-
-    return render(request,'editPosts.html',{'pseudonimo': request.session['member_id']})
+def edit_post(request):
+    if request.method == 'POST':
+        form=PostForm(request.POST)
+        if form.is_valid():
+            #variable = formulario
+            titulo = form.cleaned_data['titulo']
+            texto = form.cleaned_data['texto']
+            date  = form.cleaned_data['fecha']
+            usuario = Usuario.objects.get(pseudonimo = request.session['member_id'])
+            #entrada en la base de datos
+            post = Post.objects.get(
+                            pseudonimo = usuario,
+                            titulo = post.titulo,
+                            texto = post.texto,
+                            fecha = date,)
+            post.save()
+            return render(request, 'micropost_enviado.html')
+    else:
+        form = PostForm()
+    return render(request, 'editPosts.html', {'pseudonimo':request.session['member_id'],'form' : form})
