@@ -11,7 +11,7 @@ from microposts.models import Post
 
 # Create your models here.
 class Usuario(models.Model):
-    nombre = models.CharField(max_length = 2) # *
+    nombre = models.CharField(max_length = 30) # *
     apellidos = models.CharField(max_length = 30) # *
     pseudonimo = models.CharField(primary_key = True, max_length = 30) # *
     correo = models.EmailField(max_length = 30) # *

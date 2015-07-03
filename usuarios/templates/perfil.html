@@ -17,13 +17,13 @@
       {% endif %}      
   {% else %}
     <div class="col-md-3" >
-      {% if foto_usu %}
-        <img src="../../static/uploads/{{foto_usu}}" style="height:30%%">
-      {% else %}
-        <img src="../../static/uploads/defecto.jpg" style="height:30%%">
-      {% endif %}   
+    {% if foto_usu %}
+      <img src="../../static/uploads/{{foto_usu}}">
+    {% else %}
+      <img src="../../static/uploads/defecto.jpg">
+    {% endif %}      
+			<!--<a href="/fotoUsu"><img src="../../static/imagenes/opcion5.jpg"></a>-->
   {% endif %}   
-
 		</div>
 
 		<div class="col-md-8">
