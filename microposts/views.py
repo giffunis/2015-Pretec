@@ -44,3 +44,11 @@ def set_post(request):
     else:
         form = PostForm()
     return render(request, 'formulario_microposts.html', {'pseudonimo':request.session['member_id'],'form' : form})
+
+@comprueba_auth
+def editPosts(request):
+    if request.is_ajax():
+        a = funcionBuscar(request)
+        return HttpResponse(a)
+
+    return render(request,'editPosts.html',{'pseudonimo': request.session['member_id']})
