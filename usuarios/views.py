@@ -432,8 +432,8 @@ def buscarUsuario(request):
         form=BuscarUsuario(request.POST)
         if form.is_valid():
             buscar = form.cleaned_data['busquedaUsu']
-            query = Usuario.objects.filter(pseudonimo__contains=form.cleaned_data['busquedaUsu'])
-
+            #query = Usuario.objects.filter(pseudonimo__contains=form.cleaned_data['busquedaUsu'])
+            query = Usuario.objects.filter(pseudonimo=buscar)
             context = {
                 "usu_data" : query,
                 "usuario" : buscar,
