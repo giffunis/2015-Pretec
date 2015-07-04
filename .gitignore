@@ -79,6 +79,6 @@ pretec/wsgi.py
 microposts/migrations/00*
 
 #no copiar env-heroku
-env-heroku/
+env-hero/
 *.pyc
 staticfiles
