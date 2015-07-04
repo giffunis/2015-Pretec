@@ -115,7 +115,7 @@ def get_registro(request):
             usuario.save()
             #enviamos email de confirmacion
             email_titulo = 'Bienvenido a Pretec'
-            email_mensaje = 'Ya eres miembro de este fantastico sitio web donde podras enterarte de todas las novedades tecnologicas segun vayan surgiendo. Bienvenido a la era Tecnologica: pretec2.herokuapp.com/inicio'
+            email_mensaje = 'Ya eres miembro de este fantastico sitio web donde podras enterarte de todas las novedades tecnologicas segun vayan surgiendo. Bienvenido a la era Tecnologica: dsipretec.herokuapp.com'
             send_mail(email_titulo, email_mensaje, 'pretcdsi@gmail.com', [correo], fail_silently = False)
 
             return render(request, 'registro_completado.html')
@@ -158,7 +158,7 @@ def fotoUsu(request):
 
             #actualizamos el campo foto
             Usuario.objects.filter(pseudonimo=request.session['member_id']).update(foto=foto)
-            
+
             #todos los datos del usuario para mostrar en el perfil
             query = Usuario.objects.get(pseudonimo=request.session['member_id'])
 
@@ -482,7 +482,7 @@ def edit_post(request, post_id):
         post.save()
         messages.success(request, "Post modificado!")
 
-    
+
     query = Post.objects.get(pk=post_id)
     context = {
         'titulo': query.titulo,
@@ -490,4 +490,3 @@ def edit_post(request, post_id):
     }
     return render_to_response('editar_post.html', context, context_instance=RequestContext(request))
     #return render(request, 'editar_post.html', context)
-
