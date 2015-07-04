@@ -44,3 +44,4 @@ def set_post(request):
     else:
         form = PostForm()
     return render(request, 'formulario_microposts.html', {'pseudonimo':request.session['member_id'],'form' : form})
+
