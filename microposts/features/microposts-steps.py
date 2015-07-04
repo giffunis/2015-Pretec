@@ -31,4 +31,4 @@ def el_presiona(step,button_label):
     # button=world.browser.find_element_byid('//button[text()="%s"]') % button_label.first
     botton_registro=world.browser.find_element_by_id(button_label)
     botton_registro.click()
-    world.browser.implicitly_wait(5)    
+    world.browser.implicitly_wait(5)

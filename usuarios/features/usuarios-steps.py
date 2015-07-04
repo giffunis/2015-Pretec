@@ -61,8 +61,8 @@ def then_deberia_ver_content(step,id_usu,content):
         assert True
     else:
         raise Exception(content+" "+world.browser.find_element_by_id(id_usu).text)
-        
+
 @step(u'selecciona la imagen (.*)')
 def selecciona_la_imagen(step,imagen_input):
-    campo_input_file=world.browser.find_element_by_xpath(imagen_input)
+    campo_input_file=world.browser.find_element_by_xpath("//input[@type='file']")
     campo_input_file.send_keys(imagen_input)

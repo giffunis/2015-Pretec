@@ -34,9 +34,9 @@ Feature: Editar Perfil
     Given voy a la direccion "http://127.0.0.1:8000/editProfile/" URL
     And El presiona "editar_contrasena"
     And deberia ver "Cambio de contraseña"
-    And El llena el "id_old_password" con "zeta@zeta.com"
-    And El llena el "id_new_password1" con "zeta@zeta.com"
-    And El llena el "id_new_password2" con "zetas@zetas.com"
+    And El llena el "id_old_password" con "123456"
+    And El llena el "id_new_password1" con "qwerty"
+    And El llena el "id_new_password2" con "qwerty"
     And El presiona "actualizar"
     Then deberia ver en el id "success" esto Su contrasena se ha actualizado correctamente
 
@@ -46,4 +46,4 @@ Feature: Editar Perfil
     And deberia ver "Acrualiza tu foto"
     And selecciona la imagen "C:\Users\quino\Pictures\foto_perfil"
     And El presiona "actualizar"
-    Then deberia ver en el id "success" esto Su contrasena se ha actualizado correctamente
+    Then deberia ver "Acrualiza tu foto"
