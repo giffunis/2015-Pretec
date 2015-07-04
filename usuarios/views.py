@@ -468,4 +468,4 @@ def edit_post(request, post_id):
         'texto': query.texto,
     }
     return render_to_response('editar_post.html', context, context_instance=RequestContext(request))
-
+    #return render(request, 'editar_post.html', context)
