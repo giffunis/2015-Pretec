@@ -1,8 +1,71 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+{% load bootstrap3 %}
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% block bootstrap3_content %}
 
-{% block content%}
-<h1>REGISTRO COMPLETADO</h1>
+<html lang="es">
 
-<p> El proceso de registro ha terminado, se le ha enviado un correo electrónico para darle la bienvenida e informarle de la activación de su cuenta, Gracias.</p>
+  <head>
+    <link rel="stylesheet" type="text/css" href="/static/css/estilos.css">
+    <link rel="stylesheet" type="text/css" href="../../static/css/estilos.css">
 
-{% endblock content%}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.3.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+    {% bootstrap_javascript %}
+
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    {{ form.media }}
+    <meta charset="utf-8" />
+    <title>{{page_title}}</title>
+  </head>
+
+  <body>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="container-fluid">
+        <div class="col-md-4 col-md-offset-4">
+          <h1>Registro completado</h1>
+        </div>
+      </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-sm-10">
+
+        <div class="container-fluid">
+
+			<div class="col-md-offset-3">
+
+				<h4> El proceso de registro ha terminado, se le ha enviado un correo electrónico para darle la bienvenida e informarle de la activación de su cuenta, Gracias.</h4>
+				<a href = "/login"> <button class="btn btn-primary"> Inicia Sesion</button></a>
+
+			</div>
+        </div>
+
+
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="footer">
+
+        </div>
+      </div>
+    </div>
+
+  </body>
+
+</html>
+{% bootstrap_javascript %}
+{% endblock %}
+
+
+
+
+
