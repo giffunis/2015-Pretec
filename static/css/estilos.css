@@ -14,6 +14,12 @@ button {
 
 }
 
+#fondo_registro{
+	background-image: url(../imagenes/registro.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+
+}
 
 /*Estilos base.html*/
 #ul_navbar li {
@@ -30,12 +36,12 @@ button {
 	padding-left: 5%;
 }
 
-/*Estilos regirstro.html*/
+/*Estilos regirstro.html
 #form_registro{
 	background-image: url(../imagenes/opcion5.jpg);
 	padding-bottom: 5%;
 	padding-right: 5%;
-}
+}*/
 
 #form_bPost {
 	padding-top: 10%;
