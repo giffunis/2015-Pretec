@@ -2,7 +2,7 @@
 # Desarrollo de Sistemas Informáticos: Pretec
 
 **Integrantes**
-  - Escobar Gómez José Joaquín (alu0100537094@ull.edu.es)
+  - Escobar Gómez José Joaquín (alu0100837094@ull.edu.es)
   - Giffuni Becerra José Saúl (alu0100770551@ull.edu.es)
   - Martínez Galán Rebecca (alu0100773026@ull.edu.es)
   - Ravelo Moreno Alejandro (alu0100763379@ull.edu.es)
