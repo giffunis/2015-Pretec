@@ -138,7 +138,7 @@ def fotoUsu(request):
         if form.is_valid():
             #cogemos la foto y la almacenamos en la carpeta correspondiente
             foto = request.FILES['foto']
-            ruta = open('/app/static/uploads/' + foto.name, 'wb+')
+            ruta = open('/app/staticfiles/uploads/' + foto.name, 'wb+')
             for chunk in foto.chunks():
                 ruta.write(chunk)
             ruta.close()
