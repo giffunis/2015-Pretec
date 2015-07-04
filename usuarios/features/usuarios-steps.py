@@ -15,7 +15,7 @@ def la_direccion_url(step,url):
     world.browser.get(url)
 
 
-@step(u'Then deberia ver "(.*)"')
+@step(u'deberia ver "(.*)"')
 def then_deberia_ver_content(step,content):
     world.browser.implicitly_wait(5)
     if content not in world.browser.find_element_by_id("content").text:
@@ -54,10 +54,14 @@ def then_deberia_ver_content(step,content):
 def el_usuario_existente_es(step,campo):
     assert True, 'el usuario quiere crear con ese pseudonimo'
 
-@step(u'Then deberia ver en el id "(.*)" esto (.*)')
+@step(u'deberia ver en el id "(.*)" esto (.*)')
 def then_deberia_ver_content(step,id_usu,content):
     world.browser.implicitly_wait(5)
     if content == world.browser.find_element_by_id(id_usu).text:
         assert True
     else:
         raise Exception(content+" "+world.browser.find_element_by_id(id_usu).text)
+@step(u'selecciona la imagen (.*)')
+def selecciona_la_imagen(step,imagen_input):
+    campo_input_file=world.browser.find_element_by_xpath(imagen_input)
+    campo_input_file.send_keys(imagen_input)
