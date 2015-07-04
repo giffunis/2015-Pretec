@@ -19,7 +19,7 @@ def la_direccion_url(step,url):
 def then_deberia_ver_content(step,content):
     world.browser.implicitly_wait(5)
     if content not in world.browser.find_element_by_id("content").text:
-        raise Exception("Pagina no encontrada.")
+        raise Exception(world.browser.find_element_by_id("content").text)
 
 @step(u'un usuario se quiere registrar "(.*)"')
 def un_usuario_se_quiere_registrar(step,nombre):
@@ -38,7 +38,7 @@ def el_presiona(step,button_label):
     # button=world.browser.find_element_byid('//button[text()="%s"]') % button_label.first
     botton_registro=world.browser.find_element_by_id(button_label)
     botton_registro.click()
-    world.browser.implicitly_wait(5) 
+    world.browser.implicitly_wait(5)
 
 @step(u'Then deberia ver el error "(.*)"')
 def then_deberia_ver_content(step,content):
@@ -54,8 +54,10 @@ def then_deberia_ver_content(step,content):
 def el_usuario_existente_es(step,campo):
     assert True, 'el usuario quiere crear con ese pseudonimo'
 
-#No funciona igual bootstrap ya se encarga de comprobar el llenado del formulario
-# Scenario: Usuario no llena los campos de forma correcta
-# When voy a la direccion "http://127.0.0.1:8000/registro/" URL
-# And El presiona "Registrarse"
-# Then deberia ver "Por favor llene los campos obligatorios"
+@step(u'Then deberia ver en el id "(.*)" esto (.*)')
+def then_deberia_ver_content(step,id_usu,content):
+    world.browser.implicitly_wait(5)
+    if content == world.browser.find_element_by_id(id_usu).text:
+        assert True
+    else:
+        raise Exception(content+" "+world.browser.find_element_by_id(id_usu).text)

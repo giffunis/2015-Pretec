@@ -28,13 +28,13 @@
 		</div>
 
 		<div class="col-md-8">
-			<h2>{{pseudonimo}}</h2>
+			<h2 id="id_{{pseudonimo}}" >{{pseudonimo}}</h2>
       {% if messages %}
     <div class="row">
       <!-- <div class='col-sm-12'> -->
       <div class='col-sm-6 '>
         {% for message in messages %}
-          {% if message.tags == "success" %} <p class="alert alert-success">{{ message }}</p> {% endif %}
+          {% if message.tags == "success" %} <p  id="success" class="alert alert-success">{{ message }}</p> {% endif %}
           {% if message.tags == "error" %} <p class="alert alert-danger">{{ message }}</p> {% endif %}
         {% endfor %}
       </div>
@@ -50,7 +50,7 @@
         {% if pseudonimo == logueado %}
 
         {% else %}
-          <button type="submit" class="btn btn-primary" id="btn_seguir">Seguir</button>
+          <button id="Seguir" type="submit" class="btn btn-primary" >Seguir</button>
         {% endif %}
 
 

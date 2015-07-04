@@ -9,7 +9,7 @@
 <div class="col-md-6 col-md-offset-4">
 {% if usu_data %}
 	{% for item in usu_data %}
-		<a href="/perfil/{{usuario}}"><h3>{{item.pseudonimo}}</h3></a>
+		<a id="{{item.pseudonimo}}" href="/perfil/{{usuario}}"><h3>{{item.pseudonimo}}</h3></a>
 		<h5>{{item.nombre}} {{item.apellidos}}</h5>
 		<br>
 		<hr>
