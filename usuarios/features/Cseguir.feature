@@ -13,7 +13,7 @@ Feature: seguir y no seguir
     And El llena el "id_password2" con "123456"
     And El llena el "id_date" con "02/17/1991"
     And El presiona "Registrarse"
-    Then deberia ver "REGISTRO COMPLETADO"
+    Then deberia ver "Registro completado"
 
   Scenario: El usuario zeta se loguea
     Given El usuario existente es "zetazeta"
