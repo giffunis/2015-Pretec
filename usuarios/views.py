@@ -411,7 +411,7 @@ def buscarUsuario(request):
         form=BuscarUsuario(request.POST)
         if form.is_valid():
             buscar = form.cleaned_data['busquedaUsu']
-            query = Usuario.objects.filter(pseudonimo=buscar)
+            query = Usuario.objects.filter(pseudonimo__contains=form.cleaned_data['busquedaUsu'])
 
             context = {
                 "usu_data" : query,
@@ -458,6 +458,6 @@ def edit_post(request, post_id):
         'titulo': query.titulo,
         'texto': query.texto,
     }
-
+    query.save()
     return render_to_response('editar_post.html', context, context_instance=RequestContext(request))
 
