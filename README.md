@@ -13,7 +13,7 @@
 
 ##Aplicación en Heroku
 
-Aplicación en [Heroku](http://pretec2.herokuapp.com/inicio).
+Aplicación en [Heroku](https://dsipretec.herokuapp.com/).
 
 
 ##Tests
@@ -32,5 +32,3 @@ Aplicación en [Heroku](http://pretec2.herokuapp.com/inicio).
 * [Travis-CI and Coveralls](https://godjango.com/25-travis-ci-and-coveralls/)
 -------------------------
 *Desarrollo de Sistemas Informáticos(Curso 2014-2015)*
-
-

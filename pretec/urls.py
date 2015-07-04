@@ -10,6 +10,7 @@ urlpatterns = [
     # Examples:
     # url(r'^$', 'pretec.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
+    url(r'^confirmacion/$', usuarios.views.confirmacion),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^registro/$', usuarios.views.get_registro),
     url(r'^inicio/$', usuarios.views.inicio),
@@ -30,6 +31,6 @@ urlpatterns = [
     url(r'^seguidores/$', usuarios.views.verSeguidores),
     url(r'^fotoUsu/$', usuarios.views.fotoUsu),
     url(r'^mi_perfil/delete/(?P<post_id>\d+)/$', usuarios.views.delete_post, name='deletePost'),
-
+    url(r'^editar_post/(?P<post_id>\d+)/$', usuarios.views.edit_post),
 
 ]

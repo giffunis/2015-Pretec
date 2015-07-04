@@ -32,7 +32,7 @@
       {% for item in user_data %}
         <h2>{{item.titulo}}</h2>
         <p>{{item.texto}}</p>
-        <p class="pull-right list-inline">{{item.pseudonimo.pseudonimo}} {{item.fecha}}</p>
+        <p class="pull-right list-inline"><a href="/perfil/{{item.pseudonimo.pseudonimo}}">{{item.pseudonimo.pseudonimo}}</a> {{item.fecha}}</p>
         <p class="pull-right list-inline"></p>
         <br>
         <hr>

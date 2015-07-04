@@ -14,9 +14,10 @@
 
   </head>
 
-  <body>
-    <div id="content" class="row">
-      <div class="col-sm-12">
+
+  <body id="fondo_registro">
+    <div class="row">
+      <div class="col-sm-12 col-md-offset-4">
         <div class="container-fluid">
         <div class="header col-sm-6 col-sm-offset-4">
           <h1>{% block title %}(no title){% endblock %}</h1>
@@ -27,7 +28,7 @@
     </div>
 
 
-      <div class="col-sm-6 col-sm-offset-2" id="contenedor_form">
+      <div class="col-sm-6 col-sm-offset-6" id="contenedor_form">
         <div class="container-fluid">
           {% block content %}{% endblock content %}
         </div>

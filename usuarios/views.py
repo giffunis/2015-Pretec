@@ -9,6 +9,9 @@ from django.core.context_processors import csrf
 from django.core.exceptions import ValidationError
 from django.core.exceptions import ObjectDoesNotExist
 
+from django.core.mail import send_mail
+
+
 # creados por nosotros
 from usuarios.models import Usuario
 from .forms import RegistroForm
@@ -102,6 +105,21 @@ def get_registro(request):
             correo = form.cleaned_data['correo']
             password = form.cleaned_data['password1']
             date  = form.cleaned_data['date']
+            usuario = Usuario.objects.create(
+	                        nombre = nombre,
+	                        apellidos = apellidos,
+	                        pseudonimo = pseudonimo,
+	                        correo = correo,
+	                        password = password,
+	                        date = date,)
+            usuario.save()
+            #enviamos email de confirmacion
+            email_titulo = 'Bienvenido a Pretec'
+            email_mensaje = 'Ya eres miembro de este fantastico sitio web donde podras enterarte de todas las novedades tecnologicas segun vayan surgiendo. Bienvenido a la era Tecnologica: dsipretec.herokuapp.com'
+            send_mail(email_titulo, email_mensaje, 'pretcdsi@gmail.com', [correo], fail_silently = False)
+
+            return render(request, 'registro_completado.html')
+
             # La comprobacion de las contrasenas la lleva a cabo el valido
             try:
                 usuario2 = Usuario.objects.get(pseudonimo = pseudonimo)
@@ -159,6 +177,9 @@ def fotoUsu(request):
         form=SubirFoto()
     return render(request, 'cambiarFoto.html', {'form' : form})
 
+#Metodo que te lleva a la pagina de confirmacion
+def confirmacion(request):
+	return render(request, 'confirmacion.html')
 
 #Metodo que sirve para calcular el numero de seguidores
 # Seguidores terminado. No tocar.
@@ -411,8 +432,8 @@ def buscarUsuario(request):
         form=BuscarUsuario(request.POST)
         if form.is_valid():
             buscar = form.cleaned_data['busquedaUsu']
+            #query = Usuario.objects.filter(pseudonimo__contains=form.cleaned_data['busquedaUsu'])
             query = Usuario.objects.filter(pseudonimo=buscar)
-
             context = {
                 "usu_data" : query,
                 "usuario" : buscar,
@@ -448,3 +469,23 @@ def delete_post(request,post_id):
     query = Post.objects.get(id=post_id)
     query.delete()
     return render(request, 'micropost_borrado.html')
+
+@comprueba_auth
+def edit_post(request, post_id):
+    if request.method == 'POST':
+        new_title = request.POST['titulo']
+        new_texto = request.POST['texto']
+        post = Post.objects.get(pk=post_id)
+        post.titulo = new_title
+        post.texto = new_texto
+        post.save()
+        messages.success(request, "Post modificado!")
+
+
+    query = Post.objects.get(pk=post_id)
+    context = {
+        'titulo': query.titulo,
+        'texto': query.texto,
+    }
+    return render_to_response('editar_post.html', context, context_instance=RequestContext(request))
+    #return render(request, 'editar_post.html', context)

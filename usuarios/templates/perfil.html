@@ -18,12 +18,13 @@
   {% else %}
     <div class="col-md-3" >
     {% if foto_usu %}
-      <a href="/fotoUsu"><img src="../../static/uploads/{{foto_usu}}"></a>
+      <img src="../../static/uploads/{{foto_usu}}">
     {% else %}
-      <a href="/fotoUsu"><img src="../../static/uploads/defecto.jpg"></a>
-    {% endif %}
+
+      <img src="../../static/uploads/defecto.jpg">
     {% endif %}
 			<!--<a href="/fotoUsu"><img src="../../static/imagenes/opcion5.jpg"></a>-->
+  {% endif %}
 
 		</div>
 
@@ -83,15 +84,16 @@
 				<h2>{{item.titulo}}</h2>
 				<p>{{item.texto}}</p>
 
-        <p id="id_post" style="display:none">{{ item.id}}</p>
-        <a href = ""> <button id="Editar_post" class="btn-info btn btn-xs"> Editar </button></a>
+        {% if pseudonimo == logueado %}
+          <p id="id_post" style="display:none">{{item.id}}</p>
+          <a href = "/editar_post/{{item.id}}"> <button id="Editar_post" class="btn-info btn btn-xs"> Editar </button></a>
+          <a href = "/mi_perfil/delete/{{item.id}}"> <button id="Eliminar_post" class="btn-info btn btn-xs btn-danger"> Eliminar </button></a>
+          <p class="pull-right list-inline">{{item.fecha}}</p>
+          <br>
+          <hr>
+        {% endif %}
 
-        <a href = "/mi_perfil/delete/{{item.id}}"> <button id="Eliminar_post" class="btn-info btn btn-xs btn-danger"> Eliminar </button></a>
 
-
-				<p class="pull-right list-inline">{{item.fecha}}</p>
-				<br>
-				<hr>
 			{% endfor %}
 		</div>
 
