@@ -10,11 +10,13 @@ urlpatterns = [
     # Examples:
     # url(r'^$', 'pretec.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
+    url(r'^confirmacion/$', usuarios.views.confirmacion),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^registro/$', usuarios.views.get_registro),
     url(r'^inicio/$', usuarios.views.inicio),
     url(r'^login/$', usuarios.views.login),
     url(r'^logout/$', usuarios.views.logout),
+    url('^perfil/(?P<username>[a-zA-Z0-9\\_]+)/$', usuarios.views.pag_perfil),
     url(r'^mi_perfil/$', usuarios.views.mi_perfil),
     url(r'^home/$', usuarios.views.pag_home),
     url(r'^editProfile/$', usuarios.views.editProfile),
@@ -23,7 +25,6 @@ urlpatterns = [
     url(r'^set_password/$', usuarios.views.set_password),
     url(r'^microposts/$', microposts.views.set_post),
     url(r'^users/$', usuarios.views.users_view),
-    url(r'^confirmacion/$', usuarios.views.confirmacion),
     url(r'^busquedaPosts/$', usuarios.views.buscarPosts),
     url(r'^busquedaUsu/$', usuarios.views.buscarUsuario),
     url(r'^siguiendo/$', usuarios.views.verSigue),
@@ -31,4 +32,5 @@ urlpatterns = [
     url(r'^fotoUsu/$', usuarios.views.fotoUsu),
     url(r'^mi_perfil/delete/(?P<post_id>\d+)/$', usuarios.views.delete_post, name='deletePost'),
     url(r'^editar_post/(?P<post_id>\d+)/$', usuarios.views.edit_post),
+
 ]
