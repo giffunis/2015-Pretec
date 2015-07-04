@@ -40,7 +40,7 @@ Feature: Editar Perfil
     And El presiona "actualizar"
     Then deberia ver en el id "success" esto Su contrasena se ha actualizado correctamente
 
-  Scenario: El usuario cambia su imagen
+  Scenario: El usuario cambia su imagen#solo funciona en pc joaquin
     Given voy a la direccion "http://127.0.0.1:8000/editProfile/" URL
     And El presiona "editar_imagen"
     And deberia ver "Acrualiza tu foto"

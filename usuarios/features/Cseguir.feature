@@ -41,3 +41,17 @@ Feature: seguir y no seguir
   Scenario: El usuario zetazeta deja de seguir a jotajota
     Given El presiona "btn_seguir"
     Then deberia ver en el id "success" esto Ya no sigues a este usuario
+
+  Scenario: El usuario zetazeta vuelve a seguir a jotajota
+    Given El presiona "btn_seguir"
+    Then deberia ver en el id "success" esto Siguiendo!!
+
+  Scenario: El usuario zetazeta puede ver a quien sigue
+    Given voy a la direccion "http://127.0.0.1:8000/mi_perfil/" URL
+    And El presiona "siguiendo"
+    Then deberia ver en el id "id_jotajota" esto jotajota
+
+  Scenario: El usuario zetazeta puede ver que el jotajota lo tiene como seguidor
+    Given El presiona "id_jotajota"
+    And El presiona "seguidores"
+    Then deberia ver en el id "id_zetazeta" esto zetazeta

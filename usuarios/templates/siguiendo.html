@@ -8,7 +8,7 @@
 <div class="col-md-6 col-md-offset-4">
 {% if sigues %}
 	{% for item in sigues %}
-		<a href="/perfil/{{item.sigue.pseudonimo}}"><h3>{{item.sigue.pseudonimo}}</h3></a>
+		<a id="id_{{item.sigue.pseudonimo}}" href="/perfil/{{item.sigue.pseudonimo}}"><h3>{{item.sigue.pseudonimo}}</h3></a>
 		<h5>{{item.sigue.nombre}} {{item.sigue.apellidos}}</h5>
 		<br>
 		<hr>
