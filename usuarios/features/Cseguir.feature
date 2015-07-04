@@ -35,5 +35,9 @@ Feature: seguir y no seguir
     Then deberia ver en el id "id_jotajota" esto jotajota
 
   Scenario: El usuario zeta zeta puede seguir a jotajota
-    Given El presiona "Seguir"
+    Given El presiona "btn_seguir"
     Then deberia ver en el id "success" esto Siguiendo!!
+
+  Scenario: El usuario zetazeta deja de seguir a jotajota
+    Given El presiona "btn_seguir"
+    Then deberia ver en el id "success" esto Ya no sigues a este usuario
