@@ -2,7 +2,7 @@
 <body>
 <div>
 <h1>Report</h1>
-<p>142 statements analysed.</p><div>
+<p>388 statements analysed.</p><div>
 <h2>Statistics by type</h2>
 <table>
 <tr class="header">
@@ -15,35 +15,35 @@
 </tr>
 <tr class="even">
 <td>module</td>
-<td>9</td>
-<td>9</td>
-<td>=</td>
-<td>33.33</td>
-<td>11.11</td>
+<td>10</td>
+<td>7</td>
+<td>+3.00</td>
+<td>30.00</td>
+<td>20.00</td>
 </tr>
 <tr class="odd">
 <td>class</td>
-<td>5</td>
-<td>5</td>
-<td>=</td>
+<td>13</td>
+<td>11</td>
+<td>+2.00</td>
 <td>0.00</td>
 <td>0.00</td>
 </tr>
 <tr class="even">
 <td>method</td>
-<td>14</td>
-<td>14</td>
+<td>15</td>
+<td>15</td>
 <td>=</td>
-<td>14.29</td>
-<td>50.00</td>
+<td>20.00</td>
+<td>46.67</td>
 </tr>
 <tr class="odd">
 <td>function</td>
-<td>8</td>
-<td>8</td>
-<td>=</td>
+<td>28</td>
+<td>27</td>
+<td>+1.00</td>
 <td>0.00</td>
-<td>0.00</td>
+<td>21.43</td>
 </tr>
 </table>
 </div>
@@ -52,15 +52,23 @@
 <pre>django 
   \-contrib 
   | \-admin (usuarios.admin)
+  | \-messages (usuarios.views)
   \-core 
   | \-context_processors (usuarios.views)
+  | \-exceptions (usuarios.views)
+  | \-mail (usuarios.views)
   \-db 
-  | \-migrations (usuarios.migrations.0001_initial)
-  | \-models (usuarios.forms,usuarios.migrations.0001_initial,usuarios.models)
-  \-forms (usuarios.forms,usuarios.models)
+  | \-migrations (usuarios.migrations.0002_auto_20150703_2122,usuarios.migrations.0001_initial)
+  | \-models (usuarios.forms,usuarios.migrations.0002_auto_20150703_2122,usuarios.migrations.0001_initial,usuarios.models)
+  \-forms (usuarios.forms,usuarios.views,usuarios.models)
   \-http (usuarios.views)
   \-shortcuts (usuarios.views)
+  \-template (usuarios.views)
   \-test (usuarios.tests)
+  \-utils 
+    \-translation (usuarios.forms,usuarios.views)
+microposts 
+  \-models (usuarios.views,usuarios.models)
 usuarios 
   \-forms (usuarios.views)
   \-models (usuarios.tests,usuarios.forms,usuarios.views)</pre></div>
@@ -76,31 +84,31 @@ usuarios
 </tr>
 <tr class="even">
 <td>code</td>
-<td>167</td>
-<td>75.23</td>
-<td>167</td>
-<td>=</td>
+<td>487</td>
+<td>77.92</td>
+<td>412</td>
+<td>+75.00</td>
 </tr>
 <tr class="odd">
 <td>docstring</td>
-<td>0</td>
-<td>0.00</td>
-<td>0</td>
-<td>=</td>
+<td>30</td>
+<td>4.80</td>
+<td>26</td>
+<td>+4.00</td>
 </tr>
 <tr class="even">
 <td>comment</td>
-<td>22</td>
-<td>9.91</td>
-<td>22</td>
-<td>=</td>
+<td>48</td>
+<td>7.68</td>
+<td>50</td>
+<td>-2.00</td>
 </tr>
 <tr class="odd">
 <td>empty</td>
-<td>33</td>
-<td>14.86</td>
-<td>33</td>
-<td>=</td>
+<td>60</td>
+<td>9.60</td>
+<td>54</td>
+<td>+6.00</td>
 </tr>
 </table>
 </div>
@@ -138,9 +146,9 @@ usuarios
 </tr>
 <tr class="even">
 <td>convention</td>
-<td>93</td>
-<td>93</td>
-<td>=</td>
+<td>186</td>
+<td>176</td>
+<td>+10.00</td>
 </tr>
 <tr class="odd">
 <td>refactor</td>
@@ -150,14 +158,14 @@ usuarios
 </tr>
 <tr class="even">
 <td>warning</td>
-<td>7</td>
-<td>7</td>
-<td>=</td>
+<td>24</td>
+<td>22</td>
+<td>+2.00</td>
 </tr>
 <tr class="odd">
 <td>error</td>
-<td>0</td>
-<td>0</td>
+<td>1</td>
+<td>1</td>
 <td>=</td>
 </tr>
 </table>
@@ -174,38 +182,38 @@ usuarios
 </tr>
 <tr class="even">
 <td>usuarios.views</td>
+<td>100.00</td>
+<td>54.17</td>
 <td>0.00</td>
-<td>42.86</td>
-<td>0.00</td>
-<td>32.26</td>
+<td>54.84</td>
 </tr>
 <tr class="odd">
-<td>usuarios.forms</td>
-<td>0.00</td>
-<td>28.57</td>
-<td>0.00</td>
-<td>7.53</td>
-</tr>
-<tr class="even">
 <td>usuarios.models</td>
 <td>0.00</td>
-<td>14.29</td>
+<td>20.83</td>
 <td>0.00</td>
-<td>13.98</td>
+<td>11.29</td>
+</tr>
+<tr class="even">
+<td>usuarios.forms</td>
+<td>0.00</td>
+<td>20.83</td>
+<td>0.00</td>
+<td>8.60</td>
 </tr>
 <tr class="odd">
 <td>usuarios.admin</td>
 <td>0.00</td>
-<td>14.29</td>
+<td>4.17</td>
 <td>0.00</td>
-<td>1.08</td>
+<td>0.54</td>
 </tr>
 <tr class="even">
 <td>usuarios.tests</td>
 <td>0.00</td>
 <td>0.00</td>
 <td>0.00</td>
-<td>43.01</td>
+<td>21.51</td>
 </tr>
 <tr class="odd">
 <td>usuarios.migrations.0001_initial</td>
@@ -213,6 +221,13 @@ usuarios
 <td>0.00</td>
 <td>0.00</td>
 <td>2.15</td>
+</tr>
+<tr class="even">
+<td>usuarios.migrations.0002_auto_20150703_2122</td>
+<td>0.00</td>
+<td>0.00</td>
+<td>0.00</td>
+<td>1.08</td>
 </tr>
 </table>
 </div>
@@ -225,41 +240,57 @@ usuarios
 </tr>
 <tr class="even">
 <td>bad-whitespace</td>
-<td>50</td>
+<td>95</td>
 </tr>
 <tr class="odd">
 <td>missing-docstring</td>
-<td>31</td>
+<td>60</td>
 </tr>
 <tr class="even">
+<td>line-too-long</td>
+<td>14</td>
+</tr>
+<tr class="odd">
 <td>bad-continuation</td>
+<td>10</td>
+</tr>
+<tr class="even">
+<td>unused-import</td>
+<td>9</td>
+</tr>
+<tr class="odd">
+<td>mixed-indentation</td>
 <td>6</td>
 </tr>
-<tr class="odd">
-<td>unused-import</td>
-<td>5</td>
-</tr>
 <tr class="even">
+<td>unused-variable</td>
+<td>4</td>
+</tr>
+<tr class="odd">
 <td>superfluous-parens</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td>trailing-whitespace</td>
 <td>3</td>
 </tr>
 <tr class="odd">
-<td>line-too-long</td>
+<td>redefined-outer-name</td>
 <td>3</td>
 </tr>
 <tr class="even">
-<td>unused-argument</td>
-<td>1</td>
+<td>unnecessary-semicolon</td>
+<td>2</td>
 </tr>
 <tr class="odd">
-<td>bad-indentation</td>
+<td>undefined-variable</td>
 <td>1</td>
 </tr>
 </table>
 </div>
 <div>
 <h2>Global evaluation</h2>
-Your code has been rated at 2.96/10 (previous run: 2.96/10, +0.00)</div>
+Your code has been rated at 4.46/10 (previous run: 4.39/10, +0.07)</div>
 <div>
 <h2>Messages</h2>
 <table>
@@ -291,7 +322,7 @@ Your code has been rated at 2.96/10 (previous run: 2.96/10, +0.00)</div>
 <td>convention</td>
 <td>usuarios.forms</td>
 <td>&#160;</td>
-<td>10</td>
+<td>12</td>
 <td>0</td>
 <td>No space allowed around keyword argument assignment
     apellidos = forms.CharField(label = 'Apellidos', max_length = 50)
@@ -301,7 +332,7 @@ Your code has been rated at 2.96/10 (previous run: 2.96/10, +0.00)</div>
 <td>convention</td>
 <td>usuarios.forms</td>
 <td>&#160;</td>
-<td>10</td>
+<td>12</td>
 <td>0</td>
 <td>No space allowed around keyword argument assignment
     apellidos = forms.CharField(label = 'Apellidos', max_length = 50)
@@ -311,7 +342,7 @@ Your code has been rated at 2.96/10 (previous run: 2.96/10, +0.00)</div>
 <td>convention</td>
 <td>usuarios.forms</td>
 <td>&#160;</td>
-<td>11</td>
+<td>13</td>
 <td>0</td>
 <td>No space allowed after keyword argument assignment
     pseudonimo = forms.CharField(label= 'Pseudonimo', max_length='20', min_length='5')
@@ -323,9 +354,61 @@ Your code has been rated at 2.96/10 (previous run: 2.96/10, +0.00)</div>
 <td>&#160;</td>
 <td>18</td>
 <td>0</td>
+<td>Trailing whitespace</td>
+</tr>
+<tr class="even">
+<td>warning</td>
+<td>usuarios.forms</td>
+<td>&#160;</td>
+<td>21</td>
+<td>0</td>
+<td>Found indentation with tabs instead of spaces</td>
+</tr>
+<tr class="odd">
+<td>warning</td>
+<td>usuarios.forms</td>
+<td>&#160;</td>
+<td>22</td>
+<td>0</td>
+<td>Found indentation with tabs instead of spaces</td>
+</tr>
+<tr class="even">
+<td>warning</td>
+<td>usuarios.forms</td>
+<td>&#160;</td>
+<td>23</td>
+<td>0</td>
+<td>Found indentation with tabs instead of spaces</td>
+</tr>
+<tr class="odd">
+<td>convention</td>
+<td>usuarios.forms</td>
+<td>&#160;</td>
+<td>28</td>
+<td>0</td>
 <td>No space allowed after keyword argument assignment
     pseudonimo = forms.CharField(label= 'Pseudonimo', max_length='20', min_length='5')
                                       ^</td>
+</tr>
+<tr class="even">
+<td>convention</td>
+<td>usuarios.forms</td>
+<td>&#160;</td>
+<td>34</td>
+<td>0</td>
+<td>No space allowed around keyword argument assignment
+    apellidos = forms.CharField(label = 'Apellidos', max_length = 50)
+                                      ^</td>
+</tr>
+<tr class="odd">
+<td>convention</td>
+<td>usuarios.forms</td>
+<td>&#160;</td>
+<td>34</td>
+<td>0</td>
+<td>No space allowed around keyword argument assignment
+    apellidos = forms.CharField(label = 'Apellidos', max_length = 50)
+                                                                ^</td>
 </tr>
 <tr class="even">
 <td>convention</td>
@@ -339,7 +422,7 @@ Your code has been rated at 2.96/10 (previous run: 2.96/10, +0.00)</div>
 <td>convention</td>
 <td>usuarios.forms</td>
 <td>RegistroForm</td>
-<td>7</td>
+<td>9</td>
 <td>0</td>
 <td>Missing class docstring</td>
 </tr>
@@ -347,7 +430,55 @@ Your code has been rated at 2.96/10 (previous run: 2.96/10, +0.00)</div>
 <td>convention</td>
 <td>usuarios.forms</td>
 <td>LoginForm</td>
-<td>17</td>
+<td>27</td>
+<td>0</td>
+<td>Missing class docstring</td>
+</tr>
+<tr class="odd">
+<td>convention</td>
+<td>usuarios.forms</td>
+<td>EditNameForm</td>
+<td>32</td>
+<td>0</td>
+<td>Missing class docstring</td>
+</tr>
+<tr class="even">
+<td>convention</td>
+<td>usuarios.forms</td>
+<td>EditEmailForm</td>
+<td>37</td>
+<td>0</td>
+<td>Missing class docstring</td>
+</tr>
+<tr class="odd">
+<td>convention</td>
+<td>usuarios.forms</td>
+<td>EditPasswordForm</td>
+<td>42</td>
+<td>0</td>
+<td>Missing class docstring</td>
+</tr>
+<tr class="even">
+<td>convention</td>
+<td>usuarios.forms</td>
+<td>BuscarPost</td>
+<td>48</td>
+<td>0</td>
+<td>Missing class docstring</td>
+</tr>
+<tr class="odd">
+<td>convention</td>
+<td>usuarios.forms</td>
+<td>BuscarUsuario</td>
+<td>51</td>
+<td>0</td>
+<td>Missing class docstring</td>
+</tr>
+<tr class="even">
+<td>convention</td>
+<td>usuarios.forms</td>
+<td>SubirFoto</td>
+<td>54</td>
 <td>0</td>
 <td>Missing class docstring</td>
 </tr>
@@ -371,17 +502,17 @@ Your code has been rated at 2.96/10 (previous run: 2.96/10, +0.00)</div>
 <td>convention</td>
 <td>usuarios.models</td>
 <td>&#160;</td>
-<td>19</td>
+<td>14</td>
 <td>0</td>
 <td>No space allowed around keyword argument assignment
-    nombre = models.CharField(max_length = 2) # *
+    nombre = models.CharField(max_length = 30) # *
                                          ^</td>
 </tr>
 <tr class="even">
 <td>convention</td>
 <td>usuarios.models</td>
 <td>&#160;</td>
-<td>20</td>
+<td>15</td>
 <td>0</td>
 <td>No space allowed around keyword argument assignment
     apellidos = models.CharField(max_length = 30) # *
@@ -391,7 +522,7 @@ Your code has been rated at 2.96/10 (previous run: 2.96/10, +0.00)</div>
 <td>convention</td>
 <td>usuarios.models</td>
 <td>&#160;</td>
-<td>21</td>
+<td>16</td>
 <td>0</td>
 <td>No space allowed around keyword argument assignment
     pseudonimo = models.CharField(primary_key = True, max_length = 30) # *
@@ -401,7 +532,7 @@ Your code has been rated at 2.96/10 (previous run: 2.96/10, +0.00)</div>
 <td>convention</td>
 <td>usuarios.models</td>
 <td>&#160;</td>
-<td>21</td>
+<td>16</td>
 <td>0</td>
 <td>No space allowed around keyword argument assignment
     pseudonimo = models.CharField(primary_key = True, max_length = 30) # *
@@ -411,7 +542,7 @@ Your code has been rated at 2.96/10 (previous run: 2.96/10, +0.00)</div>
 <td>convention</td>
 <td>usuarios.models</td>
 <td>&#160;</td>
-<td>22</td>
+<td>17</td>
 <td>0</td>
 <td>No space allowed around keyword argument assignment
     correo = models.EmailField(max_length = 30) # *
@@ -421,29 +552,127 @@ Your code has been rated at 2.96/10 (previous run: 2.96/10, +0.00)</div>
 <td>convention</td>
 <td>usuarios.models</td>
 <td>&#160;</td>
-<td>23</td>
+<td>18</td>
 <td>0</td>
 <td>No space allowed around keyword argument assignment
     password = models.CharField(max_length = 30) # *
                                            ^</td>
 </tr>
 <tr class="odd">
-<td>convention</td>
+<td>warning</td>
 <td>usuarios.models</td>
 <td>&#160;</td>
-<td>27</td>
+<td>20</td>
 <td>0</td>
-<td>Line too long (223/100)</td>
+<td>Unnecessary semicolon</td>
 </tr>
 <tr class="even">
 <td>convention</td>
 <td>usuarios.models</td>
 <td>&#160;</td>
-<td>42</td>
+<td>21</td>
+<td>0</td>
+<td>No space allowed around keyword argument assignment
+    seguidores = models.ManyToManyField('self', symmetrical = False, through = 'Relaciones');
+                                                            ^</td>
+</tr>
+<tr class="odd">
+<td>convention</td>
+<td>usuarios.models</td>
+<td>&#160;</td>
+<td>21</td>
+<td>0</td>
+<td>No space allowed around keyword argument assignment
+    seguidores = models.ManyToManyField('self', symmetrical = False, through = 'Relaciones');
+                                                                             ^</td>
+</tr>
+<tr class="even">
+<td>warning</td>
+<td>usuarios.models</td>
+<td>&#160;</td>
+<td>21</td>
+<td>0</td>
+<td>Unnecessary semicolon</td>
+</tr>
+<tr class="odd">
+<td>convention</td>
+<td>usuarios.models</td>
+<td>&#160;</td>
+<td>22</td>
+<td>0</td>
+<td>Trailing whitespace</td>
+</tr>
+<tr class="even">
+<td>convention</td>
+<td>usuarios.models</td>
+<td>&#160;</td>
+<td>26</td>
+<td>0</td>
+<td>Line too long (223/100)</td>
+</tr>
+<tr class="odd">
+<td>convention</td>
+<td>usuarios.models</td>
+<td>&#160;</td>
+<td>41</td>
 <td>0</td>
 <td>Unnecessary parens after u'if' keyword</td>
 </tr>
+<tr class="even">
+<td>warning</td>
+<td>usuarios.models</td>
+<td>&#160;</td>
+<td>47</td>
+<td>0</td>
+<td>Found indentation with tabs instead of spaces</td>
+</tr>
 <tr class="odd">
+<td>convention</td>
+<td>usuarios.models</td>
+<td>&#160;</td>
+<td>47</td>
+<td>0</td>
+<td>Exactly one space required after assignment
+	seguidor =  models.ForeignKey(Usuario, related_name = 'seguidor')
+          ^</td>
+</tr>
+<tr class="even">
+<td>convention</td>
+<td>usuarios.models</td>
+<td>&#160;</td>
+<td>47</td>
+<td>0</td>
+<td>No space allowed around keyword argument assignment
+	seguidor =  models.ForeignKey(Usuario, related_name = 'seguidor')
+                                                     ^</td>
+</tr>
+<tr class="odd">
+<td>warning</td>
+<td>usuarios.models</td>
+<td>&#160;</td>
+<td>48</td>
+<td>0</td>
+<td>Found indentation with tabs instead of spaces</td>
+</tr>
+<tr class="even">
+<td>convention</td>
+<td>usuarios.models</td>
+<td>&#160;</td>
+<td>48</td>
+<td>0</td>
+<td>No space allowed around keyword argument assignment
+	sigue = models.ForeignKey(Usuario, related_name = 'sigue')
+                                                 ^</td>
+</tr>
+<tr class="odd">
+<td>convention</td>
+<td>usuarios.models</td>
+<td>&#160;</td>
+<td>51</td>
+<td>0</td>
+<td>Trailing whitespace</td>
+</tr>
+<tr class="even">
 <td>convention</td>
 <td>usuarios.models</td>
 <td>&#160;</td>
@@ -451,37 +680,45 @@ Your code has been rated at 2.96/10 (previous run: 2.96/10, +0.00)</div>
 <td>0</td>
 <td>Missing module docstring</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>convention</td>
 <td>usuarios.models</td>
 <td>Usuario</td>
-<td>18</td>
+<td>13</td>
 <td>0</td>
 <td>Missing class docstring</td>
+</tr>
+<tr class="even">
+<td>convention</td>
+<td>usuarios.models</td>
+<td>Usuario.get_nombre</td>
+<td>29</td>
+<td>4</td>
+<td>Missing method docstring</td>
 </tr>
 <tr class="odd">
 <td>convention</td>
 <td>usuarios.models</td>
-<td>Usuario.get_nombre</td>
-<td>30</td>
+<td>Usuario.calc_edad</td>
+<td>33</td>
 <td>4</td>
 <td>Missing method docstring</td>
 </tr>
 <tr class="even">
 <td>convention</td>
 <td>usuarios.models</td>
-<td>Usuario.calc_edad</td>
-<td>34</td>
+<td>Usuario.restriccion_edad</td>
+<td>39</td>
 <td>4</td>
 <td>Missing method docstring</td>
 </tr>
 <tr class="odd">
 <td>convention</td>
 <td>usuarios.models</td>
-<td>Usuario.restriccion_edad</td>
-<td>40</td>
-<td>4</td>
-<td>Missing method docstring</td>
+<td>Relaciones</td>
+<td>46</td>
+<td>0</td>
+<td>Missing class docstring</td>
 </tr>
 <tr class="even">
 <td>warning</td>
@@ -869,7 +1106,7 @@ Your code has been rated at 2.96/10 (previous run: 2.96/10, +0.00)</div>
 <td>convention</td>
 <td>usuarios.views</td>
 <td>&#160;</td>
-<td>21</td>
+<td>46</td>
 <td>0</td>
 <td>Unnecessary parens after 'if' keyword</td>
 </tr>
@@ -877,45 +1114,27 @@ Your code has been rated at 2.96/10 (previous run: 2.96/10, +0.00)</div>
 <td>convention</td>
 <td>usuarios.views</td>
 <td>&#160;</td>
-<td>33</td>
-<td>0</td>
-<td>Exactly one space required around assignment
-        form=LoginForm(request.POST)
-            ^</td>
-</tr>
-<tr class="odd">
-<td>convention</td>
-<td>usuarios.views</td>
-<td>&#160;</td>
-<td>35</td>
+<td>62</td>
 <td>0</td>
 <td>No space allowed around keyword argument assignment
-            usuario = Usuario.objects.get(pseudonimo = request.POST['pseudonimo'])
-                                                     ^</td>
-</tr>
-<tr class="even">
-<td>convention</td>
-<td>usuarios.views</td>
-<td>&#160;</td>
-<td>38</td>
-<td>0</td>
-<td>Exactly one space required after comma
-                return render(request,'perfil.html', {'name': request.session['member_id']})
-                                     ^</td>
+                usuario = Usuario.objects.get(pseudonimo = pseudonimo)
+                                                         ^</td>
 </tr>
 <tr class="odd">
-<td>warning</td>
+<td>convention</td>
 <td>usuarios.views</td>
 <td>&#160;</td>
-<td>42</td>
+<td>66</td>
 <td>0</td>
-<td>Bad indentation. Found 13 spaces, expected 12</td>
+<td>No space allowed around keyword argument assignment
+                usuario = Usuario.objects.get(pseudonimo = pseudonimo)
+                                                         ^</td>
 </tr>
 <tr class="even">
 <td>convention</td>
 <td>usuarios.views</td>
 <td>&#160;</td>
-<td>61</td>
+<td>87</td>
 <td>0</td>
 <td>No space allowed around keyword argument assignment
         usuario = Usuario.objects.get(nombre = name)
@@ -925,7 +1144,7 @@ Your code has been rated at 2.96/10 (previous run: 2.96/10, +0.00)</div>
 <td>convention</td>
 <td>usuarios.views</td>
 <td>&#160;</td>
-<td>62</td>
+<td>88</td>
 <td>0</td>
 <td>Unnecessary parens after 'if' keyword</td>
 </tr>
@@ -933,7 +1152,7 @@ Your code has been rated at 2.96/10 (previous run: 2.96/10, +0.00)</div>
 <td>convention</td>
 <td>usuarios.views</td>
 <td>&#160;</td>
-<td>81</td>
+<td>100</td>
 <td>0</td>
 <td>Exactly one space required around assignment
         form=RegistroForm(request.POST)
@@ -943,7 +1162,7 @@ Your code has been rated at 2.96/10 (previous run: 2.96/10, +0.00)</div>
 <td>convention</td>
 <td>usuarios.views</td>
 <td>&#160;</td>
-<td>88</td>
+<td>107</td>
 <td>0</td>
 <td>Exactly one space required before assignment
             date  = form.cleaned_data['date']
@@ -953,131 +1172,649 @@ Your code has been rated at 2.96/10 (previous run: 2.96/10, +0.00)</div>
 <td>convention</td>
 <td>usuarios.views</td>
 <td>&#160;</td>
-<td>90</td>
+<td>110</td>
 <td>0</td>
-<td>Wrong hanging indentation.
-                            nombre = nombre,
-                |           ^</td>
+<td>No space allowed around keyword argument assignment
+                usuario2 = Usuario.objects.get(pseudonimo = pseudonimo)
+                                                          ^</td>
 </tr>
 <tr class="odd">
 <td>convention</td>
 <td>usuarios.views</td>
 <td>&#160;</td>
-<td>90</td>
+<td>114</td>
 <td>0</td>
 <td>No space allowed around keyword argument assignment
-                            nombre = nombre,
-                                   ^</td>
+                    usuario2 = Usuario.objects.get(correo = correo)
+                                                          ^</td>
 </tr>
 <tr class="even">
 <td>convention</td>
 <td>usuarios.views</td>
 <td>&#160;</td>
-<td>91</td>
+<td>118</td>
 <td>0</td>
 <td>Wrong hanging indentation.
-                            apellidos = apellidos,
-                |           ^</td>
+        	                        nombre = nombre,
+                        |        ^</td>
 </tr>
 <tr class="odd">
 <td>convention</td>
 <td>usuarios.views</td>
 <td>&#160;</td>
-<td>91</td>
+<td>118</td>
 <td>0</td>
 <td>No space allowed around keyword argument assignment
-                            apellidos = apellidos,
+        	                        nombre = nombre,
+                                        ^</td>
+</tr>
+<tr class="even">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>&#160;</td>
+<td>119</td>
+<td>0</td>
+<td>Wrong hanging indentation.
+        	                        apellidos = apellidos,
+                        |        ^</td>
+</tr>
+<tr class="odd">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>&#160;</td>
+<td>119</td>
+<td>0</td>
+<td>No space allowed around keyword argument assignment
+        	                        apellidos = apellidos,
+                                           ^</td>
+</tr>
+<tr class="even">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>&#160;</td>
+<td>120</td>
+<td>0</td>
+<td>Wrong hanging indentation.
+        	                        pseudonimo = pseudonimo,
+                        |        ^</td>
+</tr>
+<tr class="odd">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>&#160;</td>
+<td>120</td>
+<td>0</td>
+<td>No space allowed around keyword argument assignment
+        	                        pseudonimo = pseudonimo,
+                                            ^</td>
+</tr>
+<tr class="even">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>&#160;</td>
+<td>121</td>
+<td>0</td>
+<td>Wrong hanging indentation.
+        	                        correo = correo,
+                        |        ^</td>
+</tr>
+<tr class="odd">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>&#160;</td>
+<td>121</td>
+<td>0</td>
+<td>No space allowed around keyword argument assignment
+        	                        correo = correo,
+                                        ^</td>
+</tr>
+<tr class="even">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>&#160;</td>
+<td>122</td>
+<td>0</td>
+<td>Wrong hanging indentation.
+        	                        password = password,
+                        |        ^</td>
+</tr>
+<tr class="odd">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>&#160;</td>
+<td>122</td>
+<td>0</td>
+<td>No space allowed around keyword argument assignment
+        	                        password = password,
+                                          ^</td>
+</tr>
+<tr class="even">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>&#160;</td>
+<td>123</td>
+<td>0</td>
+<td>Wrong hanging indentation.
+        	                        date = date,)
+                        |        ^</td>
+</tr>
+<tr class="odd">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>&#160;</td>
+<td>123</td>
+<td>0</td>
+<td>No space allowed around keyword argument assignment
+        	                        date = date,)
                                       ^</td>
 </tr>
 <tr class="even">
 <td>convention</td>
 <td>usuarios.views</td>
 <td>&#160;</td>
-<td>92</td>
+<td>126</td>
 <td>0</td>
-<td>Wrong hanging indentation.
-                            pseudonimo = pseudonimo,
-                |           ^</td>
+<td>Line too long (221/100)</td>
 </tr>
 <tr class="odd">
 <td>convention</td>
 <td>usuarios.views</td>
 <td>&#160;</td>
-<td>92</td>
+<td>127</td>
 <td>0</td>
-<td>No space allowed around keyword argument assignment
-                            pseudonimo = pseudonimo,
-                                       ^</td>
+<td>Line too long (113/100)</td>
 </tr>
 <tr class="even">
 <td>convention</td>
 <td>usuarios.views</td>
 <td>&#160;</td>
-<td>93</td>
+<td>127</td>
 <td>0</td>
-<td>Wrong hanging indentation.
-                            correo = correo,
-                |           ^</td>
+<td>No space allowed around keyword argument assignment
+                    send_mail(email_titulo, email_mensaje, 'pretcdsi@gmail.com', [correo], fail_silently = False)
+                                                                                                         ^</td>
 </tr>
 <tr class="odd">
 <td>convention</td>
 <td>usuarios.views</td>
 <td>&#160;</td>
-<td>93</td>
+<td>137</td>
 <td>0</td>
-<td>No space allowed around keyword argument assignment
-                            correo = correo,
-                                   ^</td>
+<td>Exactly one space required around assignment
+        form=SubirFoto(request.POST, request.FILES)
+            ^</td>
 </tr>
 <tr class="even">
 <td>convention</td>
 <td>usuarios.views</td>
 <td>&#160;</td>
-<td>94</td>
+<td>147</td>
 <td>0</td>
-<td>Wrong hanging indentation.
-                            password = password,
-                |           ^</td>
+<td>Line too long (101/100)</td>
 </tr>
 <tr class="odd">
 <td>convention</td>
 <td>usuarios.views</td>
 <td>&#160;</td>
-<td>94</td>
+<td>147</td>
 <td>0</td>
 <td>No space allowed around keyword argument assignment
-                            password = password,
-                                     ^</td>
+            usu_post = Post.objects.filter(pseudonimo = request.session['member_id']).order_by('-id')
+                                                      ^</td>
 </tr>
 <tr class="even">
 <td>convention</td>
 <td>usuarios.views</td>
 <td>&#160;</td>
-<td>95</td>
+<td>165</td>
 <td>0</td>
-<td>Wrong hanging indentation.
-                            date = date,)
-                |           ^</td>
+<td>Line too long (103/100)</td>
 </tr>
 <tr class="odd">
 <td>convention</td>
 <td>usuarios.views</td>
 <td>&#160;</td>
-<td>95</td>
+<td>167</td>
+<td>0</td>
+<td>Exactly one space required around assignment
+        form=SubirFoto()
+            ^</td>
+</tr>
+<tr class="even">
+<td>warning</td>
+<td>usuarios.views</td>
+<td>&#160;</td>
+<td>172</td>
+<td>0</td>
+<td>Found indentation with tabs instead of spaces</td>
+</tr>
+<tr class="odd">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>&#160;</td>
+<td>177</td>
 <td>0</td>
 <td>No space allowed around keyword argument assignment
-                            date = date,)
-                                 ^</td>
+    aux = Relaciones.objects.filter(sigue = username).count()
+                                          ^</td>
 </tr>
 <tr class="even">
 <td>convention</td>
 <td>usuarios.views</td>
 <td>&#160;</td>
-<td>105</td>
+<td>183</td>
+<td>0</td>
+<td>No space allowed around keyword argument assignment
+    aux = Relaciones.objects.filter(seguidor = username).count()
+                                             ^</td>
+</tr>
+<tr class="odd">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>&#160;</td>
+<td>187</td>
 <td>0</td>
 <td>Exactly one space required after comma
-    return render(request,'perfil.html', {'name': request.session['member_id']})
+def follow(seguidor,sigue):
+                   ^</td>
+</tr>
+<tr class="even">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>&#160;</td>
+<td>189</td>
+<td>0</td>
+<td>Wrong hanging indentation.
+                    seguidor = Usuario.objects.get(pseudonimo = seguidor),
+        |           ^</td>
+</tr>
+<tr class="odd">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>&#160;</td>
+<td>189</td>
+<td>0</td>
+<td>No space allowed around keyword argument assignment
+                    seguidor = Usuario.objects.get(pseudonimo = seguidor),
+                             ^</td>
+</tr>
+<tr class="even">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>&#160;</td>
+<td>189</td>
+<td>0</td>
+<td>No space allowed around keyword argument assignment
+                    seguidor = Usuario.objects.get(pseudonimo = seguidor),
+                                                              ^</td>
+</tr>
+<tr class="odd">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>&#160;</td>
+<td>190</td>
+<td>0</td>
+<td>Wrong hanging indentation.
+                    sigue = Usuario.objects.get(pseudonimo = sigue),)
+        |           ^</td>
+</tr>
+<tr class="even">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>&#160;</td>
+<td>190</td>
+<td>0</td>
+<td>No space allowed around keyword argument assignment
+                    sigue = Usuario.objects.get(pseudonimo = sigue),)
+                          ^</td>
+</tr>
+<tr class="odd">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>&#160;</td>
+<td>190</td>
+<td>0</td>
+<td>No space allowed around keyword argument assignment
+                    sigue = Usuario.objects.get(pseudonimo = sigue),)
+                                                           ^</td>
+</tr>
+<tr class="even">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>&#160;</td>
+<td>195</td>
+<td>0</td>
+<td>Wrong hanging indentation.
+                    seguidor = Usuario.objects.get(pseudonimo = seguidor),
+        |           ^</td>
+</tr>
+<tr class="odd">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>&#160;</td>
+<td>195</td>
+<td>0</td>
+<td>No space allowed around keyword argument assignment
+                    seguidor = Usuario.objects.get(pseudonimo = seguidor),
+                             ^</td>
+</tr>
+<tr class="even">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>&#160;</td>
+<td>195</td>
+<td>0</td>
+<td>No space allowed around keyword argument assignment
+                    seguidor = Usuario.objects.get(pseudonimo = seguidor),
+                                                              ^</td>
+</tr>
+<tr class="odd">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>&#160;</td>
+<td>196</td>
+<td>0</td>
+<td>Wrong hanging indentation.
+                    sigue = Usuario.objects.get(pseudonimo = sigue),).delete()
+        |           ^</td>
+</tr>
+<tr class="even">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>&#160;</td>
+<td>196</td>
+<td>0</td>
+<td>No space allowed around keyword argument assignment
+                    sigue = Usuario.objects.get(pseudonimo = sigue),).delete()
+                          ^</td>
+</tr>
+<tr class="odd">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>&#160;</td>
+<td>196</td>
+<td>0</td>
+<td>No space allowed around keyword argument assignment
+                    sigue = Usuario.objects.get(pseudonimo = sigue),).delete()
+                                                           ^</td>
+</tr>
+<tr class="even">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>&#160;</td>
+<td>201</td>
+<td>0</td>
+<td>No space allowed around keyword argument assignment
+    aux = Post.objects.filter(pseudonimo = username).count()
+                                         ^</td>
+</tr>
+<tr class="odd">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>&#160;</td>
+<td>206</td>
+<td>0</td>
+<td>Exactly one space required after comma
+def pag_perfil(request,username):
+                      ^</td>
+</tr>
+<tr class="even">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>&#160;</td>
+<td>210</td>
+<td>0</td>
+<td>Unnecessary parens after 'if' keyword</td>
+</tr>
+<tr class="odd">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>&#160;</td>
+<td>214</td>
+<td>0</td>
+<td>No space allowed around keyword argument assignment
+                relacion = Relaciones.objects.get(sigue = seguir, seguidor = seguidor)
+                                                        ^</td>
+</tr>
+<tr class="even">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>&#160;</td>
+<td>214</td>
+<td>0</td>
+<td>No space allowed around keyword argument assignment
+                relacion = Relaciones.objects.get(sigue = seguir, seguidor = seguidor)
+                                                                           ^</td>
+</tr>
+<tr class="odd">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>&#160;</td>
+<td>217</td>
+<td>0</td>
+<td>Exactly one space required after comma
+                follow(seguidor,seguir)
+                               ^</td>
+</tr>
+<tr class="even">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>&#160;</td>
+<td>220</td>
+<td>0</td>
+<td>Exactly one space required after comma
+                unfollow(seguidor,seguir)
+                                 ^</td>
+</tr>
+<tr class="odd">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>&#160;</td>
+<td>222</td>
+<td>0</td>
+<td>No space allowed around keyword argument assignment
+    usuario = Usuario.objects.get(pseudonimo = username)
+                                             ^</td>
+</tr>
+<tr class="even">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>&#160;</td>
+<td>237</td>
+<td>0</td>
+<td>No space allowed around keyword argument assignment
+        relacion = Relaciones.objects.get(sigue = username, seguidor = request.session['member_id'])
+                                                ^</td>
+</tr>
+<tr class="odd">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>&#160;</td>
+<td>237</td>
+<td>0</td>
+<td>No space allowed around keyword argument assignment
+        relacion = Relaciones.objects.get(sigue = username, seguidor = request.session['member_id'])
+                                                                     ^</td>
+</tr>
+<tr class="even">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>&#160;</td>
+<td>244</td>
+<td>0</td>
+<td>Line too long (161/100)</td>
+</tr>
+<tr class="odd">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>&#160;</td>
+<td>270</td>
+<td>0</td>
+<td>No space allowed around keyword argument assignment
+    usuario = Usuario.objects.get(pseudonimo = request.session['member_id'])
+                                             ^</td>
+</tr>
+<tr class="even">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>&#160;</td>
+<td>271</td>
+<td>0</td>
+<td>No space allowed around keyword argument assignment
+    query = Post.objects.filter(pseudonimo = request.session['member_id']).order_by('-id')
+                                           ^</td>
+</tr>
+<tr class="odd">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>&#160;</td>
+<td>311</td>
+<td>0</td>
+<td>Exactly one space required after comma
+    return render(request,'editProfile.html',{'pseudonimo': request.session['member_id']})
                          ^</td>
+</tr>
+<tr class="even">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>&#160;</td>
+<td>311</td>
+<td>0</td>
+<td>Exactly one space required after comma
+    return render(request,'editProfile.html',{'pseudonimo': request.session['member_id']})
+                                            ^</td>
+</tr>
+<tr class="odd">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>&#160;</td>
+<td>322</td>
+<td>0</td>
+<td>No space allowed around keyword argument assignment
+            usu = Usuario.objects.get(pseudonimo = request.session['member_id'])
+                                                 ^</td>
+</tr>
+<tr class="even">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>&#160;</td>
+<td>342</td>
+<td>0</td>
+<td>No space allowed around keyword argument assignment
+            usuario = Usuario.objects.get(pseudonimo = request.session['member_id'])
+                                                     ^</td>
+</tr>
+<tr class="odd">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>&#160;</td>
+<td>350</td>
+<td>0</td>
+<td>No space allowed around keyword argument assignment
+                    usuario2 = Usuario.objects.get(correo = new_email)
+                                                          ^</td>
+</tr>
+<tr class="even">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>&#160;</td>
+<td>379</td>
+<td>0</td>
+<td>No space allowed around keyword argument assignment
+            usuario = Usuario.objects.get(pseudonimo = request.session['member_id'])
+                                                     ^</td>
+</tr>
+<tr class="odd">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>&#160;</td>
+<td>408</td>
+<td>0</td>
+<td>Exactly one space required after comma
+    for i in range(0,usuarios.count()):
+                    ^</td>
+</tr>
+<tr class="even">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>&#160;</td>
+<td>417</td>
+<td>0</td>
+<td>Line too long (123/100)</td>
+</tr>
+<tr class="odd">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>&#160;</td>
+<td>422</td>
+<td>0</td>
+<td>Exactly one space required around assignment
+        form=BuscarUsuario(request.POST)
+            ^</td>
+</tr>
+<tr class="even">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>&#160;</td>
+<td>431</td>
+<td>0</td>
+<td>Line too long (113/100)</td>
+</tr>
+<tr class="odd">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>&#160;</td>
+<td>433</td>
+<td>0</td>
+<td>Exactly one space required around assignment
+        form=BuscarUsuario()
+            ^</td>
+</tr>
+<tr class="even">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>&#160;</td>
+<td>436</td>
+<td>0</td>
+<td>Line too long (119/100)</td>
+</tr>
+<tr class="odd">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>&#160;</td>
+<td>441</td>
+<td>0</td>
+<td>Exactly one space required around assignment
+        form=BuscarPost(request.POST)
+            ^</td>
+</tr>
+<tr class="even">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>&#160;</td>
+<td>444</td>
+<td>0</td>
+<td>No space allowed before bracket
+            query = Post.objects.filter(titulo__contains=form.cleaned_data['busqueda'] )
+                                                                                       ^</td>
+</tr>
+<tr class="odd">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>&#160;</td>
+<td>452</td>
+<td>0</td>
+<td>Line too long (110/100)</td>
+</tr>
+<tr class="even">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>&#160;</td>
+<td>458</td>
+<td>0</td>
+<td>Exactly one space required after comma
+def delete_post(request,post_id):
+                       ^</td>
 </tr>
 <tr class="odd">
 <td>convention</td>
@@ -1091,7 +1828,7 @@ Your code has been rated at 2.96/10 (previous run: 2.96/10, +0.00)</div>
 <td>convention</td>
 <td>usuarios.views</td>
 <td>comprueba_auth</td>
-<td>17</td>
+<td>42</td>
 <td>0</td>
 <td>Missing function docstring</td>
 </tr>
@@ -1099,7 +1836,7 @@ Your code has been rated at 2.96/10 (previous run: 2.96/10, +0.00)</div>
 <td>convention</td>
 <td>usuarios.views</td>
 <td>comprueba_auth.comprueba_login</td>
-<td>19</td>
+<td>44</td>
 <td>4</td>
 <td>Missing function docstring</td>
 </tr>
@@ -1107,31 +1844,15 @@ Your code has been rated at 2.96/10 (previous run: 2.96/10, +0.00)</div>
 <td>convention</td>
 <td>usuarios.views</td>
 <td>login</td>
-<td>31</td>
+<td>54</td>
 <td>0</td>
 <td>Missing function docstring</td>
-</tr>
-<tr class="odd">
-<td>convention</td>
-<td>usuarios.views</td>
-<td>invalid_login</td>
-<td>49</td>
-<td>0</td>
-<td>Missing function docstring</td>
-</tr>
-<tr class="even">
-<td>warning</td>
-<td>usuarios.views</td>
-<td>invalid_login</td>
-<td>49</td>
-<td>18</td>
-<td>Unused argument 'request'</td>
 </tr>
 <tr class="odd">
 <td>convention</td>
 <td>usuarios.views</td>
 <td>logout</td>
-<td>52</td>
+<td>78</td>
 <td>0</td>
 <td>Missing function docstring</td>
 </tr>
@@ -1139,7 +1860,7 @@ Your code has been rated at 2.96/10 (previous run: 2.96/10, +0.00)</div>
 <td>convention</td>
 <td>usuarios.views</td>
 <td>authenticate</td>
-<td>59</td>
+<td>85</td>
 <td>0</td>
 <td>Missing function docstring</td>
 </tr>
@@ -1147,27 +1868,307 @@ Your code has been rated at 2.96/10 (previous run: 2.96/10, +0.00)</div>
 <td>convention</td>
 <td>usuarios.views</td>
 <td>get_registro</td>
-<td>79</td>
+<td>98</td>
+<td>0</td>
+<td>Missing function docstring</td>
+</tr>
+<tr class="even">
+<td>warning</td>
+<td>usuarios.views</td>
+<td>get_registro</td>
+<td>110</td>
+<td>16</td>
+<td>Unused variable 'usuario2'</td>
+</tr>
+<tr class="odd">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>fotoUsu</td>
+<td>135</td>
 <td>0</td>
 <td>Missing function docstring</td>
 </tr>
 <tr class="even">
 <td>convention</td>
 <td>usuarios.views</td>
-<td>perfil</td>
-<td>104</td>
+<td>confirmacion</td>
+<td>171</td>
+<td>0</td>
+<td>Missing function docstring</td>
+</tr>
+<tr class="odd">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>seguidores</td>
+<td>176</td>
+<td>0</td>
+<td>Missing function docstring</td>
+</tr>
+<tr class="even">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>sigue</td>
+<td>182</td>
 <td>0</td>
 <td>Missing function docstring</td>
 </tr>
 <tr class="odd">
 <td>warning</td>
 <td>usuarios.views</td>
+<td>follow</td>
+<td>187</td>
+<td>20</td>
+<td>Redefining name 'sigue' from outer scope (line 182)</td>
+</tr>
+<tr class="even">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>follow</td>
+<td>187</td>
+<td>0</td>
+<td>Missing function docstring</td>
+</tr>
+<tr class="odd">
+<td>warning</td>
+<td>usuarios.views</td>
+<td>unfollow</td>
+<td>193</td>
+<td>23</td>
+<td>Redefining name 'sigue' from outer scope (line 182)</td>
+</tr>
+<tr class="even">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>unfollow</td>
+<td>193</td>
+<td>0</td>
+<td>Missing function docstring</td>
+</tr>
+<tr class="odd">
+<td>warning</td>
+<td>usuarios.views</td>
+<td>unfollow</td>
+<td>194</td>
+<td>4</td>
+<td>Unused variable 'relacion'</td>
+</tr>
+<tr class="even">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>post</td>
+<td>200</td>
+<td>0</td>
+<td>Missing function docstring</td>
+</tr>
+<tr class="odd">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>pag_perfil</td>
+<td>206</td>
+<td>0</td>
+<td>Missing function docstring</td>
+</tr>
+<tr class="even">
+<td>warning</td>
+<td>usuarios.views</td>
+<td>pag_perfil</td>
+<td>214</td>
+<td>16</td>
+<td>Unused variable 'relacion'</td>
+</tr>
+<tr class="odd">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>verSigue</td>
+<td>248</td>
+<td>0</td>
+<td>Missing function docstring</td>
+</tr>
+<tr class="even">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>verSeguidores</td>
+<td>259</td>
+<td>0</td>
+<td>Missing function docstring</td>
+</tr>
+<tr class="odd">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>mi_perfil</td>
+<td>268</td>
+<td>0</td>
+<td>Missing function docstring</td>
+</tr>
+<tr class="even">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>pag_home</td>
+<td>291</td>
+<td>0</td>
+<td>Missing function docstring</td>
+</tr>
+<tr class="odd">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>editProfile</td>
+<td>306</td>
+<td>0</td>
+<td>Missing function docstring</td>
+</tr>
+<tr class="even">
+<td>error</td>
+<td>usuarios.views</td>
+<td>editProfile</td>
+<td>308</td>
+<td>12</td>
+<td>Undefined variable 'funcionBuscar'</td>
+</tr>
+<tr class="odd">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>set_name</td>
+<td>315</td>
+<td>0</td>
+<td>Missing function docstring</td>
+</tr>
+<tr class="even">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>set_email</td>
+<td>336</td>
+<td>0</td>
+<td>Missing function docstring</td>
+</tr>
+<tr class="odd">
+<td>warning</td>
+<td>usuarios.views</td>
+<td>set_email</td>
+<td>350</td>
+<td>20</td>
+<td>Unused variable 'usuario2'</td>
+</tr>
+<tr class="even">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>set_password</td>
+<td>369</td>
+<td>0</td>
+<td>Missing function docstring</td>
+</tr>
+<tr class="odd">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>users_view</td>
+<td>403</td>
+<td>0</td>
+<td>Missing function docstring</td>
+</tr>
+<tr class="even">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>inicio</td>
+<td>414</td>
+<td>0</td>
+<td>Missing function docstring</td>
+</tr>
+<tr class="odd">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>buscarUsuario</td>
+<td>420</td>
+<td>0</td>
+<td>Missing function docstring</td>
+</tr>
+<tr class="even">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>buscarPosts</td>
+<td>439</td>
+<td>0</td>
+<td>Missing function docstring</td>
+</tr>
+<tr class="odd">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>delete_post</td>
+<td>458</td>
+<td>0</td>
+<td>Missing function docstring</td>
+</tr>
+<tr class="even">
+<td>warning</td>
+<td>usuarios.views</td>
+<td>edit_post</td>
+<td>468</td>
+<td>8</td>
+<td>Redefining name 'post' from outer scope (line 200)</td>
+</tr>
+<tr class="odd">
+<td>convention</td>
+<td>usuarios.views</td>
+<td>edit_post</td>
+<td>464</td>
+<td>0</td>
+<td>Missing function docstring</td>
+</tr>
+<tr class="even">
+<td>warning</td>
+<td>usuarios.views</td>
 <td>&#160;</td>
-<td>7</td>
+<td>4</td>
+<td>0</td>
+<td>Unused gettext imported from django.utils.translation as _</td>
+</tr>
+<tr class="odd">
+<td>warning</td>
+<td>usuarios.views</td>
+<td>&#160;</td>
+<td>8</td>
 <td>0</td>
 <td>Unused csrf imported from django.core.context_processors</td>
 </tr>
 <tr class="even">
+<td>warning</td>
+<td>usuarios.views</td>
+<td>&#160;</td>
+<td>9</td>
+<td>0</td>
+<td>Unused ValidationError imported from django.core.exceptions</td>
+</tr>
+<tr class="odd">
+<td>warning</td>
+<td>usuarios.views</td>
+<td>&#160;</td>
+<td>10</td>
+<td>0</td>
+<td>Unused ObjectDoesNotExist imported from django.core.exceptions</td>
+</tr>
+<tr class="even">
+<td>warning</td>
+<td>usuarios.views</td>
+<td>&#160;</td>
+<td>27</td>
+<td>0</td>
+<td>Unused forms imported from django</td>
+</tr>
+<tr class="odd">
+<td>convention</td>
+<td>usuarios.migrations.0001_initial</td>
+<td>&#160;</td>
+<td>17</td>
+<td>0</td>
+<td>Line too long (114/100)</td>
+</tr>
+<tr class="even">
+<td>convention</td>
+<td>usuarios.migrations.0001_initial</td>
+<td>&#160;</td>
+<td>30</td>
+<td>0</td>
+<td>Line too long (109/100)</td>
+</tr>
+<tr class="odd">
 <td>convention</td>
 <td>usuarios.migrations.0001_initial</td>
 <td>&#160;</td>
@@ -1175,9 +2176,25 @@ Your code has been rated at 2.96/10 (previous run: 2.96/10, +0.00)</div>
 <td>0</td>
 <td>Missing module docstring</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>convention</td>
 <td>usuarios.migrations.0001_initial</td>
+<td>Migration</td>
+<td>7</td>
+<td>0</td>
+<td>Missing class docstring</td>
+</tr>
+<tr class="odd">
+<td>convention</td>
+<td>usuarios.migrations.0002_auto_20150703_2122</td>
+<td>&#160;</td>
+<td>1</td>
+<td>0</td>
+<td>Missing module docstring</td>
+</tr>
+<tr class="even">
+<td>convention</td>
+<td>usuarios.migrations.0002_auto_20150703_2122</td>
 <td>Migration</td>
 <td>7</td>
 <td>0</td>
