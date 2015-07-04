@@ -1,0 +1,25 @@
+{%  extends 'base.html' %}
+{% load bootstrap3 %}
+
+{% block title %}
+  Posts : {{busqueda}}
+{% endblock %}
+
+{% block content %}
+<div class="col-md-6 col-md-offset-4">
+{% if post_data %}
+	{% for item in post_data %}
+		<h2>{{item.titulo}}</h2>
+		<p>{{item.texto}}</p>
+		<p class="pull-right list-inline"><a href="/perfil/{{item.pseudonimo.pseudonimo}}">{{item.pseudonimo.pseudonimo}}</a>{{item.fecha}}</p>
+		<br>
+		<hr>
+	{% endfor %}
+{% else %}
+	<h3>Ningun post coincide con su busqueda</h3><br>
+	<h4>¿Quieres publicar algo sobre este tema? </h4>
+	 <button type="submit" class="btn btn-primary"><a href="/microposts"style="color:white">Publicar</a></button>
+
+{% endif %}
+</div>
+{% endblock content %}

@@ -67,13 +67,15 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
 ]
 
 WSGI_APPLICATION = 'pretec.wsgi.application'
-
+# MEDIA_ROOT = '/home/rebecca/DSI/pretec/static/uploads/'
+# MEDIA_URL = '/uploads/'
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases

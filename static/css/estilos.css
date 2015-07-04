@@ -1,5 +1,9 @@
 /*generales*/
 
+#id_fecha{
+	display: none;
+}
+
 h1 {
 	padding: 3%;
 }
@@ -10,9 +14,19 @@ button {
 
 }
 
+/*Estilos base.html*/
+#ul_navbar li {
+	padding-top: 2%;
+}
+
+#btn_cerrarsesion {
+	padding-top: 6%;
+}
+
+
 /*Estilos base_formularios.html*/
 #contenedor_form {
-	padding-left: 5%
+	padding-left: 5%;
 }
 
 /*Estilos regirstro.html*/
@@ -22,10 +36,11 @@ button {
 	padding-right: 5%;
 }
 
+#form_bPost {
+	padding-top: 10%;
+}
 
-
-
-
+/*estilos perfil.html*/
 #imagen_perfil img {
 	width: 80%;
 	height: 50%;
@@ -36,10 +51,14 @@ button {
 }
 
 #info_perfil {
-	padding-left: 3%
+	padding-left: 3%;
 }
 
 
+/**/
+#home_izq {
+	margin-top: 11%;
+}
 
 /*Estilos de inicio.html*/
 #titulo_inicio {
@@ -101,7 +120,3 @@ button {
 #form_post {
 	padding-top: 2%;
 }
-
-
-
-
