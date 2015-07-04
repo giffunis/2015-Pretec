@@ -105,21 +105,6 @@ def get_registro(request):
             correo = form.cleaned_data['correo']
             password = form.cleaned_data['password1']
             date  = form.cleaned_data['date']
-            usuario = Usuario.objects.create(
-	                        nombre = nombre,
-	                        apellidos = apellidos,
-	                        pseudonimo = pseudonimo,
-	                        correo = correo,
-	                        password = password,
-	                        date = date,)
-            usuario.save()
-            #enviamos email de confirmacion
-            email_titulo = 'Bienvenido a Pretec'
-            email_mensaje = 'Ya eres miembro de este fantastico sitio web donde podras enterarte de todas las novedades tecnologicas segun vayan surgiendo. Bienvenido a la era Tecnologica: dsipretec.herokuapp.com'
-            send_mail(email_titulo, email_mensaje, 'pretcdsi@gmail.com', [correo], fail_silently = False)
-
-            return render(request, 'registro_completado.html')
-
             # La comprobacion de las contrasenas la lleva a cabo el valido
             try:
                 usuario2 = Usuario.objects.get(pseudonimo = pseudonimo)
@@ -137,10 +122,15 @@ def get_registro(request):
         	                        password = password,
         	                        date = date,)
                     usuario.save()
+                    email_titulo = 'Bienvenido a Pretec'
+                    email_mensaje = 'Ya eres miembro de este fantastico sitio web donde podras enterarte de todas las novedades tecnologicas segun vayan surgiendo. Bienvenido a la era Tecnologica: dsipretec.herokuapp.com'
+                    send_mail(email_titulo, email_mensaje, 'pretcdsi@gmail.com', [correo], fail_silently = False)
                     return render(request, 'registro_completado.html')
     else:
         form = RegistroForm()
     return render(request, 'formulario_registro.html', {'form' : form})
+
+
 
 def fotoUsu(request):
     if request.method == 'POST':
