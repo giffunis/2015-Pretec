@@ -24,6 +24,15 @@ Feature: Micropost
     And El presiona "Enviar"
     Then deberia ver "Post Enviado"
 
+  Scenario: Un usuario puede editar su post
+    Given voy a la direccion "http://127.0.0.1:8000/mi_perfil/" URL
+    And El presiona "Editar_post"
+    And deberia ver "Editar Post"
+    And El llena el "titulo" con "Titulo YUJUUUUU"
+    And El llena el "texto" con "Se ha editado el micropost"
+    And El presiona "publicar"
+    Then deberia ver en el id "success" esto Post modificado!
+
   Scenario: Un usuario puede borrar un post
     Given voy a la direccion "http://127.0.0.1:8000/mi_perfil/" URL
     And El presiona "Eliminar_post"

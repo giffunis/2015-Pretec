@@ -12,14 +12,14 @@
 	    <label for="titulo">Título</label>
 	    <input type="text" name="titulo" id="titulo" class="form-control" value="{{titulo}}">
 	  </div>
-	
+
 	  <div class="form-group">
 	    <label for="texto">Texto</label>
 	    <input type="text" name="texto" id="texto" class="form-control" value="{{texto}}">
 	  </div>
 
 	  <div class = "col-md-offset-7">
-		<button type="submit" class="btn btn-primary">Publicar</a></button>
+		<button id="publicar" type="submit" class="btn btn-primary">Publicar</a></button>
 	  </div>
 	</form>
   {% if messages %}
@@ -27,8 +27,8 @@
       <!-- <div class='col-sm-12'> -->
       <div class='col-sm-6 '>
         {% for message in messages %}
-          {% if message.tags == "success" %} <p class="alert alert-success">{{ message }}</p> {% endif %}
-          {% if message.tags == "error" %} <p class="alert alert-danger">{{ message }}</p> {% endif %}
+          {% if message.tags == "success" %} <p id="success" class="alert alert-success">{{ message }}</p> {% endif %}
+          {% if message.tags == "error" %} <p id="error" class="alert alert-danger">{{ message }}</p> {% endif %}
         {% endfor %}
       </div>
     </div>
