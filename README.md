@@ -13,7 +13,7 @@
 
 ##Aplicación en Heroku
 
-Aplicación en [Heroku](https://dsipretec.herokuapp.com/).
+Aplicación en [Heroku](https://pretec.herokuapp.com/).
 
 
 ##Tests
