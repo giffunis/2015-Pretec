@@ -6,20 +6,32 @@
 
 {% block content%}
 
-    <form role="form">
+    	<form  method="post">
+		{% csrf_token %}
 	  <div class="form-group">
 	    <label for="titulo">Título</label>
-	    <input type="text" class="form-control" id="titulo" href="/edit_post" value="{{titulo}}">
+	    <input type="text" name="titulo" id="titulo" class="form-control" value="{{titulo}}">
 	  </div>
 	
 	  <div class="form-group">
-	    <label for="titulo">Texto</label>
-	    <input type="text" class="form-control" id="titulo" href="/edit_post" value="{{texto}}">
+	    <label for="texto">Texto</label>
+	    <input type="text" name="texto" id="texto" class="form-control" value="{{texto}}">
 	  </div>
 
 	  <div class = "col-md-offset-7">
-		<button type="submit" class="btn btn-primary"><a href="/mi_perfil"style="color:white">Publicar</a></button>
+		<button type="submit" class="btn btn-primary">Publicar</a></button>
 	  </div>
 	</form>
+  {% if messages %}
+    <div class="row">
+      <!-- <div class='col-sm-12'> -->
+      <div class='col-sm-6 '>
+        {% for message in messages %}
+          {% if message.tags == "success" %} <p class="alert alert-success">{{ message }}</p> {% endif %}
+          {% if message.tags == "error" %} <p class="alert alert-danger">{{ message }}</p> {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
 
 {% endblock content%}

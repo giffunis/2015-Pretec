@@ -452,12 +452,20 @@ def delete_post(request,post_id):
 
 @comprueba_auth
 def edit_post(request, post_id):
-    query = Post.objects.get(pk=post_id)
+    if request.method == 'POST':
+        new_title = request.POST['titulo']
+        new_texto = request.POST['texto']
+        post = Post.objects.get(pk=post_id)
+        post.titulo = new_title
+        post.texto = new_texto
+        post.save()
+        messages.success(request, "Post modificado!")
 
+    
+    query = Post.objects.get(pk=post_id)
     context = {
         'titulo': query.titulo,
         'texto': query.texto,
     }
-
     return render_to_response('editar_post.html', context, context_instance=RequestContext(request))
 
