@@ -60,7 +60,7 @@ target/
 db.sqlite3
 
 #Carpeta migrations de la app usuarios
-usuarios/migrations
+#usuarios/migrations
 
 #Residuos del Mac
 .DS_Store
@@ -73,10 +73,10 @@ usuarios/migrations
 .notas-datetimer
 
 #Probando montando un servidor propio
-pretec/wsgi.py
+#pretec/wsgi.py
 
 #para evitar el error en el migrate
-microposts/migrations/00*
+#microposts/migrations/00*
 
 #no copiar env-heroku
 env-hero/
