@@ -102,8 +102,8 @@ def get_registro(request):
 	                        date = date,)
             usuario.save()
             #enviamos email de confirmacion
-            email_titulo = 'Email de confirmacion'
-            email_mensaje = 'Haz click en este link para confirmar tu cuenta: localhost:8000/confirmacion'
+            email_titulo = 'Bienvenido a Pretec'
+            email_mensaje = 'Ya eres miembro de este fantástico sitio web donde podrás enterarte de todas las novedades tecnológicas según vayan surgiendo. Bienvenido a la era Tecnológica: pretec2.herokuapp.com/inicio'
             send_mail(email_titulo, email_mensaje, 'pretcdsi@gmail.com', [correo], fail_silently = False)
 
             return render(request, 'registro_completado.html')
