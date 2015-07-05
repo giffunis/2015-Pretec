@@ -119,8 +119,7 @@ EMAIL_PORT = '587'
 
 
 AWS_STORAGE_BUCKET_NAME = 'pretec'
-AWS_ACCESS_KEY_ID = 'AKIAJVEK6RAP3YEACSNA'
-AWS_SECRET_ACCESS_KEY = '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'
+
 
 # Tell django-storages that when coming up with the URL for an item in S3 storage, keep
 # it simple - just use this domain plus the path. (If this isn't set, things get complicated).
