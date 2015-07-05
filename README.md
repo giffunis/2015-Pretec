@@ -16,12 +16,12 @@
 Aplicación en [Heroku](https://pretec.herokuapp.com/).
 
 
-##Tests
-
+##Travis
+[![BuildStatus](https://travis-ci.org/alu0100837094/2015-Pretec.svg?branch=master)](https://travis-ci.org/alu0100837094/2015-Pretec)
 
 ##Coveralls
 
-
+[![CoverageStatus](https://coveralls.io/repos/alu0100837094/2015-Pretec/badge.svg?branch=master)](https://coveralls.io/r/alu0100837094/2015-Pretec?branch=master)
 
 ##Recursos
 
@@ -29,6 +29,5 @@ Aplicación en [Heroku](https://pretec.herokuapp.com/).
 * [Heroku dev center](https://devcenter.heroku.com/articles/getting-started-with-django)
 * [Google API Console](https://code.google.com/apis/console)
 * [Bootstrap](http://getbootstrap.com/components/)
-* [Travis-CI and Coveralls](https://godjango.com/25-travis-ci-and-coveralls/)
 -------------------------
 *Desarrollo de Sistemas Informáticos(Curso 2014-2015)*
