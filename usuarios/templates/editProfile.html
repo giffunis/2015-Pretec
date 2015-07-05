@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static from staticfiles %}
 {% block title %}
   Edita tu Perfil
 {% endblock %}
@@ -8,7 +8,7 @@
 
 <div class="col-md-offset-4">
 	<h1>¿Que deseas cambiar?</h1>
-	<div class="col-md-offset-1">	
+	<div class="col-md-offset-1">
 		<a href = "/set_name"> <button class="btn btn-primary"> Nombre </button></a>
 		<a href = "/set_email"> <button class="btn btn-primary"> Correo </button></a>
 		<a href = "/set_password"> <button class="btn btn-primary"> Password </button></a>

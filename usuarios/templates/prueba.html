@@ -4,25 +4,25 @@
 {% bootstrap_css %}
 {% bootstrap_javascript %}
 {% block bootstrap3_content %}
-
+{% load static from staticfiles %}
 <html lang="es">
 
   <head>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.js"> </script>
-    <link rel="stylesheet" type="text/css" href="/static/css/estilos.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/estilos.css' %}">
     {{ form.media }}
     <meta charset="utf-8" />
     <title>{{page_title}}</title>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="../../static/css/estilos.css">
-   
+
+
   </head>
 
   <body>
 
 
-    <p>holaaaaaa</p>  
+    <p>holaaaaaa</p>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"> </script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -32,4 +32,3 @@
 </html>
 
 {% endblock %}
-

@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static from staticfiles %}
 {% block title %}
   Perfil
 {% endblock %}
@@ -11,19 +11,19 @@
   {% if pseudonimo == logueado %}
 		<div class="col-md-3" >
       {% if foto_usu %}
-        <a href="/fotoUsu"><img src="../../static/uploads/{{foto_usu}}" style="height:30%%"></a>
+        <a href="/fotoUsu"><img src="{% static 'uploads/{{foto_usu}}' %}" style="height:30%%"></a>
       {% else %}
-        <a href="/fotoUsu"><img src="../../static/uploads/defecto.jpg" style="height:30%%"></a>
-      {% endif %}      
+        <a href="/fotoUsu"><img src="{% static 'uploads/defecto.jpg' %}" style="height:30%%"></a>
+      {% endif %}
   {% else %}
     <div class="col-md-3" >
     {% if foto_usu %}
-      <img src="../../static/uploads/{{foto_usu}}">
+      <img src="{% static 'uploads/{{foto_usu}}' %}">
     {% else %}
-      <img src="../../static/uploads/defecto.jpg">
-    {% endif %}      
+      <img src="{% static 'uploads/defecto.jpg' %}">
+    {% endif %}
 			<!--<a href="/fotoUsu"><img src="../../static/imagenes/opcion5.jpg"></a>-->
-  {% endif %}   
+  {% endif %}
 		</div>
 
 		<div class="col-md-8">
@@ -47,13 +47,13 @@
             </select>
         </div>
         {% if pseudonimo == logueado %}
-        
+
         {% else %}
           <button type="submit" class="btn btn-primary" id="btn_seguir">Seguir</button>
         {% endif %}
-        
-        
-          
+
+
+
       </form>
     </div>
 		</div>
@@ -87,7 +87,7 @@
           <br>
           <hr>
         {% endif %}
-        
+
 			{% endfor %}
 		</div>
 

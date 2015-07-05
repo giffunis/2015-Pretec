@@ -4,22 +4,21 @@
 {% bootstrap_css %}
 {% bootstrap_javascript %}
 {% block bootstrap3_content %}
-
+{% load static from staticfiles %}
 <html lang="es">
 
   <head>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.js"> </script>
-    <link rel="stylesheet" type="text/css" href="/static/css/estilos.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/estilos.css' %}">
     {{ form.media }}
     <meta charset="utf-8" />
     <title>{{page_title}}</title>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="../../static/css/estilos.css"
   </head>
 
   <body id="body_inicio">
-    
+
 
     <div class="row">
       <div class="col-md-10 col-md-offset-4">
@@ -33,7 +32,7 @@
         <p><a class="btn btn-success col-lg-offset-1" id="inicio_login" role="button" href="/login">¡Inicia sesion!</a></p>
 
 
-      </div> 
+      </div>
     </div>
 
     <div class="row">

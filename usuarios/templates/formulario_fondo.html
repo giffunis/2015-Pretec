@@ -4,13 +4,13 @@
 {% bootstrap_css %}
 {% bootstrap_javascript %}
 {% block bootstrap3_content %}
-
+{% load static from staticfiles %}
 <html lang="es">
 
   <head>
     <meta charset="utf-8" />
     <title>{{page_title}}</title>
-    <link rel="stylesheet" type="text/css" href="../../static/css/estilos.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/estilos.css' %}">
 
   </head>
 

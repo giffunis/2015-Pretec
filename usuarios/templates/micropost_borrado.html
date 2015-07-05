@@ -3,12 +3,11 @@
 {# Load CSS and JavaScript #}
 {% bootstrap_css %}
 {% block bootstrap3_content %}
-
+{% load static from staticfiles %}
 <html lang="es">
 
   <head>
-    <link rel="stylesheet" type="text/css" href="/static/css/estilos.css">
-    <link rel="stylesheet" type="text/css" href="../../static/css/estilos.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/estilos.css' %}">
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.3.min.js"></script>
@@ -51,7 +50,7 @@
                   <li><a href="/mi_perfil">Perfil</a></li>
                   <li><a href="/editProfile">Editar perfil</a></li>
                   <li><a href="/microposts">Publicar post</a></li>
-              </ul> 
+              </ul>
 
               <ul class="nav navbar-nav navbar-right">
                 <li id="btn_cerrarsesion"><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Cerrar Sesion</a></li>
@@ -89,8 +88,3 @@
 </html>
 {% bootstrap_javascript %}
 {% endblock %}
-
-
-
-
-
