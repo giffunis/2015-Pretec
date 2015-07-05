@@ -4,6 +4,19 @@ python:
 install:
   - pip install -r travis/requirements.txt
   # - pip install coveralls
+# blacklist
+branches:
+  except:
+    - master
+    - amazon
+    -heroku_subida
+    -nuevo
+
+# whitelist
+branches:
+  only:
+    - test 
+
 script:
   - ./coverage_test.sh
 # after_success: coveralls
