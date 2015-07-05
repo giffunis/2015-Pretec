@@ -75,8 +75,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'pretec.wsgi.application'
-# MEDIA_ROOT = '/home/rebecca/DSI/pretec/static/uploads/'
-# MEDIA_URL = '/uploads/'
+
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
@@ -106,7 +105,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
-# STATIC_URL = '/static/'
+
+
 
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static/')),
 
@@ -115,6 +115,8 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'pretcdsi@gmail.com'
 EMAIL_HOST_PASSWORD = 'pretecDSI'
 EMAIL_PORT = '587'
+
+
 
 AWS_STORAGE_BUCKET_NAME = 'pretec'
 AWS_ACCESS_KEY_ID = 'AKIAJVEK6RAP3YEACSNA'
